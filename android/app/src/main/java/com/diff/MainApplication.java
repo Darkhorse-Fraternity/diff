@@ -2,6 +2,8 @@ package com.diff;
 
 import android.app.Application;
 
+import com.github.yamill.orientation.OrientationPackage;
+
 import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -24,7 +26,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
           new ReactNativeDialogsPackage(),
-          new BlurViewPackage()
+          new BlurViewPackage(),
+          new OrientationPackage()
       );
     }
   };

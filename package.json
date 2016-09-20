@@ -16,6 +16,7 @@
     "react-native-blur": "^1.0.1",
     "react-native-button": "^1.7.0",
     "react-native-dialogs": "0.0.19",
+    "react-native-orientation": "^1.17.0",
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-storage": "^0.1.4",
     "react-native-swiper": "^1.4.11",
