@@ -13,6 +13,11 @@ import {
 } from 'react-native';
 
 class diff extends Component {
+
+  componentDidMount(){
+
+  }
+
   render() {
     return (
       <View style={styles.container}>
