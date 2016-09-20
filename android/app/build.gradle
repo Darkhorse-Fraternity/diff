@@ -87,14 +87,22 @@ repositories {
     maven { url "https://jitpack.io" }
 }
 
-
+buildscript {
+    repositories {
+        maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
+    }
+    dependencies {
+        classpath 'com.fivehundredpx:blurringview:1.0.0'
+    }
+}
 
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
-
+        renderscriptTargetApi 20
+        renderscriptSupportModeEnabled true
         applicationId "com.diff"
         minSdkVersion 16
         targetSdkVersion 22
