@@ -5,6 +5,7 @@
 # Xcode
 #
 build/
+pod/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
