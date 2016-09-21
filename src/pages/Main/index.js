@@ -43,13 +43,13 @@ export default class Main extends Component {
         {/*<BlurView blurType="light" style={styles.blur}>
           <Text>Hi, I am a tiny menu item</Text>
         </BlurView>*/}
-        <BlurView
+        {/*<BlurView
          blurRadius={10}
          downsampleFactor={5}
          overlayColor={'rgba(255, 255, 255, 0.1)'}
          style={styles.blurView}
          viewRef={this.state.viewRef}
-       />
+       />*/}
         <Text style={styles.welcome}>Blur component</Text>
       </Image>
     );

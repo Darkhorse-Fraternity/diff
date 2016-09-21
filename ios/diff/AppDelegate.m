@@ -11,6 +11,7 @@
 #import "Orientation.h"
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
+#import "RCTHotUpdate.h"
 
 @implementation AppDelegate
 
@@ -18,7 +19,13 @@
 {
   NSURL *jsCodeLocation;
 
-  jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
+  
+#if DEBUG
+  jsCodeLocation = [NSURL URLWithString:@"http://localhost:8081/index.ios.bundle?platform=ios&dev=true"];
+#else
+  jsCodeLocation=[RCTHotUpdate bundleURL];
+#endif
+  
 
   RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                       moduleName:@"diff"
