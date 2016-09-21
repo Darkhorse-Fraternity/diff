@@ -3,7 +3,9 @@ package com.diff;
 import android.app.Application;
 
 import com.github.yamill.orientation.OrientationPackage;
-
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.imagepicker.ImagePickerPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.aakashns.reactnativedialogs.ReactNativeDialogsPackage;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
@@ -27,7 +29,10 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
           new ReactNativeDialogsPackage(),
           new BlurViewPackage(),
-          new OrientationPackage()
+          new OrientationPackage(),
+          new VectorIconsPackage(),
+          new RNDeviceInfo(),
+          new ImagePickerPackage()
       );
     }
   };

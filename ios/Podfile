@@ -1,0 +1,33 @@
+# Uncomment this line to define a global platform for your project
+platform :ios, '8.0'
+# Uncomment this line if you're using Swift
+#use_frameworks!
+
+target 'diff' do
+
+
+    #定义dayibase的版本。
+#    dayi_Version = "0.3.0"
+##    dayi_market_Version = "0.3.0"
+#pod "dayi/Base", :git => "git@test2.dayi.im:yl/dayi.git", :tag => dayi_Version
+#pod "dayi/Util", :git => "git@test2.dayi.im:yl/dayi.git", :tag => dayi_Version
+#pod "dayi/DYPhoto", :git => "git@test.dayi.im:yl/dayi.git", :tag => dayi_Version
+#pod "DayiMarket/QiniuUpload", :git => "git@test.dayi.im:fl/dayiMarket.git", :tag => dayi_market_Version
+#pod "DayiMarket/DLMotion", :git => "git@test.dayi.im:fl/dayiMarket.git", :tag => dayi_market_Version
+#pod "DayiMarket/TOCropViewController", :git => "git@test.dayi.im:fl/dayiMarket.git", :tag => dayi_market_Version
+pod 'Reveal-iOS-SDK' ,:configurations => ['Debug']
+pod 'IQKeyboardManager'
+pod 'Toast', '~> 3.0'
+#pod 'Socket.IO-Client-Swift'
+#pod 'SVProgressHUD'
+#pod 'JSONModel'
+#pod 'Masonry'
+pod 'HexColors'
+# pod 'GetuiSDK', '~> 1.4.2'
+#pod 'QiniuUpload'
+#pod 'GrowingIO'
+end
+
+target 'diffTests' do
+
+end

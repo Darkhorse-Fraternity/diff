@@ -1,7 +1,6 @@
 package com.diff;
 
 import com.facebook.react.ReactActivity;
-import com.imagepicker.ImagePickerPackage;
 
 
 
