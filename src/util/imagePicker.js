@@ -15,9 +15,9 @@ const DEFAULT_OPTIONS = {
   cancelButtonTitle: '取消',
   takePhotoButtonTitle: '拍照', // specify null or empty string to remove this button
   chooseFromLibraryButtonTitle: '从手机相册选择', // specify null or empty string to remove this button
-  customButtons: {
-    //'Choose Photo from Facebook': 'fb', // [Button Text] : [String returned upon selection]
-  },
+  // customButtons: {
+  //   //'Choose Photo from Facebook': 'fb', // [Button Text] : [String returned upon selection]
+  // },
   cameraType: 'back', // 'front' or 'back'
   mediaType: 'photo', // 'photo' or 'video'
   videoQuality: 'high', // 'low', 'medium', or 'high'
@@ -37,7 +37,6 @@ const DEFAULT_OPTIONS = {
 }
 
 export default function imagePicker(options:Object,callBack:Function){
-
 
 
   // StatusBar.setBarStyle('default', false);

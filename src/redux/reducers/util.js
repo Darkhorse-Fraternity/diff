@@ -20,7 +20,7 @@ const initialUtilState = immutable.fromJS({
   }
 });
 
-export default function drawState(state:immutable.Map<string,Object> = initialUtilState, action:Object) {
+export default function drawState(state:immutable.Map = initialUtilState, action:Object) {
     switch (action.type) {
       case VOICE_TEST:
         return state.setIn(['test', 'voiceTest'], action.voiceTest);

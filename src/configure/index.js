@@ -108,7 +108,7 @@ function preConfig() {
     loadUserData();
 
     //热跟新
-    jsCheckUpdate();
+    // jsCheckUpdate();
 
     //配置友盟信息
     // umeng.configure();
