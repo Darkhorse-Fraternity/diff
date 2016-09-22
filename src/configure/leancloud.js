@@ -6,7 +6,7 @@
 
 let LeanCloud_APP_ID = '';
 let LeanCloud_APP_KEY = '';
-if(!__DEV__){
+if(__DEV__){
        LeanCloud_APP_ID = 'hd16vijfry1s8lpklrhbqpccl77erki0836v4vlrilnl35ui';
        LeanCloud_APP_KEY = 'gz0v89hdmstmq3x4swyuhpxdi5lyg4wtcjq1iuxxcaziwobb';
 }else {
