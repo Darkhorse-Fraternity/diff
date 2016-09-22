@@ -14,7 +14,7 @@ import ReactNative, {
 
 import {navbarHeight,Toast} from '../../util';
 // import {httpHeader} from '../../configure';
-import {userManager} from '../../util/XGlobal';
+// import {userManager} from '../../util/XGlobal';
 import ExceptionView, {ExceptionType} from '../ExceptionView';
 import {connect} from 'react-redux';
 import { navigatePush, navigatePop, navigateRefresh } from '../../redux/actions/nav';

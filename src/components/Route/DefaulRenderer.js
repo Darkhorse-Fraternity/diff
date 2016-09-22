@@ -21,7 +21,6 @@ import Scene from './Scene'
 import NavBar from './NavBar'
 
 const {
-  Transitioner: NavigationTransitioner,
   CardStack: NavigationCardStack,
   Card: NavigationCard,
 } = NavigationExperimental;
@@ -133,7 +132,11 @@ export default class DefaultRenderer extends Component {
       }
     }
 
-      let { direction,key,panHandlers } = selected;
+      let { direction,key,gestureResponseDistance } = selected;
+
+      if(direction != 'vertical' ){
+        gestureResponseDistance = gestureResponseDistance || 1000;
+      }
     return (
 
       <NavigationCardStack
@@ -143,7 +146,7 @@ export default class DefaultRenderer extends Component {
         onNavigateBack={()=>onNavigate({type:'back'})}
         style={[styles.animatedView, style, this.props.style]}
         //style={{flex:1}}
-        panHandlers={panHandlers}
+        gestureResponseDistance={gestureResponseDistance}
         direction={direction}
         renderHeader={this._renderHeader.bind(this)}
         //render={ret=>console.log('asd',ret)}

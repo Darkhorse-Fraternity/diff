@@ -1,17 +1,7 @@
 /* @flow */
 'use strict'
 import DeviceInfo from 'react-native-device-info'
-import {userManager, loadUserData, loadFirstJoin} from '../util/XGlobal'
-import jsCheckUpdate from '../util/checkUpdate'
-import {lockToPortrait} from 'react-native-orientation'
-// import umeng from '../util/umeng'
-import React, {
-    StatusBar,
-    BackAndroid,
-    UIManager,
-    ToastAndroid,
-} from 'react-native';
-import Platform  from 'Platform'
+
 import {LeanCloud_APP_ID,LeanCloud_APP_KEY} from './leancloud'
 const defaultHost = !__DEV__ ?
     /*release*/   'leancloud.cn/1.1' :
@@ -90,43 +80,11 @@ const isLogin = false;
 //主题字体 这边看是否需要把CSS 样式进行抽取
 const themeFontConfig = {}
 
-//前置配置 在一进程序的时候就会
-/**
- * 用于系统前置配置。
- */
-function preConfig() {
-
-    if (Platform.OS == 'ios') {
-        // StatusBar.setBarStyle('light-content', true);
-    } else {
-
-    }
-    //加载是否是第一次进入。
-    loadFirstJoin()
-
-    // 加载缓存设置到公共参数
-    loadUserData();
-
-    //热跟新
-    // jsCheckUpdate();
-
-    //配置友盟信息
-    // umeng.configure();
-
-    if (Platform.OS != 'ios') {
-        UIManager.setLayoutAnimationEnabledExperimental &&
-        UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-    lockToPortrait();
-
-}
-
 
 module.exports = {
     defaultHost,
     httpHeaders,
     ...themeColorConfig,
-    preConfig,
     isLogin,
     tag,
     setLeanCloudSession,

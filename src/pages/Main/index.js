@@ -28,17 +28,15 @@ import {connect} from 'react-redux'
 import {navigatePush, navigatePop} from '../../redux/actions/nav'
 import {logout,loginSucceed} from '../../redux/actions/login'
 const { BlurView, VibrancyView } = require('react-native-blur');
-const uri = 'https://d13yacurqjgara.cloudfront.net/users/632930/screenshots/2883377/__3.jpg'
-import {preConfig, mainColor, backViewColor, lightMainColor, lightContainingColor} from '../../configure';
+import {preConfig} from '../../redux/actions/config'
+import { mainColor, backViewColor, lightMainColor, lightContainingColor} from '../../configure';
 class Main extends Component {
 
   constructor(props:Object) {
       super(props);
       //  this.state = {
       //  };
-      preConfig();//前置配置。
-
-
+      this.props.preConfig();
       this.state = {isLogin: false, waiting: true, isFirst: true};
   }
 
@@ -239,8 +237,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         pop: ()=> {
             dispatch(navigatePop());
+        },
+        preConfig:()=>{
+          dispatch(preConfig());
         }
-
 
     }
 }

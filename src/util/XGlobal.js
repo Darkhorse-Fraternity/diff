@@ -14,52 +14,7 @@ import Platform  from 'Platform';
 
 let instance = null;
 const UserManageSaveInfo = 'UserManageSaveInfo';
-class UserManager {
-  userData:Object;
-  isFirstJoin:bool;
-  isLogin:bool;
-  constructor() {
-    if (!instance) {
-      instance = this;
-      this.userData = {
-        user_token : '',
-        user_info :{
-          user_name : "未命名",//用户名
-          nick : "",//昵称
-          headimg : "",//用户头像
 
-          uid : -1,//用户id
-
-          grade_str :"高一" , //年级
-          grade:0,
-          place_id:'',
-          place_str:'',//地区串（浙江杭州西湖区）
-          school_id:0,//学校ID
-          school_str:'',//学校名称
-          order_url:'',//订单链接地址
-          left_course_time : "",  //剩余课时
-          connect_phone : "",  //联系手机号
-        }
-      };
-      this.isFirstJoin = true;
-      this.isLogin = false;
-    }
-    return instance;
-  }
-
-  saveInfo(info:Object,...params:any){
-    // 合并信息
-     Object.assign(this.userData.user_info,info,...params);
-    // 发出通知给监听者。
-    RCTDeviceEventEmitter.emit(UserManageSaveInfo, this.userData.user_info);
-  }
-
-  lestenUerInfo(callBack:Function): EmitterSubscription{
-
-    return  RCTDeviceEventEmitter.addListener(UserManageSaveInfo,callBack);
-  }
-}
-export const userManager = new UserManager();
 
 //保存到本地
 const Save_UserData_Key = 'saveUserData';
@@ -94,24 +49,7 @@ export function loadFirstJoin(){
 }
 
 export function clearUserData() {
-  userManager.userData = {
-    user_token : '',
-    user_info :{
-      user_name : "未命名",//用户名
-      nick : "",//昵称
-      headimg : "",//用户头像
-      uid : -1,//用户id
-      grade_str :"高一" , //年级
-      grade:0,
-      place_id:'',
-      place_str:'',//地区串（浙江杭州西湖区）
-      school_id:0,//学校ID
-      school_str:'',//学校名称
-      order_url:'',//订单链接地址
-      left_course_time : "",  //剩余课时
-      connect_phone : "",  //联系手机号
-    }
-  };
+
   global.storage.remove({
     key:Save_UserData_Key
   });
@@ -120,7 +58,7 @@ export function clearUserData() {
 
 
 
-export function loadUserData():Promise{
+export function loadUserData(){
   // 读取
   // 这边sui
   //

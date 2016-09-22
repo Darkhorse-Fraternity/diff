@@ -5,7 +5,7 @@
 import {throwIfMissing,Toast} from '../util';
 import {defaultHost, httpHeaders,tag} from '../configure';
 // import {LimitableMap} from './LimitableMap'
-import {userManager} from '../util/XGlobal';
+// import {userManager} from '../util/XGlobal';
 import RCTDeviceEventEmitter  from 'RCTDeviceEventEmitter';
 import {addParams,toQueryString} from './useMeth';
 

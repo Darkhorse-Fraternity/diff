@@ -1,7 +1,7 @@
 
 
 import { combineReducers } from 'redux'
-import {userManager} from '../../util/XGlobal'
+// import {userManager} from '../../util/XGlobal'
 import {
   TAB_SWITCH,
 } from '../actions/tab'

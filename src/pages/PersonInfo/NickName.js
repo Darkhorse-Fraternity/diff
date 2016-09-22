@@ -16,7 +16,6 @@ import Button from 'react-native-button'
 import {backViewColor,mainColor, textInputTextColor, placeholderTextColor} from '../../configure'
 import {request} from '../../request'
 import {updateUserName} from '../../request/leanCloud'
-import {userManager} from '../../util/XGlobal'
 // import NavigationManager from '../Route/NavigationManager'
 import {renderNavSenderButton} from '../../util/viewUtil'
 // import TimerMixin from 'react-timer-mixin';

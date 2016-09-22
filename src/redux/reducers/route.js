@@ -5,7 +5,6 @@
 import {config} from '../../components/Route/pageConfig'
 import { combineReducers } from 'redux'
 import * as NavigationStateUtils from 'NavigationStateUtils'
-import {userManager} from '../../util/XGlobal'
 
 import { NAV_PUSH, NAV_POP,
 				NAV_JUMP_TO_KEY,
@@ -42,7 +41,7 @@ const initialNavLoginState = {
  * navigationState，有默认值initialNavState，以后则默认返回上次一次存的值，
  */
 
-function navigationState(state = userManager.isLogin?initialNavLoginState :initialNavState, action) {
+function navigationState(state :Object =initialNavState, action) {
 	switch (action.type) {
 	case NAV_PUSH:
 		if (state.routes[state.index].key === (action.state && action.state.key)) return state
