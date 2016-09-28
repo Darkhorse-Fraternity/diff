@@ -4,7 +4,7 @@
 import {
   Linking,
 } from "react-native";
- import {addParams,toQueryString} from '../../request/useMeth'
+ import {addParams} from '../../request/useMeth'
 export default class URLManager {
   static openURL(url:String){
     Linking.openURL(url,null);

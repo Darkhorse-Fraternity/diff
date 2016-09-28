@@ -214,11 +214,62 @@ export function limitSearch(className:string,page:Number = 0,
       }
     }
 }
-
+/**
+ * 增加
+ * @param  {[type]} className:string 类名
+ * @param  {[type]} params:Object    参数
+ * @return {[type]}                  [description]
+ */
 export function classCreatNewOne(className:string,params:Object):Object{
   return {
     path:'/classes/' + className,
     method:methodType.post,
     params,
+  }
+}
+
+/**
+ * 修改leancloud 对象
+ * @param  {[type]} className:string 类名
+ * @param  {[type]} objectId:string  对象id
+ * @param  {[type]} params:Object    参数
+ * @return {[type]}                  [description]
+ */
+export function classUpdate(className:string,objectId:string,params:Object):Object{
+  return {
+    path:'/classes/'+ className + '/' + objectId,
+    method:methodType.put,
+    params,
+  }
+}
+
+/**
+ * 删除对象
+ * 你也可以在一个对象中删除一个字段，通过 Delete 操作（注意：这时候 HTTP Method 还是 PUT）：
+ * @param  {[type]} className:string [description]
+ * @param  {[type]} objectId:string  [description]
+ * @param  {[type]} params:Object    [description]
+ * @return {[type]}                  [description]
+ */
+export function classDelete(className:string,objectId:string,params:Object):Object{
+  return {
+    path:'/classes/'+ className + '/' + objectId,
+    method:methodType.put,
+    params,
+  }
+}
+
+export function classBatch(requests:[Object]):Object{
+  const  newRequests = requests.map((request,i)=>{
+    return {
+      path:'1.1'+request.path,
+      method:request.method,
+      body:request.params,
+    }
+  });
+  return {
+    path:'/batch'
+    method:method.post,
+    params:newRequests,
   }
 }

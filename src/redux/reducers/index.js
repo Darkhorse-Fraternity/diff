@@ -9,6 +9,7 @@ import util from './util'
 import contribute from './contribute'
 import ideaList from './ideaList'
 import intro from './intro'
+import iShow from './iShow'
 export {
   intro,
   ideaList,
@@ -17,4 +18,5 @@ export {
   tab,
   util,
   contribute,
+  iShow,
 };

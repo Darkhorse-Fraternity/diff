@@ -20,7 +20,8 @@ export function addParams(url:string, params:Object) {
  */
 export function toQueryString(obj:Object) {
   return obj?Object.keys(obj).sort().map(function(key){
-    var val = obj[key];
+    let val = obj[key];
+    if (typeof val === 'object') val = JSON.stringify(val);
     if (Array.isArray(val)) {
       return val.sort().map(function(val2){
         return encodeURIComponent(key)+ '=' + encodeURIComponent(val2);

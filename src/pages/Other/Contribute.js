@@ -14,7 +14,7 @@ import  {
 import * as immutable from 'immutable';
 import Dimensions from "Dimensions";
 import {pixel,screenWidth,screenHeight,navbarHeight,Toast} from '../../util/';
-import {renderNavRightButton} from '../../util/viewUtil'
+import {renderNavSenderButton} from '../../util/viewUtil'
 import Button from 'react-native-button'
 import {backViewColor, textInputTextColor, placeholderTextColor, grayFontColor} from '../../configure'
 import {request} from '../../request'
@@ -42,7 +42,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
 
 
     componentDidMount() {
-      const rightBtn = renderNavRightButton('发送',this._tapRight)
+      const rightBtn = renderNavSenderButton(this._tapRight)
       this.props.refresh({renderRightComponent:rightBtn});
     }
 

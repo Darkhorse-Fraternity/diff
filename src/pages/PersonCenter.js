@@ -113,20 +113,22 @@ class SettingIOS extends Component {
                  {this._renderRow('我的订单',  styles.bottomLine, this.orderSource,true, () => {
                  this.props.push({key:'WebView-myOrder',title:'我的订单',url:this.state.userCenterData.order_url});
                  })}*/}
-                {this._renderRow('设置', styles.group, this.setSource, true, () => {
+                {this._renderRow('设置', styles.group,  true, () => {
                     this.props.push('Setting');
                 })}
-                {this._renderRow('推荐我的创意服务', styles.group, this.setSource, true, () => {
+                {this._renderRow('推荐我的创意服务', styles.group, true, () => {
                     this.props.push('Contribute');
                 })}
-
+                {this._renderRow('我的发布', styles.group, true, () => {
+                    this.props.push('iShowList');
+                })}
 
 
             </ScrollView>
         );
     }
 
-    _renderRow(title:string, style:any, source:any, isArraw:bool = false, onPress:Function = ()=> {
+    _renderRow(title:string, style:any,  isArraw:bool = false, onPress:Function = ()=> {
     }, description:any = null) {
         return (
             <TouchableOpacity onPress={onPress} style={style}>

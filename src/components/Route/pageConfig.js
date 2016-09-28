@@ -15,7 +15,7 @@ export  const pageConfig = {
                           direction:'vertical'},
 
   "PersonCenter"        : { title : "个人中心", },
-  "BaseWebView"         : { title : "加载中。。"},
+  "BaseWebView"         : { title : "加载中。。",gestureResponseDistance:30},
   "CourseInfoView"      : { title : "课程详情", },
   "LessonEvaluateView"  : { title : "课程评价", },
   "PersonInfo"          : { title : "个人资料", },
@@ -31,7 +31,8 @@ export  const pageConfig = {
   'Contribute'          : { title : '创意服务'},
   'Intro'               : { title : '介绍',hideNavBar:true},
   'IdeaList'            : { title : '创意列表'},
-}
+  'iShowList'           : { title : '我的发布'},
+  }
 
 export function config(key:string):Object{
 

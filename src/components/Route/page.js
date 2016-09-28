@@ -20,6 +20,7 @@ import NickName from '../../pages/PersonInfo/NickName'
 import Contribute from '../../pages/Other/Contribute'
 import Intro from '../../pages/Other/Intro'
 import IdeaList from '../../pages/Other/IdeaList'
+import iShowList from '../../pages/Other/IShowList'
 export  const PageMap =
 {
   "WebView"             : BaseWebView,
@@ -38,4 +39,5 @@ export  const PageMap =
   'Contribute'          : Contribute,
   'Intro'               : Intro,
   'IdeaList'            : IdeaList,
+  'iShowList'           : iShowList,
 }

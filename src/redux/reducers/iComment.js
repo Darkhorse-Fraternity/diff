@@ -2,11 +2,10 @@
 'use strict';
 
 import {
-  IDEA_LIST_START,
-  IDEA_LIST_FAILED,
-  IDEA_LIST_SUCCEED,
-  IDEA_LIST_SELECT,
-} from '../actions/ideaList'
+  ICOMMENT_LIST_START,
+  ICOMMENT_LIST_FAILED,
+  ICOMMENT_LIST_SUCCEED,
+} from '../actions/iComment'
 import * as immutable from 'immutable';
 
 const initialIdeaListState = immutable.fromJS({
@@ -19,10 +18,10 @@ const initialIdeaListState = immutable.fromJS({
 
 export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
-      case IDEA_LIST_FAILED:
-      case IDEA_LIST_START:
+      case ICOMMENT_LIST_FAILED:
+      case ICOMMENT_LIST_START:
         return state.mergeDeep({loadStatu:action.loadStatu});
-      case IDEA_LIST_SUCCEED:
+      case ICOMMENT_LIST_SUCCEED:
         let data = state.get('data')
         const page = state.get('page')
          page == 0?data = action.data:data.push(action.data);
@@ -31,8 +30,7 @@ export default function drawState(state:immutable.Map<String,any> = initialIdeaL
           page:action.page,
           data:data,
         });
-      case IDEA_LIST_SELECT:
-        return state.mergeDeep({index:action.index});
+
       default:
         return state
     }

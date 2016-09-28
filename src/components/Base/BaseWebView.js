@@ -73,7 +73,7 @@ const noWifi = require('../../../source/img/xy_nowifi/xy_nowifi.png');
 
     _onNavigationStateChange(state:Object){
       // console.log('state:',state);
-      if(state.title.length){
+      if(state.title && state.title.length){
         this.props.refresh({title:state.title});
       }
       this.canGoBack = state.canGoBack;

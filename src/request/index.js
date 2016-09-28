@@ -7,7 +7,7 @@ import {defaultHost, httpHeaders,tag} from '../configure';
 // import {LimitableMap} from './LimitableMap'
 // import {userManager} from '../util/XGlobal';
 import RCTDeviceEventEmitter  from 'RCTDeviceEventEmitter';
-import {addParams,toQueryString} from './useMeth';
+import {addParams} from './useMeth';
 
 var LimitableMap = require('./limitableMap');
 
@@ -144,11 +144,11 @@ module.exports = {
 
     let urlpath = scheme + '://' + host + path;
     // var header = Object.assign({}, httpHeader,{token:userManager.userData.user_token})
-    let paramsString =  toQueryString(params);
 
     const httpHeader = httpHeaders(needSession);
 
-    var cacheKey =  urlpath + paramsString + toQueryString(httpHeader);
+
+    var cacheKey =  addParams(urlpath, params) + JSON.stringify(httpHeader);
     var data =  cache.get(cacheKey)
     var handle = HandleRequest()
 

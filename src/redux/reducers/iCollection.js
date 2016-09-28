@@ -2,11 +2,12 @@
 'use strict';
 
 import {
-  IDEA_LIST_START,
-  IDEA_LIST_FAILED,
-  IDEA_LIST_SUCCEED,
-  IDEA_LIST_SELECT,
-} from '../actions/ideaList'
+  ICOLLECTION_LIST_START,
+  ICOLLECTION_LIST_FAILED,
+  ICOLLECTION_LIST_SUCCEED,
+  ICOLLECTION_LIST_SELECT,
+  ICOLLECTION_DELETE_SUCCEED
+} from '../actions/iCollection'
 import * as immutable from 'immutable';
 
 const initialIdeaListState = immutable.fromJS({
@@ -16,13 +17,12 @@ const initialIdeaListState = immutable.fromJS({
   data:[],
 });
 
-
 export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
-      case IDEA_LIST_FAILED:
-      case IDEA_LIST_START:
+      case ICOLLECTION_LIST_FAILED:
+      case ICOLLECTION_LIST_START:
         return state.mergeDeep({loadStatu:action.loadStatu});
-      case IDEA_LIST_SUCCEED:
+      case ICOLLECTION_LIST_SUCCEED:
         let data = state.get('data')
         const page = state.get('page')
          page == 0?data = action.data:data.push(action.data);
@@ -31,10 +31,17 @@ export default function drawState(state:immutable.Map<String,any> = initialIdeaL
           page:action.page,
           data:data,
         });
-      case IDEA_LIST_SELECT:
+      case ICOLLECTION_LIST_SELECT:
         return state.mergeDeep({index:action.index});
+      case  ICOLLECTION_DELETE_SUCCEED:
+        let data = state.get('data')
+        let index = state.get('index')
+        data.pop(index);
+        return state.merge({
+          index:0,
+          data:data,
+        })
       default:
         return state
     }
-
 }
