@@ -38,7 +38,8 @@ class ishowList extends Component {
     }
 
     shouldComponentUpdate(nextProps:Object) {
-      return !immutable.is(this.props.loadStatu, nextProps.loadStatu) ;
+      return !immutable.is(this.props.loadStatu, nextProps.loadStatu)||
+             !immutable.is(this.props.dataSource,nextProps.dataSource);
     }
 
 
@@ -62,8 +63,10 @@ class ishowList extends Component {
         <TouchableOpacity
           style={[styles.row]}
           onPress={()=>{
-            this.props.select(rowID);
-            this.props.push("Intro")}} >
+            const idea = this.props.dataSource[rowID]
+            // console.log('idea:',idea);
+            this.props.push({key:"Intro",idea:idea})
+          }} >
           <View>
             <WBImage style={styles.image} source={{uri:url}}/>
             <Text

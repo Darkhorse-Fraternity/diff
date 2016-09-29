@@ -16,6 +16,7 @@ import{
   LIST_LOAD_ERROR,
   LIST_NORMAL,
 } from '../../../src/components/Base/BaseListView'
+import {navigatePop} from './nav'
 
 export const ISHOW_LIST_START = 'ISHOW_LIST_START'
 export const ISHOW_LIST_FAILED = 'ISHOW_LIST_FAILED'
@@ -25,6 +26,7 @@ export const ISHOW_DELETE_START = 'ISHOW_DELETE_START'
 export const ISHOW_DELETE_SUCCEED = 'ISHOW_DELETE_SUCCEED'
 export const ISHOW_DELETE_FAILED = 'ISHOW_DELETE_FAILED'
 const pageSize = 40;
+
 
 export function iShowListLoad():Function{
   return (dispatch,getState) => {
@@ -54,13 +56,21 @@ export function iShowListLoadMore():Function{
         const params = limitSearch('TodoObject',page,pageSize,{
           'include':'images',
           'where':{
-            'user':{'__type':"Pointer","className":"_User","objectId":"55a0c5d4e4b031b00558ae79"}}
+            'user':{'__type':"Pointer","className":"_User","objectId":"55a0c5d4e4b031b00558ae79"},
+            'gradeType':{"$in":[0,1,2]}
+            },
           });
         if(!loaded){//not serial
           dispatch(_listStart(page != 0));//当page 不为0 的时候则表示不是加载多页。
           request(params, function (response) {
               if (response.statu) {
-                  dispatch(_listSucceed(response.data.results,page));
+                //并没有从条件中获取到user,在这边自己添加。
+                let results =   response.data.results
+                const data = results.map((item)=>{
+                   item.user = user;
+                   return item;
+                })
+                  dispatch(_listSucceed(data,page));
               } else {
                   dispatch(_listFailed(response));
               }
@@ -81,7 +91,7 @@ export function iShowListLoadMore():Function{
    if(data.length < pageSize){
      loadStatu = LIST_LOAD_NO_MORE
    }
-   if(page == 0 && data.count == 0){
+   if(page == 0 && data.length == 0){
      loadStatu = LIST_NO_DATA
    }
     return {
@@ -132,24 +142,27 @@ export function iShowSelcet(index:number):Object {
    }
 }
 
-export function iShowDelete(objectId:string):Function {
+export function iShowDelete():Function {
   return (dispatch,getState)=>{
-    const index = getState().iShow.index;
-    const data = getState().iShow.data[index];
+    const index = getState().iShow.get('index');
+    const list = getState().iShow.get('data');
+    const data = list.get(index);
     //通知服务器,做伪删除，即把type改为3
-    const params = classUpdate("TodoObject",data.objectId,{gradeType:3})
-    dispatch(request(params, (response)=>{
+    const params = classUpdate("TodoObject",data.get('objectId'),{gradeType:3})
+    request(params, (response)=>{
       if(response.statu){
+        dispatch(navigatePop())
         dispatch(iShowDeleteSucceed());
       }else{
         dispatch(iShowDeleteFailed());
       }
-    }))
+    })
 
   }
 }
 
 export function iShowDeleteSucceed():Object{
+
   return {
     type:ISHOW_DELETE_SUCCEED,
   }

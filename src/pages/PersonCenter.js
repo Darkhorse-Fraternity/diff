@@ -86,33 +86,16 @@ class SettingIOS extends Component {
         return (
             <ScrollView
                 style={styles.list}
-                refreshControl={
-					<RefreshControl
-						refreshing={this.state.refreshing}
-						onRefresh={this._handleRefresh}
-						/>
-				}
+                //refreshControl={
+					// <RefreshControl
+					// 	refreshing={this.state.refreshing}
+					// 	onRefresh={this._handleRefresh}
+					// 	/>
+				//}
             >
                 {this._renderHeadRow(this.props.userData, () => {
-                    // NavigationManager.goToPage("PersonInfo",
-                    //  {props:{userCenterData:this.state.userCenterData}});
                     this.props.push({key: 'PersonInfo'});
                 })}
-                {/*{this._renderRow('余额充值', styles.bottomLine, this.balanceSource, true, () => {
-                 this.props.push({key:'WebView-charge',title:'余额充值',url:this.state.userCenterData.balance_charge_url});
-                 }, this.state.userCenterData.cosume_dayipoint)}
-                 {this._renderRow('购买课程', styles.bottomLine, this.buySource, true, () => {
-                 this.props.push({key:'WebView-buyClass',title:'购买课程',url:this.state.userCenterData.o2o_package_charge_url});
-                 })}
-                 {this._renderRow('我的优惠', styles.group, this.couponsSource,true, () => {
-                 this.props.push({key:'MyCouponsPage', onPressCoupons:()=>this.props.push({key:'WebView-buyClass',title:'购买课程',url:this.state.userCenterData.o2o_package_charge_url})});
-                 })}
-                 {this._renderRow('课时流水', styles.bottomLine, this.recordSource,true, () => {
-                 this.props.push('ClassRecord');
-                 })}
-                 {this._renderRow('我的订单',  styles.bottomLine, this.orderSource,true, () => {
-                 this.props.push({key:'WebView-myOrder',title:'我的订单',url:this.state.userCenterData.order_url});
-                 })}*/}
                 {this._renderRow('设置', styles.group,  true, () => {
                     this.props.push('Setting');
                 })}

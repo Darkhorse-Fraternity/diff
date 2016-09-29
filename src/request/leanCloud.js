@@ -268,8 +268,8 @@ export function classBatch(requests:[Object]):Object{
     }
   });
   return {
-    path:'/batch'
-    method:method.post,
+    path:'/batch',
+    method:methodType.post,
     params:newRequests,
   }
 }

@@ -17,7 +17,7 @@ const initialIdeaListState = immutable.fromJS({
   data:[],
 });
 
-export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function iJoinState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
       case IJOIN_LIST_FAILED:
       case IJOIN_LIST_START:

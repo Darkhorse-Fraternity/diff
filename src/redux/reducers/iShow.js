@@ -10,19 +10,19 @@ import {
 } from '../actions/iShow'
 import * as immutable from 'immutable';
 
-const initialIdeaListState = immutable.fromJS({
+const initialiShowListState = immutable.fromJS({
   page:0,
   index:0,//用于选取详细页面的数据。
   loadStatu:'LIST_FIRST_JOIN',
   data:[],
 });
 
-export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function iShowState(state:immutable.Map<String,any> = initialiShowListState, action:Object) {
     switch (action.type) {
       case ISHOW_LIST_FAILED:
       case ISHOW_LIST_START:
         return state.mergeDeep({loadStatu:action.loadStatu});
-      case ISHOW_LIST_SUCCEED:
+      case ISHOW_LIST_SUCCEED:{
         let data = state.get('data')
         const page = state.get('page')
          page == 0?data = action.data:data.push(action.data);
@@ -30,17 +30,20 @@ export default function drawState(state:immutable.Map<String,any> = initialIdeaL
           loadStatu:action.loadStatu,
           page:action.page,
           data:data,
-        });
+        });}
       case ISHOW_LIST_SELECT:
         return state.mergeDeep({index:action.index});
-      case  ISHOW_DELETE_SUCCEED:
+      case  ISHOW_DELETE_SUCCEED:{
         let data = state.get('data')
         let index = state.get('index')
-        data.pop(index);
+        let loadStatu =state.get('loadStatu')
+        const data2 =  data.remove(index);
         return state.merge({
           index:0,
-          data:data,
-        })
+          data:data2,
+          loadStatu:data.length==0?'LIST_NO_DATA  ':loadStatu
+
+        })}
       default:
         return state
     }

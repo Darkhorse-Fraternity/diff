@@ -6,7 +6,7 @@
 
 
 import React, {Component,PropTypes} from 'react';
-import {ideaListLoad,ideaListLoadMore} from '../../redux/actions/ideaList'
+import {iCommentListLoad,iCommentListLoadMore} from '../../redux/actions/iComment'
 import {
     View,
     Text,
@@ -19,8 +19,7 @@ import WBImage from '../../components/Base/WBImage'
 import {connect} from 'react-redux'
 import BaseListView from '../../components/Base/BaseListView';
 import { navigatePush } from '../../redux/actions/nav'
-import {ideaListSelcet} from '../../redux/actions/ideaList'
-class IdeaList extends Component {
+class IComment extends Component {
     constructor(props:Object) {
         super(props);
         // this._renderHeader.bind(this)
@@ -73,11 +72,8 @@ class IdeaList extends Component {
         <TouchableOpacity
           style={[styles.row]}
           onPress={()=>{
-            // this.props.select(rowID);
-            const idea = this.props.dataSource[rowID]
-            // console.log('idea:',idea);
-            this.props.push({key:"Intro",idea:idea})
-          }} >
+            this.props.select(rowID);
+            this.props.push("Intro")}} >
           <View>
             <WBImage style={styles.image} source={{uri:url}}/>
             <Text
@@ -149,8 +145,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
     return {
-      loadStatu:state.ideaList.get('loadStatu'),
-      dataSource:state.ideaList.get('data').toArray(),
+      loadStatu:state.iComment.get('loadStatu'),
+      dataSource:state.iComment.get('data').toArray(),
       user:state.login.data,
     }
 }
@@ -158,17 +154,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
       load:()=>{
-        dispatch(ideaListLoad());
+        dispatch(iCommentListLoad());
       },
       loadMore:()=>{
-        dispatch(ideaListLoadMore());
+        dispatch(iCommentListLoadMore());
       },
       push:(key)=>{
         dispatch(navigatePush(key));
       },
-      select:(index:number)=>{
-        dispatch(ideaListSelcet(index));
-      }
+
 
     }
 }
@@ -176,4 +170,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(IdeaList)
+)(IComment)

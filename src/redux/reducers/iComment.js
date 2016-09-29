@@ -5,18 +5,21 @@ import {
   ICOMMENT_LIST_START,
   ICOMMENT_LIST_FAILED,
   ICOMMENT_LIST_SUCCEED,
+  ICOMMENT_DELETE_SUCCEED,
+  ICOMMENT_ADD_FAILED,
+  ICOMMENT_ADD_SUCCEED,
+  ICOMMENT_CONTENT_CHANGE,
 } from '../actions/iComment'
 import * as immutable from 'immutable';
 
 const initialIdeaListState = immutable.fromJS({
-  page:0,
-  index:0,//用于选取详细页面的数据。
+  content:'',
   loadStatu:'LIST_FIRST_JOIN',
   data:[],
 });
 
 
-export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function iCommentState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
       case ICOMMENT_LIST_FAILED:
       case ICOMMENT_LIST_START:
@@ -30,7 +33,14 @@ export default function drawState(state:immutable.Map<String,any> = initialIdeaL
           page:action.page,
           data:data,
         });
-
+      case ICOMMENT_ADD_SUCCEED:
+      //TODO:
+        return state
+      case ICOMMENT_DELETE_SUCCEED:
+      //TODO:
+        return state
+      case ICOMMENT_CONTENT_CHANGE:
+        return state.setIn(['content'], action.content)
       default:
         return state
     }

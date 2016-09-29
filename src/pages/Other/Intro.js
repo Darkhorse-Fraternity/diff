@@ -114,12 +114,14 @@ componentWillUnmount(){
 
 
 shouldComponentUpdate(nextProps:Object) {
-  return !immutable.is(this.props.idea, nextProps.idea) ||
+  return !immutable.is(this.props.scene.route.idea, nextProps.scene.route.idea) ||
         !immutable.is(this.props.intro,nextProps.intro);
 }
 
 render() {
-    const idea = this.props.idea.toObject();
+  // console.log(this.props);
+    const idea = this.props.scene.route.idea.toObject();
+
     const user = idea.user.toObject();
     const price = idea.price == '0' ?'免费':idea.price;
 
@@ -256,10 +258,11 @@ const styles = StyleSheet.create({
   },
 });
 const mapStateToProps = (state) => {
-    const data = state.ideaList.get('data');
+
+    // const data = state.ideaList.get('data');
     const index = state.ideaList.get('index');
     return {
-      idea:data.get(index),
+      // idea:data.get(index),
       intro:state.intro,
     }
 }

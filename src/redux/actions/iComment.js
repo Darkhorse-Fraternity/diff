@@ -23,6 +23,9 @@ export const ICOMMENT_LIST_SUCCEED = 'ICOMMENT_LIST_SUCCEEDT'
 export const ICOMMENT_DELETE_START = 'ICOMMENT_DELETE_START'
 export const ICOMMENT_DELETE_SUCCEED = 'ICOMMENT_DELETE_SUCCEED'
 export const ICOMMENT_DELETE_FAILED = 'ICOMMENT_DELETE_FAILED'
+export const ICOMMENT_ADD_SUCCEED = 'ICOMMENT_ADD_SUCCEED'
+export const ICOMMENT_ADD_FAILED = 'ICOMMENT_ADD_FAILED'
+export const ICOMMENT_CONTENT_CHANGE = 'ICOMMENT_CONTENT_CHANGE'
 const pageSize = 40;
 
 export function iCommentListLoad():Function{
@@ -127,6 +130,13 @@ function _listStart(isLoadMore:bool):Object {
     }
 }
 
+export function iCommentContentChange(content:string):Object{
+  return {
+    type:ICOMMENT_CONTENT_CHANGE,
+    content
+  }
+}
+
 
 export function iCommentAdd():Function{
   return (dispatch,getState)=>{
@@ -134,33 +144,45 @@ export function iCommentAdd():Function{
     const index = state.ideaList.index;
     const data = state.ideaList.data[index];
     const obejctId = data.objectId;
-    const user = getState().login.data;
+    const user =state.login.data;
+    const content = state.iComment.content
     const params = classCreatNewOne('iComment',{
-      content:'',
-      user:user,
+      content,
+      user,
       idae:{"__type": "Pointer",
           "className": "TodoObject",
           "objectId": obejctId}
     })
     dispatch(request(params, (response)=>{
       if(response.statu){
-
+        dispatch(iCommentAddSucceed())
       }else{
-
+        dispatch(iCommentAddFailed())
       }
     }))
   }
 }
 
-export function iCommentDelete(objectId:string):Function {
+export function iCommentAddSucceed():Object{
+  return {
+    type:ICOMMENT_ADD_SUCCEED,
+  }
+}
+
+export function iCommentAddFailed():Object{
+  return {
+    type:ICOMMENT_ADD_FAILED
+  }
+}
+
+export function iCommentDelete(index:number):Function {
   return (dispatch,getState)=>{
-    const index = getState().ICOMMENT.index;
     const data = getState().ICOMMENT.data[index];
     //通知服务器,做伪删除，即把type改为3
     const params = classUpdate("TodoObject",data.objectId,{gradeType:3})
     dispatch(request(params, (response)=>{
       if(response.statu){
-        dispatch(iCommentDeleteSucceed());
+        dispatch(iCommentDeleteSucceed(index));
       }else{
         dispatch(iCommentDeleteFailed());
       }
@@ -169,9 +191,10 @@ export function iCommentDelete(objectId:string):Function {
   }
 }
 
-export function iCommentDeleteSucceed():Object{
+export function iCommentDeleteSucceed(index:number):Object{
   return {
     type:ICOMMENT_DELETE_SUCCEED,
+    index,
   }
 }
 

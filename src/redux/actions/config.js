@@ -13,6 +13,7 @@ import React, {
     Platform,
     UIManager,
     ToastAndroid,
+    StatusBar,
 } from 'react-native';
 
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
@@ -44,6 +45,7 @@ function _preConfig() {
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
+    Platform.OS=='ios'&& StatusBar.setBarStyle('default', true);
 
 }
 

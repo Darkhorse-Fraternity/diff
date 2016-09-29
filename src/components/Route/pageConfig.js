@@ -32,6 +32,7 @@ export  const pageConfig = {
   'Intro'               : { title : '介绍',hideNavBar:true},
   'IdeaList'            : { title : '创意列表'},
   'iShowList'           : { title : '我的发布'},
+  'iShowDetail'         : { title : ''},
   }
 
 export function config(key:string):Object{

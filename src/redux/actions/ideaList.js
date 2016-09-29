@@ -45,7 +45,12 @@ export function ideaListLoadMore():Function{
  * @return {[type]}              [description]
  */
  function _requestIdeaList(page:number):Function {
-    const params = limitSearch('TodoObject',page,pageSize,{include:'user,images'});
+    const params = limitSearch('TodoObject',page,pageSize,{
+      include:'user,images',
+      where:{
+        'gradeType':{"$in":[1]},
+      }
+    });
     return (dispatch,getState) => {
         const loaded = getState().ideaList.loaded;
         if(!loaded){//not serial
