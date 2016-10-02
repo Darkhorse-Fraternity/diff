@@ -54,6 +54,37 @@ export function renderNavSenderButton(tap:Function) {
              ref='sender'
              name='md-send'
              size={15}
+             color={disabled?'gray':'black'}
+             //backgroundColor="transparent"
+             //resizeMode = 'contain'
+             //source={image}
+             style={styles.icon}/>
+        </WBButton>
+     )
+   }
+
+  return tryRender;
+}
+
+
+
+export function renderNavAddButton(tap:Function) {
+   function tryRender(props:Object) {
+     let disabled = props.scene.route.rightButtonDisabled;
+     let isLoad = props.scene.route.rightButtonIsLoad;
+     return(
+       <WBButton
+         ref='nav_right_button'
+         onPress={tap}
+         isLoad={isLoad}
+         style={[{color:containingColor, flexDirection:'row'},styles.barRightButtonText]}
+         styleDisabled={{color:lightContainingColor}}
+         containerStyle= {styles.rightButton}
+         disabled ={disabled}>
+           <AniView
+             ref='sender'
+             name='ios-add'
+             size={20}
              color='black'
              //backgroundColor="transparent"
              //resizeMode = 'contain'

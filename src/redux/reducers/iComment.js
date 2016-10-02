@@ -9,13 +9,16 @@ import {
   ICOMMENT_ADD_FAILED,
   ICOMMENT_ADD_SUCCEED,
   ICOMMENT_CONTENT_CHANGE,
+  ICOMMENT_BINDING_IDEAID,
 } from '../actions/iComment'
 import * as immutable from 'immutable';
 
 const initialIdeaListState = immutable.fromJS({
+  ideaId:'',//绑定的id 对象。
   content:'',
   loadStatu:'LIST_FIRST_JOIN',
   data:[],
+  page:0,
 });
 
 
@@ -41,6 +44,8 @@ export default function iCommentState(state:immutable.Map<String,any> = initialI
         return state
       case ICOMMENT_CONTENT_CHANGE:
         return state.setIn(['content'], action.content)
+      case ICOMMENT_BINDING_IDEAID:
+        return state.setIn(['ideaId'], action.ideaId)
       default:
         return state
     }

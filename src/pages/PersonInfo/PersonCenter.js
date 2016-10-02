@@ -1,7 +1,7 @@
 /* @flow */
 'use strict';
 
-import {pixel, navbarHeight, screenWidth, screenHeight} from '../util'
+import {pixel, navbarHeight, screenWidth, screenHeight} from '../../util'
 import React, {Component, PropTypes} from 'react';
 import ReactNative, {
     ScrollView,
@@ -13,9 +13,9 @@ import ReactNative, {
     RefreshControl,
 } from 'react-native'
 
-import {blackFontColor, grayFontColor, backViewColor} from '../configure';
+import {blackFontColor, grayFontColor, backViewColor} from '../../configure';
 import {connect} from 'react-redux'
-import {navigatePush} from '../redux/actions/nav'
+import {navigatePush} from '../../redux/actions/nav'
 
 
 var needRefresh = true;
@@ -96,16 +96,19 @@ class SettingIOS extends Component {
                 {this._renderHeadRow(this.props.userData, () => {
                     this.props.push({key: 'PersonInfo'});
                 })}
-                {this._renderRow('设置', styles.group,  true, () => {
-                    this.props.push('Setting');
-                })}
+
                 {this._renderRow('推荐我的创意服务', styles.group, true, () => {
                     this.props.push('Contribute');
                 })}
                 {this._renderRow('我的发布', styles.group, true, () => {
                     this.props.push('iShowList');
                 })}
+                {this._renderRow('我的收藏', styles.group, true, () => {
 
+                })}
+                {this._renderRow('设置', styles.group,  true, () => {
+                    this.props.push('Setting');
+                })}
 
             </ScrollView>
         );

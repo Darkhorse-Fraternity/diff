@@ -81,7 +81,7 @@ export function iCollectionListLoadMore():Function{
    if(data.length < pageSize){
      loadStatu = LIST_LOAD_NO_MORE
    }
-   if(page == 0 && data.count == 0){
+   if(page == 0 && data.length == 0){
      loadStatu = LIST_NO_DATA
    }
     return {

@@ -4,8 +4,8 @@
 
 
 import TabView  from './TabView'
-import LoginView from '../../pages/LoginView';
-import PersonCenter from '../../pages/PersonCenter';
+import LoginView from '../../pages/Setting/LoginView';
+import PersonCenter from '../../pages/PersonInfo/PersonCenter';
 import PersonInfo from '../../pages/PersonInfo';
 import BaseWebView from '../../components/Base/BaseWebView';
 import Setting from '../../pages/Setting';
@@ -17,11 +17,13 @@ import Feedback from '../../pages/Setting/Feedback'
 import AlterPwd from '../../pages/PersonInfo/AlterPwd'
 import NickName from '../../pages/PersonInfo/NickName'
 // import PhoneContacts from '../../pages/PersonInfo/PhoneContacts';
-import Contribute from '../../pages/Other/Contribute'
+import Contribute from '../../pages/Submit/Contribute'
 import Intro from '../../pages/Other/Intro'
 import IdeaList from '../../pages/Other/IdeaList'
 import iShowList from '../../pages/Other/IShowList'
 import iShowDetail from '../../pages/Other/iShowDetail'
+import Comment from '../../pages/Other/Comment'
+import AddComment from '../../pages/Other/AddComment'
 export  const PageMap =
 {
   "WebView"             : BaseWebView,
@@ -42,4 +44,6 @@ export  const PageMap =
   'IdeaList'            : IdeaList,
   'iShowList'           : iShowList,
   'iShowDetail'         : iShowDetail,
+  'Comment'             : Comment,
+  'AddComment'          : AddComment,
 }

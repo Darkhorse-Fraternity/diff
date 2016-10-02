@@ -1,4 +1,4 @@
-/* @flow */
+ /* @flow */
 'use strict'
 
 import React, {Component} from 'react'
@@ -16,6 +16,7 @@ import WBButton from '../../components/Base/WBButton'
 import {connect} from 'react-redux'
 import {screenWidth,screenHeight} from '../../util'
 import { navigatePush ,navigatePop} from '../../redux/actions/nav'
+import {iCommentBindingIdeaID} from '../../redux/actions/iComment'
 import * as immutable from 'immutable';
 import { BlurView} from 'react-native-blur';
 const MyBlueView = Platform.OS == 'ios' ?BlurView:View;
@@ -23,6 +24,10 @@ const MyBlueView = Platform.OS == 'ios' ?BlurView:View;
 const style = Platform.OS == 'ios'?{}:{backgroundColor:'rgba(0,0,0,0.9)'}
 import {showModalSwiper,hiddenModelSwiper} from '../../redux/actions/intro'
 
+import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
+import * as Animatable from 'react-native-animatable';
+import EvilIcons from 'react-native-vector-icons/EvilIcons'
+const AniView = Animatable.View;
 // const myIcon = (<Icon name="rocket" size={30} color="#900" />)
 // const customTextButton = (
 //   <Icon.Button name="facebook" backgroundColor="#3b5998">
@@ -104,12 +109,32 @@ _renderSwiper(images:any){
   )
 }
 
+__renderTopBtn(name:string,callback:Function):ReactElement<any>{
+
+    return(
+      <TouchableOpacity
+        activeOpacity={1}
+        key={name}
+        onPress={()=>{
+          this.refs[name].bounceIn(1000);
+            callback&&callback();
+        }}>
+        <AniView style={styles.topButton} ref={name}>
+          <EvilIcons
+            name={name}
+            size={23}
+            style={styles.icon}/>
+        </AniView>
+      </TouchableOpacity>
+    )
+}
+
 componentWillMount() {
-  Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
+  // Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
 }
 
 componentWillUnmount(){
-  Platform.OS=='ios'&& StatusBar.setBarStyle('default', true);
+  // Platform.OS=='ios'&& StatusBar.setBarStyle('default', true);
 }
 
 
@@ -134,7 +159,17 @@ render() {
       <View style={styles.box}>
         {this._renderModalSwiper(images)}
         {this._renderBackButton()}
+
         <ScrollView>
+          <View style={styles.topBtnView}>
+            {this.__renderTopBtn('comment',()=>{
+              this.props.iCommentBindingIdeaID(idea.objectId);
+              this.props.push('Comment');
+            })}
+            {this.__renderTopBtn('heart',()=>{
+
+            })}
+          </View>
           {this._renderSwiper(images)}
           <View style={styles.label}>
             <Text style={styles.price}>￥{price}⚡️</Text>
@@ -256,6 +291,27 @@ const styles = StyleSheet.create({
       width: 10,
       height: 10,
   },
+  topBtnView:{
+    backgroundColor:'transparent',
+    position:'absolute',
+    zIndex:2,
+    left:screenWidth-90,
+    top:SwiperViewHight-17,
+    flexDirection:'row-reverse',
+  },
+  topButton:{
+    marginRight:10,
+    backgroundColor:'white',
+    height:35,
+    width:35,
+    borderRadius:35,
+    justifyContent:'center'
+  },
+  icon: {
+    // backgroundColor:'transparent',
+    alignSelf:'center',
+    color:'black'
+  }
 });
 const mapStateToProps = (state) => {
 
@@ -280,7 +336,11 @@ const mapDispatchToProps = (dispatch) => {
       },
       hiddenModelSwiper:()=>{
         dispatch(hiddenModelSwiper())
+      },
+      iCommentBindingIdeaID:(id:string)=>{
+        dispatch(iCommentBindingIdeaID(id))
       }
+
     }
 }
 

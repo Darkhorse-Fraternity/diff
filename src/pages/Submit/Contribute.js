@@ -17,7 +17,6 @@ import {pixel,screenWidth,screenHeight,navbarHeight,Toast} from '../../util/';
 import {renderNavSenderButton} from '../../util/viewUtil'
 import Button from 'react-native-button'
 import {backViewColor, textInputTextColor, placeholderTextColor, grayFontColor} from '../../configure'
-import {request} from '../../request'
 import {connect} from 'react-redux'
 import {navigateRefresh,navigatePop} from '../../redux/actions/nav'
 import {

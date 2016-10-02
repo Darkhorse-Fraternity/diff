@@ -56,7 +56,7 @@ export function iShowListLoadMore():Function{
         const params = limitSearch('TodoObject',page,pageSize,{
           'include':'images',
           'where':{
-            'user':{'__type':"Pointer","className":"_User","objectId":"55a0c5d4e4b031b00558ae79"},
+            'user':{'__type':"Pointer","className":"_User","objectId":user.objectId},
             'gradeType':{"$in":[0,1,2]}
             },
           });

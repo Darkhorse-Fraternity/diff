@@ -16,13 +16,13 @@ import {
 } from 'react-native'
 
 
-import {pixel,Toast,checkPhoneNum} from '../util';
-import {mainColor,backViewColor, textInputTextColor, placeholderTextColor} from '../configure';
-import WBButton,{BCButton} from '../components/Base/WBButton';
+import {pixel,Toast,checkPhoneNum} from '../../util';
+import {mainColor,backViewColor, textInputTextColor, placeholderTextColor} from '../../configure';
+import WBButton,{BCButton} from '../../components/Base/WBButton';
 
 import {connect} from 'react-redux'
-import { navigatePush } from '../redux/actions/nav'
-import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../redux/actions/login'
+import { navigatePush } from '../../redux/actions/nav'
+import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../../redux/actions/login'
 
 
   class LoginView extends React.Component {

@@ -18,7 +18,14 @@ import * as immutable from 'immutable';
 import WBImage from '../../components/Base/WBImage'
 import {connect} from 'react-redux'
 import BaseListView from '../../components/Base/BaseListView';
-import { navigatePush } from '../../redux/actions/nav'
+import { navigatePush,navigateRefresh } from '../../redux/actions/nav'
+import Icon from 'react-native-vector-icons/FontAwesome'
+import {renderNavAddButton} from '../../util/viewUtil'
+
+var moment = require('moment'); //load moment module to set local language
+require('moment/locale/zh-cn'); //for import moment local language file during the application build
+moment.locale('zh-cn');//set moment local language to zh-cn
+var TimeAgo = require('react-native-timeago');
 class IComment extends Component {
     constructor(props:Object) {
         super(props);
@@ -33,64 +40,57 @@ class IComment extends Component {
     };
 
 
-    componentDidMount() {
+
+
+    _tapRight=()=>{
+      this.props.push('AddComment')
     }
+
+
+    componentDidMount() {
+      const rightBtn = renderNavAddButton(this._tapRight)
+      this.props.refresh({renderRightComponent:rightBtn});
+    }
+
+
+
 
     shouldComponentUpdate(nextProps:Object) {
       return !immutable.is(this.props.loadStatu, nextProps.loadStatu)||
-          this.props.user !== nextProps.user ;
+            !immutable.is(this.props.dataSource,nextProps.dataSource);
     }
 
-    _renderHeader=()=>{
-      const name = this.props.user.username
-      return (
-        <View style={styles.headView}>
-          <Text style={styles.headViewText}>
-               -{name},您好！
-          </Text>
-          <Text style={styles.headViewSubText}>想尝试什么?</Text>
-        </View>
-      )
-    }
+
     renderRow(idea:Object, sectionID:number, rowID:number) {
       const data = idea.toObject()
-      // console.log(data.imageFile|| null  );
-        let url = 'http://facebook.github.io/react/img/logo_og.png'
-      try {
-
-        if(data.images) {
-          const images = data.images.toArray();
-           url = images[0].get('url')
-          // const newURL = data.images.get('url')
-          // url = newURL.length == 0 ?url:newURL;
-        }
-      } catch (e) {
-        console.warn(e.message);
-      }
-
+      const user = data.user;
+      const date = Date.parse(data.createdAt);
+      const avatar = user.get('avatar')
+      console.log(user);
+      console.log(date);
       return (
-        <TouchableOpacity
-          style={[styles.row]}
-          onPress={()=>{
-            this.props.select(rowID);
-            this.props.push("Intro")}} >
-          <View>
-            <WBImage style={styles.image} source={{uri:url}}/>
-            <Text
-              numberOfLines = {1}
-              style={styles.text}>
-              {data.title}
-            </Text>
-          </View>
-          <View style={styles.line}/>
-        </TouchableOpacity>
+        <View style={[styles.row]} >
+
+            <WBImage style={styles.avatar} source={{uri:avatar.get('url')}}/>
+            <View style={styles.subRow}>
+              <Text style={styles.name}>{user.get('username')}</Text>
+              <Text
+                style={styles.text}>
+                {data.content}
+              </Text>
+              <View style={styles.subBottom}>
+                <TimeAgo time={data.createdAt}  style={styles.date}/>
+              </View>
+              <View style={styles.line}/>
+            </View>
+
+        </View>
       )
     }
 
     render() {
         return (
           <BaseListView
-            renderHeader={this._renderHeader}
             style= {styles.list}
             loadStatu={this.props.loadStatu}
     				loadData={this.props.load}
@@ -104,15 +104,16 @@ class IComment extends Component {
 
 const styles = StyleSheet.create({
     row:{
-      marginTop:30,
       marginHorizontal:20,
-      backgroundColor:'white'
+      backgroundColor:'white',
+      flexDirection:'row'
     },
-    text:{
-      marginTop:15,
-      marginBottom:20,
-      fontSize:17,
+    subRow:{
+      marginTop:10,
+      flex:1,
+      marginLeft:15,
     },
+
     headView:{
       height:180,
     },
@@ -129,7 +130,6 @@ const styles = StyleSheet.create({
     },
     list:{
       backgroundColor:'white',
-      marginTop:20,
     },
     wrap: {
         flex: 1,
@@ -138,9 +138,29 @@ const styles = StyleSheet.create({
       height:StyleSheet.hairlineWidth,
       backgroundColor:'rgba(0,0,0,0.2)',
     },
-    image:{
-      height:200,
+
+    name:{
+      fontWeight:'bold',
+      fontSize:15,
     },
+    text:{
+      marginTop:5,
+      fontSize:14,
+    },
+    avatar:{
+      marginTop:10,
+      width:30,
+      height:30,
+      borderRadius:15,
+    },
+    subBottom:{
+      flexDirection:'row',
+    },
+    date:{
+      marginTop:5,
+      fontSize:12,
+      color:'rgba(0,0,0,0.5)'
+    }
 })
 
 const mapStateToProps = (state) => {
@@ -162,7 +182,9 @@ const mapDispatchToProps = (dispatch) => {
       push:(key)=>{
         dispatch(navigatePush(key));
       },
-
+      refresh:(obj)=>{
+        dispatch(navigateRefresh(obj))
+      },
 
     }
 }

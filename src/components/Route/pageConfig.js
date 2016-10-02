@@ -33,7 +33,9 @@ export  const pageConfig = {
   'IdeaList'            : { title : '创意列表'},
   'iShowList'           : { title : '我的发布'},
   'iShowDetail'         : { title : ''},
-  }
+  'Comment'             : { title : '评论'},
+  'AddComment'          : { title : '写评论'}
+}
 
 export function config(key:string):Object{
 

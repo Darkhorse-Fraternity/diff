@@ -6,7 +6,7 @@
 'use strict'
 
 import {request} from '../../request';
-import {limitSearch,classUpdate,classCreatNewOne} from '../../request/leanCloud';
+import {limitSearch,classDelete,classCreatNewOne} from '../../request/leanCloud';
 import{
   LIST_FIRST_JOIN,
   LIST_NO_DATA,
@@ -17,6 +17,7 @@ import{
   LIST_NORMAL,
 } from '../../../src/components/Base/BaseListView'
 
+
 export const ICOMMENT_LIST_START = 'ICOMMENT_LIST_START'
 export const ICOMMENT_LIST_FAILED = 'ICOMMENT_LIST_FAILED'
 export const ICOMMENT_LIST_SUCCEED = 'ICOMMENT_LIST_SUCCEEDT'
@@ -26,6 +27,10 @@ export const ICOMMENT_DELETE_FAILED = 'ICOMMENT_DELETE_FAILED'
 export const ICOMMENT_ADD_SUCCEED = 'ICOMMENT_ADD_SUCCEED'
 export const ICOMMENT_ADD_FAILED = 'ICOMMENT_ADD_FAILED'
 export const ICOMMENT_CONTENT_CHANGE = 'ICOMMENT_CONTENT_CHANGE'
+export const ICOMMENT_BINDING_IDEAID = 'ICOMMENT_BINDING_IDEAID'
+
+import {navigatePop,navigateRefresh} from './nav'
+
 const pageSize = 40;
 
 export function iCommentListLoad():Function{
@@ -49,16 +54,14 @@ export function iCommentListLoadMore():Function{
  function _requestList(page:number):Function {
 
     return (dispatch,getState) => {
-        const loaded = getState().ideaList.loaded;
-
         const state = getState();
-        const index = state.ideaList.index;
-        const data = state.ideaList.data[index];
-        const obejctId = data.objectId;
-        // const user = getState().login.data;
+        const loaded = state.ideaList.get('loaded');
+        const objectId = state.iComment.get('ideaId')
+        const user = state.login.data;
         const params = limitSearch('iComment',page,pageSize,{
+          include:'user',
            where:{
-             'todoObject':{'__type':"Pointer","className":"TodoObject","objectId":obejctId}}
+             'idea':{'__type':"Pointer","className":"TodoObject","objectId":objectId}}
            }
           );
         if(!loaded){//not serial
@@ -86,9 +89,10 @@ export function iCommentListLoadMore():Function{
    if(data.length < pageSize){
      loadStatu = LIST_LOAD_NO_MORE
    }
-   if(page == 0 && data.count == 0){
+   if(page == 0 && data.length == 0){
      loadStatu = LIST_NO_DATA
    }
+
     return {
         type: ICOMMENT_LIST_SUCCEED,
         page:page,
@@ -131,6 +135,7 @@ function _listStart(isLoadMore:bool):Object {
 }
 
 export function iCommentContentChange(content:string):Object{
+
   return {
     type:ICOMMENT_CONTENT_CHANGE,
     content
@@ -141,35 +146,44 @@ export function iCommentContentChange(content:string):Object{
 export function iCommentAdd():Function{
   return (dispatch,getState)=>{
     const state = getState();
-    const index = state.ideaList.index;
-    const data = state.ideaList.data[index];
-    const obejctId = data.objectId;
+
+    const obejctId = state.iComment.get('ideaId')
     const user =state.login.data;
-    const content = state.iComment.content
+    const content = state.iComment.get('content')
     const params = classCreatNewOne('iComment',{
       content,
-      user,
-      idae:{"__type": "Pointer",
+      idea:{
+          "__type": "Pointer",
           "className": "TodoObject",
-          "objectId": obejctId}
+          "objectId": obejctId},
+      user:{
+          "__type": "Pointer",
+          "className": "_User",
+          "objectId": user.objectId},
     })
-    dispatch(request(params, (response)=>{
+    dispatch(navigateRefresh({rightButtonIsLoad:true}))
+
+    request(params, (response)=>{
+      dispatch(navigateRefresh({rightButtonIsLoad:false}))
+
       if(response.statu){
+        dispatch(navigatePop())
         dispatch(iCommentAddSucceed())
+        dispatch(iCommentListLoad())
       }else{
         dispatch(iCommentAddFailed())
       }
-    }))
+    })
   }
 }
 
-export function iCommentAddSucceed():Object{
+ function iCommentAddSucceed():Object{
   return {
     type:ICOMMENT_ADD_SUCCEED,
   }
 }
 
-export function iCommentAddFailed():Object{
+ function iCommentAddFailed():Object{
   return {
     type:ICOMMENT_ADD_FAILED
   }
@@ -177,16 +191,17 @@ export function iCommentAddFailed():Object{
 
 export function iCommentDelete(index:number):Function {
   return (dispatch,getState)=>{
-    const data = getState().ICOMMENT.data[index];
+    const data = getState().iCommnet.get('data');
+    const item = data.get(index);
     //通知服务器,做伪删除，即把type改为3
-    const params = classUpdate("TodoObject",data.objectId,{gradeType:3})
-    dispatch(request(params, (response)=>{
+    const params = classDelete("iComment",item.objectId)
+    request(params, (response)=>{
       if(response.statu){
         dispatch(iCommentDeleteSucceed(index));
       }else{
         dispatch(iCommentDeleteFailed());
       }
-    }))
+    })
 
   }
 }
@@ -201,5 +216,12 @@ export function iCommentDeleteSucceed(index:number):Object{
 export function iCommentDeleteFailed():Object{
   return {
     type:ICOMMENT_DELETE_FAILED
+  }
+}
+
+export function iCommentBindingIdeaID(ideaId:string):Object{
+  return {
+    type:ICOMMENT_BINDING_IDEAID,
+    ideaId,
   }
 }
