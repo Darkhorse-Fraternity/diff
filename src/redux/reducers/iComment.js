@@ -22,7 +22,7 @@ const initialIdeaListState = immutable.fromJS({
 });
 
 
-export default function iCommentState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function iCommentState(state:immutable.Map<string,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
       case ICOMMENT_LIST_FAILED:
       case ICOMMENT_LIST_START:

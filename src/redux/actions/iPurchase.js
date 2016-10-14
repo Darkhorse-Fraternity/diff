@@ -31,24 +31,21 @@ export const IPURCHASE_ADD_SUCCEED = 'IPURCHASE_ADD_SUCCEED'
 export const IPURCHASE_ADD_FAILED = 'IPURCHASE_ADD_FAILED'
 export const IPURCHASE_CONTENT_CHANGE = 'IPURCHASE_CONTENT_CHANGE'
 export const IPURCHASE_BINDING_IDEAID = 'IPURCHASE_BINDING_IDEAID'
-export const IPURCHASE_CHANGE_PHONE = 'IPURCHASE_CHANGE_PHONE'
-export const IPURCHASE_COMMIT_IMAGE = 'IPURCHASE_COMMIT_IMAGE'
-export const IPURCHASE_DELETE_IMAGE = 'IPURCHASE_DELETE_IMAGE'
 export const IPURCHASE_CLEAR_DATA = 'IPURCHASE_CLEAR_DATA'
 
 import {navigatePop,navigateRefresh} from './nav'
 
 const pageSize = 40;
 
-export function IPURCHASEListLoad():Function{
+export function iPurchaseListLoad():Function{
   return (dispatch,getState) => {
     return dispatch(_requestList(0));
   }
 }
 
-export function IPURCHASEListLoadMore():Function{
+export function iPurchaseListLoadMore():Function{
   return (dispatch,getState) => {
-    const page = getState().ideaList.get('page') +1;
+    const page = getState().iPurchase.get('page') +1;
     return dispatch(_requestList(page));
   }
 }
@@ -62,12 +59,12 @@ export function IPURCHASEListLoadMore():Function{
 
     return (dispatch,getState) => {
         const state = getState();
-        const loaded = state.IPURCHASE.get('loaded');
+        const loaded = state.iPurchase.get('loaded');
         const idea = state.route.navigationState.routes
         [state.route.navigationState.index].idea
         const objectId = idea.get('objectId')
         const user = state.login.data;
-        const params = limitSearch('IPURCHASE',page,pageSize,{
+        const params = limitSearch('iPurchase',page,pageSize,{
           include:'user',
            where:{
              'idea':{'__type':"Pointer","className":"TodoObject","objectId":objectId}}
@@ -142,7 +139,7 @@ function _listStart(isLoadMore:bool):Object {
     }
 }
 
-export function IPURCHASEContentChange(content:string):Object{
+export function iPurchaseContentChange(content:string):Object{
 
   return {
     type:IPURCHASE_CONTENT_CHANGE,
@@ -151,7 +148,7 @@ export function IPURCHASEContentChange(content:string):Object{
 }
 
 
-export  function IPURCHASEAdd():Function{
+export  function iPurchaseAdd():Function{
   return (dispatch,getState)=>{
     const state = getState();
 
@@ -210,12 +207,12 @@ export  function IPURCHASEAdd():Function{
     __handlePromis(type, imageURLs, params).then(response=>{
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
       dispatch(navigatePop())
-      dispatch(IPURCHASEAddSucceed())
-      dispatch(IPURCHASEListLoad())
-      dispatch(IPURCHASEClearData())
+      dispatch(iPurchaseAddSucceed())
+      dispatch(iPurchaseListLoad())
+      dispatch(iPurchaseClearData())
     }).catch((res)=>{
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
-      dispatch(IPURCHASEAddFailed())
+      dispatch(iPurchaseAddFailed())
     })
   }
 }
@@ -240,26 +237,26 @@ async function __handlePromis(type:string,imageURLs:Array<string>,params:Object)
 }
 
 
-function IPURCHASEClearData():Object{
+function iPurchaseClearData():Object{
   return {
     type:IPURCHASE_CLEAR_DATA,
   }
 }
 
- function IPURCHASEAddSucceed():Object{
+ function iPurchaseAddSucceed():Object{
    Toast.show('发送成功')
   return {
     type:IPURCHASE_ADD_SUCCEED,
   }
 }
 
- function IPURCHASEAddFailed():Object{
+ function iPurchaseAddFailed():Object{
   return {
     type:IPURCHASE_ADD_FAILED
   }
 }
 
-export function IPURCHASEDelete(index:number):Function {
+export function iPurchaseDelete(index:number):Function {
   return (dispatch,getState)=>{
     const data = getState().iCommnet.get('data');
     const item = data.get(index);
@@ -267,23 +264,23 @@ export function IPURCHASEDelete(index:number):Function {
     const params = classDelete("IPURCHASE",item.objectId)
     request(params, (response)=>{
       if(response.statu){
-        dispatch(IPURCHASEDeleteSucceed(index));
+        dispatch(iPurchaseDeleteSucceed(index));
       }else{
-        dispatch(IPURCHASEDeleteFailed());
+        dispatch(iPurchaseDeleteFailed());
       }
     })
 
   }
 }
 
-export function IPURCHASEDeleteSucceed(index:number):Object{
+export function iPurchaseDeleteSucceed(index:number):Object{
   return {
     type:IPURCHASE_DELETE_SUCCEED,
     index,
   }
 }
 
-export function IPURCHASEDeleteFailed():Object{
+export function iPurchaseDeleteFailed():Object{
   return {
     type:IPURCHASE_DELETE_FAILED
   }
@@ -294,26 +291,5 @@ export function iBindingIdeaID(ideaId:string,commitType:string):Object{
     type:IPURCHASE_BINDING_IDEAID,
     ideaId,
     commitType,
-  }
-}
-export function changePhoneNumber(phoneNumber:string):Object{
-  return {
-    type:IPURCHASE_CHANGE_PHONE,
-    phoneNumber
-  }
-}
-
-export function commitImage(uri:string) {
-
-	return {
-		type: IPURCHASE_COMMIT_IMAGE,
-    uri,
-	}
-}
-
-export function deleteImage(uri:string){
-  return {
-    type: IPURCHASE_DELETE_IMAGE,
-    uri,
   }
 }

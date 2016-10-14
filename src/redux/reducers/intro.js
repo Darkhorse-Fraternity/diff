@@ -18,7 +18,7 @@ const initialIntroState = immutable.fromJS({
 });
 
 
-export default function introState(state:immutable.Map<String,any> = initialIntroState, action:Object) {
+export default function introState(state:immutable.Map<string,any> = initialIntroState, action:Object) {
     switch (action.type) {
       case SHOW_MODAL_SWIPER:
       case HIDDEN_MODEL_SWIPER:

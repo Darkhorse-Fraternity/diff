@@ -17,7 +17,7 @@ const initialiShowListState = immutable.fromJS({
   data:[],
 });
 
-export default function iShowState(state:immutable.Map<String,any> = initialiShowListState, action:Object) {
+export default function iShowState(state:immutable.Map<string,any> = initialiShowListState, action:Object) {
     switch (action.type) {
       case ISHOW_LIST_FAILED:
       case ISHOW_LIST_START:

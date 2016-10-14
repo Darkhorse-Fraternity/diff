@@ -17,7 +17,7 @@ const initialIdeaListState = immutable.fromJS({
   data:[],
 });
 
-export default function iJoinState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function iJoinState(state:immutable.Map<string,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
       case IJOIN_LIST_FAILED:
       case IJOIN_LIST_START:
@@ -33,7 +33,7 @@ export default function iJoinState(state:immutable.Map<String,any> = initialIdea
         });
       case IJOIN_LIST_SELECT:
         return state.mergeDeep({index:action.index});
-      case  IJOIN_DELETE_SUCCEED:
+      case  IJOIN_DELETE_SUCCEED:{
         let data = state.get('data')
         let index = state.get('index')
         data.pop(index);
@@ -41,6 +41,8 @@ export default function iJoinState(state:immutable.Map<String,any> = initialIdea
           index:0,
           data:data,
         })
+      }
+
       default:
         return state
     }

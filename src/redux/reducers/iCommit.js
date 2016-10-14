@@ -31,7 +31,7 @@ const initialState = immutable.fromJS({
 });
 
 
-export default function iCommitState(state:immutable.Map<String,any> = initialState, action:Object) {
+export default function iCommitState(state:immutable.Map<string,any> = initialState, action:Object) {
     switch (action.type) {
       case ICOMMIT_LIST_FAILED:
       case ICOMMIT_LIST_START:

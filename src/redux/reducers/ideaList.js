@@ -17,7 +17,7 @@ const initialIdeaListState = immutable.fromJS({
 });
 
 
-export default function drawState(state:immutable.Map<String,any> = initialIdeaListState, action:Object) {
+export default function ideaState(state:immutable.Map<string,any> = initialIdeaListState, action:Object) {
     switch (action.type) {
       case IDEA_LIST_FAILED:
       case IDEA_LIST_START:
