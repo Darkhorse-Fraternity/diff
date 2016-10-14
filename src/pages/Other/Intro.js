@@ -1,7 +1,7 @@
  /* @flow */
 'use strict'
 
-import React, {Component} from 'react'
+import React, {Component,PropTypes} from 'react'
 import  {View,
   TouchableOpacity,
   Modal,
@@ -19,15 +19,16 @@ import { navigatePush ,navigatePop} from '../../redux/actions/nav'
 import {iCommentBindingIdeaID} from '../../redux/actions/iComment'
 import * as immutable from 'immutable';
 import { BlurView} from 'react-native-blur';
+import BaseListView from '../../components/Base/BaseListView';
 const MyBlueView = Platform.OS == 'ios' ?BlurView:View;
 
 const style = Platform.OS == 'ios'?{}:{backgroundColor:'rgba(0,0,0,0.9)'}
-import {showModalSwiper,hiddenModelSwiper} from '../../redux/actions/intro'
-
+import {showModalSwiper,hiddenModelSwiper,tryIdea} from '../../redux/actions/intro'
+import {iCommitListLoad,iCommitListLoadMore} from '../../redux/actions/iCommit'
 import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
 import * as Animatable from 'react-native-animatable';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
-const AniView = Animatable.View;
+// const AniView = Animatable.View;
 // const myIcon = (<Icon name="rocket" size={30} color="#900" />)
 // const customTextButton = (
 //   <Icon.Button name="facebook" backgroundColor="#3b5998">
@@ -38,10 +39,20 @@ const AniView = Animatable.View;
 const SwiperViewHight = screenWidth/400*280
 class intro extends Component{
 
+  constructor(props:Object) {
+      super(props);
+      // this._renderHeader.bind(this)
+  }
 
 //图片轮播图
 //中间文字介绍
 //底部button
+static propTypes = {
+   load: PropTypes.func.isRequired,
+   loadMore:PropTypes.func.isRequired,
+   loadStatu:PropTypes.string.isRequired,
+   dataSource:PropTypes.array.isRequired,
+};
 
 _renderBackButton():ReactElement<any>{
     return (
@@ -113,18 +124,18 @@ __renderTopBtn(name:string,callback:Function):ReactElement<any>{
 
     return(
       <TouchableOpacity
-        activeOpacity={1}
+        activeOpacity={0.5}
         key={name}
         onPress={()=>{
-          this.refs[name].bounceIn(1000);
+          // this.refs[name].bounceIn(1000);
             callback&&callback();
         }}>
-        <AniView style={styles.topButton} ref={name}>
+        <View style={styles.topButton} ref={name}>
           <EvilIcons
             name={name}
             size={23}
             style={styles.icon}/>
-        </AniView>
+        </View>
       </TouchableOpacity>
     )
 }
@@ -140,54 +151,107 @@ componentWillUnmount(){
 
 shouldComponentUpdate(nextProps:Object) {
   return !immutable.is(this.props.scene.route.idea, nextProps.scene.route.idea) ||
-        !immutable.is(this.props.intro,nextProps.intro);
+        !immutable.is(this.props.intro,nextProps.intro)||
+        !immutable.is(this.props.loadStatu,nextProps.loadStatu);
+}
+
+__renderHeaderView():ReactElement<any>{
+  const idea = this.props.scene.route.idea.toObject();
+  const user =  idea.user && idea.user.toObject();
+  const price = idea.price == '0' ?'免费':idea.price;
+
+  let avatar = {}
+  if(user.avatar){
+     avatar = user.avatar.toObject();
+  }
+  const images = idea.images.toArray();
+  return(
+    <View>
+      <View style={styles.topBtnView}>
+        {this.__renderTopBtn('comment',()=>{
+          this.props.iCommentBindingIdeaID(idea.objectId);
+          this.props.push('Comment');
+        })}
+        {this.__renderTopBtn('heart',()=>{
+
+        })}
+      </View>
+      {this._renderSwiper(images)}
+      <View style={styles.label}>
+        <Text style={styles.price}>￥{price}⚡️</Text>
+      </View>
+      <View style={styles.titleView}>
+        <Text style={styles.title}>{idea.title}</Text>
+      </View>
+      <View style={styles.intro}>
+        <Text style={styles.introText}>{user.username}</Text>
+        <WBImage style={styles.avatar} source={{uri:avatar.url}}/>
+      </View>
+      <Text style={styles.infoText}>
+        {idea.contents}
+      </Text>
+      <View style={styles.titleView }/>
+    </View>
+  )
+}
+
+__renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
+  const data = item.toObject()
+  // console.log(data.imageFile|| null  );
+  // try {
+  //
+  //   if(data.images) {
+  //     const images = data.images.toArray();
+  //      url = images[0].get('url')
+  //     // const newURL = data.images.get('url')
+  //     // url = newURL.length == 0 ?url:newURL;
+  //   }
+  // } catch (e) {
+  //   console.warn(e.message);
+  // }
+      return (
+        <TouchableOpacity
+          style={[styles.row]}
+          onPress={()=>{
+            // this.props.select(rowID);
+            const idea = this.props.dataSource[rowID]
+            // console.log('idea:',idea);
+            this.props.push({key:"Intro",idea:idea})
+          }} >
+          <View>
+            {/*<WBImage style={styles.rowImage} source={{uri:url}}/>*/}
+            <Text
+              numberOfLines = {1}
+              style={styles.text}>
+              {data.content}
+            </Text>
+          </View>
+          <View style={styles.line}/>
+        </TouchableOpacity>
+      )
 }
 
 render() {
   // console.log(this.props);
     const idea = this.props.scene.route.idea.toObject();
-
-    const user = idea.user.toObject();
-    const price = idea.price == '0' ?'免费':idea.price;
-
-    let avatar = {}
-    if(user.avatar){
-       avatar = user.avatar.toObject();
-    }
     const images = idea.images.toArray();
     return (
       <View style={styles.box}>
         {this._renderModalSwiper(images)}
         {this._renderBackButton()}
 
-        <ScrollView>
-          <View style={styles.topBtnView}>
-            {this.__renderTopBtn('comment',()=>{
-              this.props.iCommentBindingIdeaID(idea.objectId);
-              this.props.push('Comment');
-            })}
-            {this.__renderTopBtn('heart',()=>{
-
-            })}
-          </View>
-          {this._renderSwiper(images)}
-          <View style={styles.label}>
-            <Text style={styles.price}>￥{price}⚡️</Text>
-          </View>
-          <View style={styles.titleView}>
-            <Text style={styles.title}>{idea.title}</Text>
-          </View>
-          <View style={styles.intro}>
-            <Text style={styles.introText}>{user.username}</Text>
-            <WBImage style={styles.avatar} source={{uri:avatar.url}}/>
-          </View>
-          <Text style={styles.infoText}>
-            {idea.contents}
-          </Text>
-        </ScrollView>
+        <BaseListView
+          renderHeader={this.__renderHeaderView.bind(this)}
+          style= {styles.list}
+          loadStatu={this.props.loadStatu}
+          loadData={this.props.load}
+          dataSource={this.props.dataSource}
+          loadMore={this.props.loadMore}
+          renderRow={this.__renderRow.bind(this)}
+          />
         <WBButton
           style={{color:'white'}}
-          onPress={()=>{this.props.push({'key':'WebView','url':idea.link})}}
+          onPress={()=>{this.props.try(idea)}}
           containerStyle={styles.tryButton}>
           试一下
         </WBButton>
@@ -202,13 +266,16 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor:'white',
   },
-
+  list:{
+    backgroundColor:'white',
+    // marginBottom:50,
+  },
   wrapper:{
     // backgroundColor:'transparent'
   },
   titleView:{
     marginHorizontal:20,
-    borderBottomWidth:pixel*2,
+    borderBottomWidth:pixel,
     borderBottomColor:'rgba(52,52,52,0.3)',
   },
   title:{
@@ -311,15 +378,35 @@ const styles = StyleSheet.create({
     // backgroundColor:'transparent',
     alignSelf:'center',
     color:'black'
-  }
+  },
+  line:{
+    height:StyleSheet.hairlineWidth,
+    backgroundColor:'rgba(0,0,0,0.2)',
+  },
+  rowImage:{
+    height:200,
+  },
+  row:{
+    marginTop:30,
+    marginHorizontal:20,
+    backgroundColor:'white'
+  },
+  text:{
+    marginTop:15,
+    marginBottom:20,
+    fontSize:17,
+  },
 });
 const mapStateToProps = (state) => {
 
     // const data = state.ideaList.get('data');
-    const index = state.ideaList.get('index');
+    // const index = state.ideaList.get('index');
     return {
       // idea:data.get(index),
       intro:state.intro,
+      loadStatu:state.iCommit.get('loadStatu'),
+      dataSource:state.iCommit.get('data').toArray(),
+      user:state.login.data,
     }
 }
 
@@ -339,8 +426,16 @@ const mapDispatchToProps = (dispatch) => {
       },
       iCommentBindingIdeaID:(id:string)=>{
         dispatch(iCommentBindingIdeaID(id))
-      }
-
+      },
+      try:(idea:Object)=>{
+        dispatch(tryIdea(idea))
+      },
+      load:()=>{
+        dispatch(iCommitListLoad());
+      },
+      loadMore:()=>{
+        dispatch(iCommitListLoadMore());
+      },
     }
 }
 

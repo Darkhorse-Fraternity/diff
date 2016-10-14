@@ -6,17 +6,19 @@ import  {
   StyleSheet,
   TextInput,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
   Image,
   Alert,
+  Platform,
+  LayoutAnimation
 } from 'react-native'
 import * as immutable from 'immutable';
 import Dimensions from "Dimensions";
 import {pixel,screenWidth,screenHeight,navbarHeight,Toast} from '../../util/';
 import {renderNavSenderButton} from '../../util/viewUtil'
 import Button from 'react-native-button'
-import {backViewColor, textInputTextColor, placeholderTextColor, grayFontColor} from '../../configure'
+import {backViewColor, blackFontColor,textInputTextColor, placeholderTextColor, grayFontColor} from '../../configure'
 import {connect} from 'react-redux'
 import {navigateRefresh,navigatePop} from '../../redux/actions/nav'
 import {
@@ -26,10 +28,14 @@ import {
   addPrice,
   addLink} from '../../redux/actions/contribute'
 import ImageSelectView from '../../components/ImageSelectView'
+import {showSelector} from '../../components/Selector'
+import {commitImage,deleteImage,changeCommitType,showModal} from '../../redux/actions/contribute'
+const typeDic = {
+  '图片':'image',
+  '文字':'write'
+};
 
-import {commitImage,deleteImage} from '../../redux/actions/contribute'
-
- class Contribute extends Component{
+ class Normal extends Component{
 
   constructor(props:Object){
        super(props);
@@ -61,14 +67,53 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
     // }
   };
 
+  __renderUserCommit():ReactElement<any>{
+    const type = this.props.state.get('replyType')
+    if(type == 'phone') return (<View/>)
+    return(
+      <View>
+        <Text style={styles.tip}>用户提交</Text>
 
+          <TouchableOpacity onPress={()=>{
+              if(Platform.OS == 'ios'){
+                this.props.showModal(true)
+              }else{
+                showSelector(['文字','图片'],(text,i)=>{
+                  this.type = text;
+                  const type = typeDic[text];
+                  this.props.changeCommitType(type);
+                })
+              }
+            }} >
+              <View style={styles.row}>
 
+                <Text style={styles.rowText}>
+                    {this.type}
+                  </Text>
+               <View style={styles.arrowView}/>
+              </View>
+          </TouchableOpacity>
+      </View>
+    )
+  }
 
-  render() {
-    // const loaded = this.props.state.get('loaded')
+  type:string = '图片';
+  render():ReactElement<any> {
+    const type = this.props.state.get('replyType')
     // this.props.refresh({rightButtonIsLoad:loaded});
+    const commitType = this.props.state.get('commitType')
+
     return (
+
       <ScrollView style={styles.containerStyle}>
+        {Platform.OS === 'ios' && showSelector(['文字','图片'],(text,i)=>{
+          this.type = text;
+          const type = typeDic[text];
+          this.props.changeCommitType(type);
+        },this.props.state.get('showModal'),()=>{
+          this.props.showModal(false)
+
+        })}
         <TextInput
           placeholderTextColor={placeholderTextColor}
           style={styles.line}
@@ -92,7 +137,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
         />
       <Text style={styles.textStyle}>{this.props.state.get('content').length}/500</Text>
 
-        <TextInput
+        {/*<TextInput
           placeholderTextColor={placeholderTextColor}
           style={styles.line}
           placeholder={"价格"}
@@ -102,18 +147,9 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
           enablesReturnKeyAutomatically= {true}
           returnKeyType='next'
           onChangeText={(text) => this.props.addPrice(text)}
-        />
+        />*/}
 
-        <TextInput
-          placeholderTextColor={placeholderTextColor}
-          style={styles.line}
-          placeholder={"链接"}
-          clearButtonMode = 'while-editing'
-          enablesReturnKeyAutomatically= {true}
-          returnKeyType='next'
-          maxLength={1000}
-          onChangeText={(text) => this.props.addLink(text)}
-        />
+        {this.__renderUserCommit()}
 
         <ImageSelectView uris={this.props.state.get("uris")} callback={(response)=>{
               if(response.uri && response.uri.length>0){
@@ -161,6 +197,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:12,
     // paddingTop:14,
   },
+
   content: {
     marginLeft:12,
     marginRight:12,
@@ -192,7 +229,38 @@ const styles = StyleSheet.create({
     marginTop:20,
     marginLeft:15,
 
-  }
+  },
+  tip:{
+    color:grayFontColor,
+    marginTop:15,
+    marginLeft:15,
+    marginBottom:5,
+  },
+  row: {
+      top:3,
+      backgroundColor: 'white',
+      paddingLeft:3,
+      paddingRight:15,
+      paddingVertical: 10 ,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginHorizontal:12,
+      alignItems:'center',
+  },
+  rowText: {
+      marginLeft: 10,
+      fontSize: 14,
+      color: blackFontColor,
+  },
+  arrowView: {
+      borderBottomWidth: pixel * 2,
+      borderRightWidth: pixel * 2,
+      borderColor: '#8c8c85',
+      transform: [{rotate: '315deg'}],
+      marginRight: 5,
+      width: 10,
+      height: 10,
+  },
 });
 
 
@@ -227,11 +295,15 @@ const mapDispatchToProps = (dispatch) => {
     addTitle:(title)=>{
       dispatch(addTitle(title))
     },
-    addLink:(link)=>{
-      dispatch(addLink(link))
-    },
+
     addPrice:(price)=>{
       dispatch(addPrice(price))
+    },
+    changeCommitType:(type:string)=>{
+      dispatch(changeCommitType(type));
+    },
+    showModal:(show:bool)=>{
+      dispatch(showModal(show))
     }
 
 	}
@@ -240,4 +312,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Contribute)
+)(Normal)

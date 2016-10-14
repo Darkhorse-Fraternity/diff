@@ -24,8 +24,20 @@ import iShowList from '../../pages/Other/IShowList'
 import iShowDetail from '../../pages/Other/iShowDetail'
 import Comment from '../../pages/Other/Comment'
 import AddComment from '../../pages/Other/AddComment'
+import Submit from '../../pages/Submit/'
+import Normal from '../../pages/Submit/Normal'
+import iCommit from '../../pages/Other/iCommit'
+import iServe from '../../pages/Other/iServe'
+import iPurchase from '../../pages/Other/iPurchase'
+import iReply from '../../pages/Other/iReply'
 export  const PageMap =
 {
+  iReply,
+  iPurchase,
+  iServe,
+  Normal,
+  Submit,
+  iCommit,
   "WebView"             : BaseWebView,
   'TabView'             : TabView,
 

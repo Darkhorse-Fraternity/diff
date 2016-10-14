@@ -18,7 +18,7 @@ import ReactNative, {
 } from 'react-native';
 import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
 import * as Animatable from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/Ionicons'
+  import Icon from 'react-native-vector-icons/Ionicons'
 const AniView = Animatable.createAnimatableComponent(Icon);
 // const {
 //   JumpToAction,

@@ -17,6 +17,9 @@ export const ADD_MY_IDEA_TITLE = 'ADD_MY_IDEA_TITLE'
 export const ADD_MY_IDEA_CONTENT = 'ADD_MY_IDEA_CONTENT'
 export const ADD_MY_IDEA_LINK = 'ADD_MY_IDEA_LINK'
 export const ADD_MY_IDEA_PRICE = 'ADD_MY_IDEA_PRICE'
+export const CHANGE_REPLY_TYPE = 'CHANGE_REPLY_TYPE'
+export const CHANGE_COMMIT_TYPE = 'CHANGE_COMMIT_TYPE'
+export const SHOW_CONTRIBUTE_MODAL = 'SHOW_CONTRIBUTE_MODAL'
 /**
  * [tabSwitch description]
  * @param  {[type]} Param:Object [description]
@@ -51,10 +54,16 @@ export function putMyIdea():Function{
 	return (dispatch, getState) => {
 
 		const state = getState()
+
+    const type = state.contribute.get('replyType')
+
+
+
+
 		const imageURLs = state.contribute.get('uris').toArray();
 		const title = state.contribute.get('title')
 		const contents = state.contribute.get('content')
-		const link = state.contribute.get('link')
+
 	 	let price = state.contribute.get('price')
 
 		//做约束检查。
@@ -67,12 +76,25 @@ export function putMyIdea():Function{
 		}else if (contents.length == 0) {
 			Toast.show('怎么能没有介绍呢？( ⊙ o ⊙ )啊！');
 			return;
-		}else if(link.length == 0){
-			Toast.show('需要给出您的链接');
-			return;
 		}else if(price.length == 0){
 			price = 0;
 		}
+
+
+    let link = ''
+    let commitType = ''
+    if(type == 'image' || type == 'write' || type == 'phone'){
+      commitType = state.contribute.get('commitType')
+			if (commitType.length == 0) return;
+    }else if(type == 'link') {
+      link = state.contribute.get('link')
+			if(link.length == 0){
+				Toast.show('需要给出您的链接');
+				return;
+			}
+    }
+
+
 
 		dispatch(_putMyIdeaStart())
 		dispatch(navigateRefresh({'rightButtonIsLoad':true}))
@@ -95,7 +117,9 @@ export function putMyIdea():Function{
 				 contents,
 				 title,
 				 link,
-				 price
+				 price,
+         type,
+         commitType,
 			 }
 			 const newParams = classCreatNewOne('TodoObject',params);
 			 request(newParams, (response)=>{
@@ -184,3 +208,24 @@ export function addPrice(price:string):Object{
 //
 // 	}
 // }
+//
+export function changeReplyType(replyType:string):Object{
+	return {
+		type:CHANGE_REPLY_TYPE,
+    replyType,
+	}
+}
+
+export function changeCommitType(commitType:string):Object{
+	return {
+		type:CHANGE_COMMIT_TYPE,
+    commitType,
+	}
+}
+
+export function showModal(showModal:bool):Object{
+	return {
+		type:SHOW_CONTRIBUTE_MODAL,
+		showModal
+	}
+}

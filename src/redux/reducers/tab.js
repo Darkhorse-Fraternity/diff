@@ -26,6 +26,8 @@ const initialTabState = {
     tabs:[
       {key:'IdeaList',selectImage:0,
         unSelectImage:0,title:'logo-freebsd-devil'},
+      {key:'iPurchase',selectImage:0,
+          unSelectImage:0,title:'ios-bulb'},
       {key:'PersonCenter',selectImage:0,
         unSelectImage:0,title:'ios-happy'},
     ],

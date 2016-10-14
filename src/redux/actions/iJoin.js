@@ -54,7 +54,7 @@ export function iJoinListLoadMore():Function{
         const params = limitSearch('TodoObject',page,pageSize,{
           'include':'images',
           'where':{
-            'user':{'__type':"Pointer","className":"_User","objectId":"55a0c5d4e4b031b00558ae79"}}
+            'user':{'__type':"Pointer","className":"_User","objectId":user.objectId}}
           });
         if(!loaded){//not serial
           dispatch(_listStart(page != 0));//当page 不为0 的时候则表示不是加载多页。

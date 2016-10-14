@@ -34,7 +34,13 @@ export  const pageConfig = {
   'iShowList'           : { title : '我的发布'},
   'iShowDetail'         : { title : ''},
   'Comment'             : { title : '评论'},
-  'AddComment'          : { title : '写评论'}
+  'AddComment'          : { title : '写评论'},
+  'Submit'              : { title : '选择类型'},
+  'Normal'              : { title : '创意服务'},
+  'iCommit'             : { title : '购买'},
+  'iServe'              : { title : '我的服务'},
+  'iPurchase'           : { title : ''},
+  'iReply'              : { title : '回复'},
 }
 
 export function config(key:string):Object{

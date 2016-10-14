@@ -75,7 +75,7 @@ function _callBackData():Object{
  * @param  {[type]} callback:function [description]
  * @return {[type]}                   [description]
  */
-function successCallback(response:Object,callback:Function):Object{
+function successCallback(response:Object,callback:Function ):Object{
 
     const callBackData = _callBackData();
     callBackData.data= response;
@@ -118,6 +118,73 @@ function handlerError(urlpath:string,iParam:Object,oParam:Object) {
     Toast.show(arr[1]);
   }
 
+}
+
+function  send( {scheme  = schemeType.https,
+          host    = defaultHost,
+          path    = throwIfMissing('send/path'),
+          method  = 'GET',
+          timeout = 20000,
+          cacheOptimize = cacheType.noCache,
+          params,
+          needSession = false,
+          ...otherParams,}:Object):Promise<any> {
+
+  let urlpath = scheme + '://' + host + path;
+  // var header = Object.assign({}, httpHeader,{token:userManager.userData.user_token})
+
+  const httpHeader = httpHeaders(needSession);
+
+
+  let cacheKey =  addParams(urlpath, params) + JSON.stringify(httpHeader);
+  let data =  cache.get(cacheKey)
+
+  if (cacheOptimize !=  cacheType.noCache){
+    if (data !== undefined) {
+      //同步情况，可以直接返回值。
+
+      if (cacheOptimize == cacheType.cacheElseNet ) {
+        return new Promise(resolve => resolve(data));
+      }
+    }
+  }else if (cacheOptimize == cacheType.onlyCache){
+     return new Promise(resolve => resolve(data));
+  }
+
+  // httpHeader.token = userManager.userData.user_token;
+
+  let request = method=='GET' ? new Request(addParams(urlpath, params),{method:method, headers:httpHeader}) : new Request(urlpath, {method:method, headers:httpHeader, body:JSON.stringify(params)});
+  let requestPromise = Promise.race([
+    fetch(request, {credentials:'include'}),
+    new Promise(function (resolve, reject) {
+      var reason =  __DEV__?'网络请求超时'+urlpath:'网络请求超时'
+      setTimeout(() => reject(new Error(reason)), timeout);
+    })
+  ]);
+  let status = 200;
+  requestPromise.then((response)=>{
+      status = response.status;
+     return   response.json()
+  }).then((responseData)=>{
+    if(status >= 200 && status < 300){
+      if (cacheOptimize !=  cacheType.noCache && responseData.retcode === tag) {
+          cache.set(cacheKey, responseData);
+      }
+      return responseData;
+    }else{
+      const message =  __DEV__?"HttpCode:"+status+",code:"+responseData.code+",error:"+responseData.error
+      :responseData.error;
+      const error =   new Error(message);
+       failCallback(error,urlpath,params);
+      throw error
+    }
+
+  })
+  // .catch(function(err:Error){
+  //      failCallback(err,urlpath,params);
+  // });
+
+   return requestPromise;
 }
 
 module.exports = {
@@ -206,5 +273,8 @@ module.exports = {
     });
 
      return handle;
-  }
+  },
+
+
+  send,
 }

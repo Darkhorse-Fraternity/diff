@@ -9,7 +9,8 @@
 
 import {request} from '../../request';
 import {classBatch,classNormalSearch} from '../../request/leanCloud';
-
+import {navigatePush} from './nav'
+import {iBindingIdeaID} from './iCommit'
 export const SHOW_MODAL_SWIPER = 'SHOW_MODAL_SWIPER'
 export const HIDDEN_MODEL_SWIPER = 'HIDDEN_MODEL_SWIPER'
 
@@ -49,4 +50,21 @@ export function getIntroData():Function{
     })
 
   }
+}
+
+export function tryIdea(idea:Object):Function{
+
+   return (dispatch,getState)=>{
+     const state = getState();
+
+     if(idea.type == 'link' && idea.link.length>0){
+       dispatch(navigatePush({'key':'WebView','url':idea.link}))
+     }else{
+       dispatch(iBindingIdeaID(idea.objectId,idea.commitType))
+       dispatch(navigatePush('iCommit'))
+     }
+
+
+
+   }
 }

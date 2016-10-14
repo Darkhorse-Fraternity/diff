@@ -1064,6 +1064,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.sword.diff;
 				PRODUCT_NAME = diff;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1093,6 +1094,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = net.sword.diff;
 				PRODUCT_NAME = diff;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};

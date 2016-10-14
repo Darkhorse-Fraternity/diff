@@ -46,6 +46,7 @@ export default class BaseListView extends Component {
       noDataPrompt: PropTypes.string,
       noDataTips: PropTypes.string,
       dataSource:PropTypes.array,
+      renderHeader:PropTypes.func,
     };
 
     static defaultProps = {
@@ -121,15 +122,18 @@ export default class BaseListView extends Component {
       const refreshable = this.props.refreshable && this.props.loadData;
       if (this.props.loadStatu === LIST_FIRST_JOIN ) {
         return (
-          <ExceptionView
-            exceptionType={ExceptionType.Loading}
-            style={this.props.style}
-            />
+            <ExceptionView
+              renderHeader={this.props.renderHeader}
+              exceptionType={ExceptionType.Loading}
+              style={this.props.style}
+              />
         );
       }else if (this.props.loadStatu === LIST_NO_DATA) {
         return (
+
           <ExceptionView
             style={this.props.style}
+            renderHeader={this.props.renderHeader}
             exceptionType={ExceptionType.NoData}
             image={this.props.noDataImg}
             prompt={this.props.noDataPrompt}

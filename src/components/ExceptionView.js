@@ -24,6 +24,7 @@ export const ExceptionType = {
 export default class ExceptionView extends Component {
 
   static propTypes = {
+    renderHeader:PropTypes.func,
     exceptionType:PropTypes.string,
     prompt:PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     image:PropTypes.number,
@@ -62,15 +63,19 @@ export default class ExceptionView extends Component {
   render() {
     let prompt = this.getPromptText(this.props.exceptionType);
     return (
-      <ScrollView
-        style={this.props.style}
-        contentContainerStyle={styles.container}
-        refreshControl={this.props.refreshControl}
-        >
-        {this._renderPromptIndicator(this.props.exceptionType)}
-        {this.renderPrompt()}
-        {this.renderOtherTips()}
-      </ScrollView>
+      <View style={[{flex:1},this.props.style]}>
+         {this.props.renderHeader && this.props.renderHeader()}
+        <ScrollView
+          style={this.props.style}
+          contentContainerStyle={styles.container}
+          refreshControl={this.props.refreshControl}
+          >
+
+          {this._renderPromptIndicator(this.props.exceptionType)}
+          {this.renderPrompt()}
+          {this.renderOtherTips()}
+        </ScrollView>
+      </View>
     );
   }
 
@@ -115,7 +120,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
-    backgroundColor: backViewColor,
+    backgroundColor: 'white',
   },
   image: {
     // position:'absolute',

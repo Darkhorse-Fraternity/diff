@@ -98,11 +98,16 @@ class SettingIOS extends Component {
                 })}
 
                 {this._renderRow('推荐我的创意服务', styles.group, true, () => {
-                    this.props.push('Contribute');
+                    this.props.push('Submit');
                 })}
                 {this._renderRow('我的发布', styles.group, true, () => {
                     this.props.push('iShowList');
                 })}
+
+                {this._renderRow('我的服务', styles.group, true, () => {
+                    this.props.push('iServe');
+                })}
+
                 {this._renderRow('我的收藏', styles.group, true, () => {
 
                 })}

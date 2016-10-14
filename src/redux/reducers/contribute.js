@@ -12,6 +12,9 @@ import {
  ADD_MY_IDEA_CONTENT,
  ADD_MY_IDEA_LINK,
  ADD_MY_IDEA_PRICE,
+ CHANGE_REPLY_TYPE,
+ CHANGE_COMMIT_TYPE,
+ SHOW_CONTRIBUTE_MODAL
 }from '../actions/contribute'
 
 
@@ -24,6 +27,9 @@ const initialDrawState = immutable.fromJS({
     price:'0',
     link:'',
     loaded:false,
+    commitType:'image',
+    replyType:'image',
+    showModal:false,
 });
 export default function drawState(state:immutable.Map<string,Object> = initialDrawState, action:Object) {
     switch (action.type) {
@@ -50,6 +56,12 @@ export default function drawState(state:immutable.Map<string,Object> = initialDr
         return state.mergeDeep({link:action.link})
       case ADD_MY_IDEA_PRICE:
         return state.mergeDeep({price:action.price})
+      case CHANGE_REPLY_TYPE:
+        return state.setIn(['replyType'], action.replyType)
+      case CHANGE_COMMIT_TYPE:
+        return state.setIn(['commitType'], action.commitType)
+      case SHOW_CONTRIBUTE_MODAL:
+        return state.setIn(['showModal'],action.showModal)
       default:
         return state
     }

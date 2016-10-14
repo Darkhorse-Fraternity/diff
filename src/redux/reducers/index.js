@@ -11,6 +11,9 @@ import ideaList from './ideaList'
 import intro from './intro'
 import iShow from './iShow'
 import iComment from './iComment'
+import iCommit from './iCommit'
+import iServe from './iServe'
+import iPurchase from './iPurchase'
 export {
   intro,
   ideaList,
@@ -20,5 +23,8 @@ export {
   util,
   contribute,
   iShow,
-  iComment
+  iComment,
+  iCommit,
+  iServe,
+  iPurchase,
 };
