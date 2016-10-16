@@ -9,21 +9,21 @@ import {
   IPURCHASE_ADD_FAILED,
   IPURCHASE_ADD_SUCCEED,
   IPURCHASE_CONTENT_CHANGE,
-  IPURCHASE_BINDING_IDEAID,
-  IPURCHASE_CHANGE_PHONE,
-  IPURCHASE_COMMIT_IMAGE,
-  IPURCHASE_DELETE_IMAGE,
-  IPURCHASE_CLEAR_DATA,
-} from '../actions/IPURCHASE'
+  IPURCHASE_RATE_RESET,
+  IPURCHASE_PAGE_CHANGE,
+  IPURCHASE_RATE_CHANGE,
+} from '../actions/iPurchase'
 import * as immutable from 'immutable';
 
 const initialState = immutable.fromJS({
-  ideaId:'',//绑定的id 对象。
   content:'',
   loadStatu:'LIST_FIRST_JOIN',
   data:[],
-  page:0,
   type:'image',
+  item:{},
+  rate:0,
+  page:0,
+  index:0,
 });
 
 
@@ -49,14 +49,19 @@ export default function iPurchaseState(state:immutable.Map<string,any> = initial
         return state
       case IPURCHASE_CONTENT_CHANGE:
         return state.setIn(['content'], action.content)
-      case IPURCHASE_BINDING_IDEAID:
-        // return state.setIn(['ideaId'], action.ideaId)
-        return state.mergeDeep({
-          ideaId:action.ideaId,
-          type:action.commitType,
-        })
-      case IPURCHASE_CLEAR_DATA:
-        return initialState
+      case IPURCHASE_PAGE_CHANGE:
+        return state.setIn(['index'],action.index)
+      case IPURCHASE_RATE_CHANGE:
+        return state.setIn(['rate'], action.rate)
+      case IPURCHASE_RATE_RESET:{
+        const index = state.get('index')
+        const rate = state.get('rate')
+       return state.updateIn(['data',index],item =>{
+
+         return item.setIn(['statu'],'done').updateIn(['rate'],ra=>rate)
+       })
+      }
+
       default:
         return state
     }

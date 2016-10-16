@@ -11,11 +11,11 @@ import  {View,
 import WBImage from '../../components/Base/WBImage'
 import WBButton from '../../components/Base/WBButton'
 import {connect} from 'react-redux'
-import { navigatePush ,navigatePop} from '../../redux/actions/nav'
+import { navigatePush } from '../../redux/actions/nav'
 import * as immutable from 'immutable';
 import BaseListView from '../../components/Base/BaseListView';
-
-import {iCommitListLoad,iCommitListLoadMore} from '../../redux/actions/iPurchase'
+import StarRating from 'react-native-star-rating';
+import {iPurchaseListLoad,iPurchaseListLoadMore,selectChange} from '../../redux/actions/iPurchase'
 
 
 class iPurchase extends Component{
@@ -38,7 +38,8 @@ static propTypes = {
 
 
 shouldComponentUpdate(nextProps:Object) {
- return !immutable.is(this.props.loadStatu,nextProps.loadStatu);
+ return !immutable.is(this.props.loadStatu,nextProps.loadStatu)||
+    !immutable.is(this.props.dataSource,nextProps.dataSource);
 }
 
 __renderHeaderView():ReactElement<any>{
@@ -52,41 +53,83 @@ __renderHeaderView():ReactElement<any>{
   )
 }
 
+
 __renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
- const data = item.toObject()
- // console.log(data.imageFile|| null  );
- // try {
- //
- //   if(data.images) {
- //     const images = data.images.toArray();
- //      url = images[0].get('url')
- //     // const newURL = data.images.get('url')
- //     // url = newURL.length == 0 ?url:newURL;
- //   }
- // } catch (e) {
- //   console.warn(e.message);
- // }
+
+    const url = item.getIn(['images',0,'url'])
+    const type = item.getIn(['idea','Type'])
+    const  content = item.get('replyContent')
+    const __renderImageView = ()=>{
+     return  (<WBImage style={styles.rowImage} source={{uri:url}}/>)
+    }
+
+    const data = item.toObject()
+    const title = data.idea.get('title')
+
+    let statu = '--';
+    let color = {color:'grey'}
+    let statuView = ()=>{}
+    if (data.statu == 'publish') {
+      statu = '!'
+      color = {color:'red'}
+    }
+
+    if(data.statu == 'done'){
+       statuView = ()=>{
+        return (
+            <StarRating
+              starSize={20}
+              disabled={true}
+              maxStars={5}
+              starColor='rgba(0,0,0,0.5)'
+              rating={item.get('rate')}
+              selectedStar={() => {}}
+             />
+        )
+      }
+    }else {
+      statuView = ()=>{
+       return (
+         <Text style={[styles.rowStatu,color]}>{statu}</Text>
+       )
+     }
+    }
+
      return (
-       <TouchableOpacity
-         style={[styles.row]}
-         onPress={()=>{
-           // this.props.select(rowID);
-           const idea = this.props.dataSource[rowID]
-           // console.log('idea:',idea);
-          //  this.props.push({key:"Intro",idea:idea})
-         }} >
-         <View>
-           {/*<WBImage style={styles.rowImage} source={{uri:url}}/>*/}
-           <Text
-             numberOfLines = {1}
-             style={styles.text}>
-             {data.content}
-           </Text>
-         </View>
-         <View style={styles.line}/>
-       </TouchableOpacity>
-     )
+       <View  style={[styles.row]}>
+         <TouchableOpacity
+           onPress={
+             ()=>{
+                 this.props.push({key:'Intro',idea:data.idea})
+             }
+           }
+           style={styles.rowHeadView}>
+           <Text style={styles.rowTitle}>{title.trimRight()}  中的购买:</Text>
+           {statuView()}
+         </TouchableOpacity>
+           <TouchableOpacity
+
+              onPress={()=>{
+                // if(data.statu == 'publish'){
+                  this.props.selectChange(rowID)
+                  this.props.push("iRate")}}
+                //}
+              >
+             <View>
+               {type == 'image' && __renderImageView()}
+               <Text
+                 numberOfLines = {1}
+                 style={styles.text}>
+                 {data.content}
+               </Text>
+             </View>
+             <View style={styles.line}/>
+           </TouchableOpacity>
+       </View>
+    )
 }
+
+
 
 render() {
 
@@ -132,19 +175,7 @@ const styles = StyleSheet.create({
    lineHeight:35,
  },
 
- slide: {
-   flex: 1,
-   // justifyContent: 'center',
-   // alignItems: 'center',
-   // backgroundColor: '#9DD6EB',
- },
 
-
- avatar:{
-   height:60,
-   width:60,
-   borderRadius:30,
- },
  image:{
    flex:1
  },
@@ -180,6 +211,16 @@ const styles = StyleSheet.create({
    height:StyleSheet.hairlineWidth,
    backgroundColor:'black',
    width:60,
+ },
+ rowTitle:{
+   color:'rgba(0,0,0,0.3)'
+ },
+ rowHeadView:{
+   flexDirection:'row',
+   justifyContent:'space-between'
+ },
+ rowStatu:{
+   fontSize:18,
  }
 
 });
@@ -189,8 +230,9 @@ const mapStateToProps = (state) => {
    // const index = state.ideaList.get('index');
    return {
      // idea:data.get(index),
-     loadStatu:state.iCommit.get('loadStatu'),
-     dataSource:state.iCommit.get('data').toArray(),
+     loadStatu:state.iPurchase.get('loadStatu'),
+     dataSource:state.iPurchase.get('data').toArray(),
+     user:state.login.data
    }
 }
 
@@ -199,16 +241,17 @@ const mapDispatchToProps = (dispatch) => {
      push:(key)=>{
        dispatch(navigatePush(key));
      },
-     pop:()=>{
-       dispatch(navigatePop());
-     },
+
 
      load:()=>{
-       dispatch(iCommitListLoad());
+       dispatch(iPurchaseListLoad());
      },
      loadMore:()=>{
-       dispatch(iCommitListLoadMore());
+       dispatch(iPurchaseListLoadMore());
      },
+     selectChange:(page:number)=>{
+       dispatch(selectChange(page))
+     }
    }
 }
 

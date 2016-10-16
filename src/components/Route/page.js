@@ -30,8 +30,10 @@ import iCommit from '../../pages/Other/iCommit'
 import iServe from '../../pages/Other/iServe'
 import iPurchase from '../../pages/Other/iPurchase'
 import iReply from '../../pages/Other/iReply'
+import iRate from '../../pages/Other/iRate'
 export  const PageMap =
 {
+  iRate,
   iReply,
   iPurchase,
   iServe,

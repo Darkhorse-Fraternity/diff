@@ -26,6 +26,7 @@ const initialState = immutable.fromJS({
   page:0,
   type:'image',
   uris:[],
+  index:0,
 });
 
 
@@ -65,14 +66,14 @@ export default function iServeState(state:immutable.Map<string,any> = initialSta
         return state.setIn(['uris'],uris2);
       case ISERVE_PAGE_CHANGE:
         return state.mergeDeep({
-          page:action.page,
+          index:action.page,
           type:action.replytype,
           iCommitID:action.iCommitID,
         })
       case ISERVE_SET_PUBLISH:{
 
-        const page = state.get('page')
-        return state.updateIn(['data',page],item =>{
+        const index = state.get('index')
+        return state.updateIn(['data',index],item =>{
           return item.updateIn(['statu'],statu=>'publish')
         })
       }

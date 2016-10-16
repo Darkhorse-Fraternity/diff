@@ -41,6 +41,7 @@ export  const pageConfig = {
   'iServe'              : { title : '我的服务'},
   'iPurchase'           : { title : ''},
   'iReply'              : { title : '回复'},
+  'iRate'               : { title : '评价'},
 }
 
 export function config(key:string):Object{

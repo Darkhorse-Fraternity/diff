@@ -6,7 +6,7 @@
 'use strict'
 
 import {request,send} from '../../request';
-import {limitSearch,classDelete,classCreatNewOne} from '../../request/leanCloud';
+import {limitSearch,classDelete,classUpdate} from '../../request/leanCloud';
 import{
   LIST_FIRST_JOIN,
   LIST_NO_DATA,
@@ -30,9 +30,9 @@ export const IPURCHASE_DELETE_FAILED = 'IPURCHASE_DELETE_FAILED'
 export const IPURCHASE_ADD_SUCCEED = 'IPURCHASE_ADD_SUCCEED'
 export const IPURCHASE_ADD_FAILED = 'IPURCHASE_ADD_FAILED'
 export const IPURCHASE_CONTENT_CHANGE = 'IPURCHASE_CONTENT_CHANGE'
-export const IPURCHASE_BINDING_IDEAID = 'IPURCHASE_BINDING_IDEAID'
-export const IPURCHASE_CLEAR_DATA = 'IPURCHASE_CLEAR_DATA'
-
+export const IPURCHASE_PAGE_CHANGE = 'IPURCHASE_PAGE_CHANGE'
+export const IPURCHASE_RATE_CHANGE = 'IPURCHASE_RATE_CHANGE'
+export const IPURCHASE_RATE_RESET = 'IPURCHASE_RATE_RESET'
 import {navigatePop,navigateRefresh} from './nav'
 
 const pageSize = 40;
@@ -59,17 +59,14 @@ export function iPurchaseListLoadMore():Function{
 
     return (dispatch,getState) => {
         const state = getState();
-        const loaded = state.iPurchase.get('loaded');
-        const idea = state.route.navigationState.routes
-        [state.route.navigationState.index].idea
-        const objectId = idea.get('objectId')
+        // const loaded = state.iPurchase.get('loaded');
         const user = state.login.data;
-        const params = limitSearch('iPurchase',page,pageSize,{
-          include:'user',
-           where:{
-             'idea':{'__type':"Pointer","className":"TodoObject","objectId":objectId}}
-           });
-        if(!loaded){//not serial
+        const params = limitSearch('iCommit',page,pageSize,{
+          include:'user,idea,images,idea.images,idea.user,replyImages',
+          "where":{
+            'user':{'__type':"Pointer","className":"_User","objectId":user.objectId}},
+          });
+        // if(!loaded){//not serial
           dispatch(_listStart(page != 0));//当page 不为0 的时候则表示不是加载多页。
           request(params, function (response) {
               if (response.statu) {
@@ -78,7 +75,7 @@ export function iPurchaseListLoadMore():Function{
                   dispatch(_listFailed(response));
               }
           });
-        }
+        // }
     }
 }
 
@@ -148,68 +145,29 @@ export function iPurchaseContentChange(content:string):Object{
 }
 
 
-export  function iPurchaseAdd():Function{
+export  function iRateAdd():Function{
   return (dispatch,getState)=>{
     const state = getState();
 
-    const obejctId = state.IPURCHASE.get('ideaId')
     const user =state.login.data;
-    const content = state.IPURCHASE.get('content')
-    const type = state.IPURCHASE.get('type')
-    const mobilePhoneNumber =  state.IPURCHASE.get('phoneNumber')
-    const imageURLs = state.IPURCHASE.get('uris').toArray();
-
-    if(content.length == 0){
-      Toast.show('需要填写购买内容。')
-      return
-    }
-
-
-    if(type == 'phone' && !checkPhoneNum(mobilePhoneNumber)){
-      Toast.show('不是正确的手机号')
-      return
-    }
-
-    if(type == 'image' && imageURLs.length ==0){
-      Toast.show('必须含有图片')
-      return
-    }
-
-    let oParam = {};
-    if(type == 'phone') oParam = {mobilePhoneNumber}
-
-
-    const params = {
-      type,
-      ...oParam,
-      content,
-      idea:{
-          "__type": "Pointer",
-          "className": "TodoObject",
-          "objectId": obejctId},
-      user:{
-          "__type": "Pointer",
-          "className": "_User",
-          "objectId": user.objectId},
-    }
+    const rate = state.iPurchase.get('rate')
+    const index =state.iPurchase.get('index')
+    const id = state.iPurchase.getIn(['data',index,'objectId'])
     dispatch(navigateRefresh({rightButtonIsLoad:true}))
 
+    const params = {
+      statu:'done',
+      rate
+    }
 
-    // const sendPromis =  send(params).then((response)=>{
-    //     dispatch(navigateRefresh({rightButtonIsLoad:false}))
-    //     dispatch(navigatePop())
-    //     dispatch(IPURCHASEAddSucceed())
-    //     dispatch(IPURCHASEListLoad())
-    // }).catch((item)=>{
-    //     dispatch(navigateRefresh({rightButtonIsLoad:false}))
-    //     dispatch(IPURCHASEAddFailed())
-    // })
-    __handlePromis(type, imageURLs, params).then(response=>{
+    const newParams =  classUpdate('iCommit',id,params)
+    send(newParams).then(response=>{
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
       dispatch(navigatePop())
       dispatch(iPurchaseAddSucceed())
-      dispatch(iPurchaseListLoad())
-      dispatch(iPurchaseClearData())
+      // dispatch(iPurchaseListLoad())
+      dispatch(rateReset())
+      dispatch(rateChange(0))
     }).catch((res)=>{
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
       dispatch(iPurchaseAddFailed())
@@ -217,31 +175,10 @@ export  function iPurchaseAdd():Function{
   }
 }
 
-async function __handlePromis(type:string,imageURLs:Array<string>,params:Object):Promise<any>{
-
-  // let images = {}
-  // if(type == 'image'){
-  //   await uploadFilesByLeanCloud(imageURLs).then((response)=>{
-  //      images = {
-	// 			"__op":"AddUnique",//添加数组
-	// 			"objects":response,
-	// 		}
-  //
-  //     params = {images,...params}
-  //   });
-
-  // }
-  const newParams =  classCreatNewOne('IPURCHASE',params)
-  send(newParams)
-
-}
 
 
-function iPurchaseClearData():Object{
-  return {
-    type:IPURCHASE_CLEAR_DATA,
-  }
-}
+
+
 
  function iPurchaseAddSucceed():Object{
    Toast.show('发送成功')
@@ -286,10 +223,22 @@ export function iPurchaseDeleteFailed():Object{
   }
 }
 
-export function iBindingIdeaID(ideaId:string,commitType:string):Object{
+export function selectChange(index:number):Object{
   return {
-    type:IPURCHASE_BINDING_IDEAID,
-    ideaId,
-    commitType,
+    type:IPURCHASE_PAGE_CHANGE,
+    index,
+  }
+}
+
+export function rateChange(rate:number):Object{
+  return {
+    type:IPURCHASE_RATE_CHANGE,
+    rate,
+  }
+}
+
+export function rateReset():Object{
+  return {
+    type:IPURCHASE_RATE_RESET,
   }
 }

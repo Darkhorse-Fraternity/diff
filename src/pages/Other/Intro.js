@@ -35,7 +35,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons'
 //     <Text style={{fontFamily: 'Arial', fontSize: 15}}>Login with Facebook</Text>
 //   </Icon.Button>
 // );
-
+import StarRating from 'react-native-star-rating';
 const SwiperViewHight = screenWidth/400*280
 class intro extends Component{
 
@@ -196,39 +196,48 @@ __renderHeaderView():ReactElement<any>{
 }
 
 __renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
-  const data = item.toObject()
-  // console.log(data.imageFile|| null  );
-  // try {
-  //
-  //   if(data.images) {
-  //     const images = data.images.toArray();
-  //      url = images[0].get('url')
-  //     // const newURL = data.images.get('url')
-  //     // url = newURL.length == 0 ?url:newURL;
-  //   }
-  // } catch (e) {
-  //   console.warn(e.message);
-  // }
-      return (
-        <TouchableOpacity
-          style={[styles.row]}
-          onPress={()=>{
-            // this.props.select(rowID);
-            const idea = this.props.dataSource[rowID]
-            // console.log('idea:',idea);
-            this.props.push({key:"Intro",idea:idea})
-          }} >
-          <View>
-            {/*<WBImage style={styles.rowImage} source={{uri:url}}/>*/}
-            <Text
-              numberOfLines = {1}
-              style={styles.text}>
-              {data.content}
-            </Text>
-          </View>
-          <View style={styles.line}/>
-        </TouchableOpacity>
-      )
+
+    const url = item.getIn(['images',0,'url'])
+    const type = item.getIn(['idea','Type'])
+    const  content = item.get('replyContent')
+    const __renderImageView = ()=>{
+     return  (<WBImage style={styles.rowImage} source={{uri:url}}/>)
+    }
+    const data = item.toObject()
+    const title = data.idea.get('title')
+     const    statuView = ()=>{
+        return (
+            <StarRating
+              starSize={20}
+              disabled={true}
+              maxStars={5}
+              starColor='rgba(0,0,0,0.5)'
+              rating={item.get('rate')}
+              selectedStar={() => {}}
+             />
+        )
+      }
+     return (
+       <View  style={[styles.row]}>
+         <View style={styles.rowHeadView}>
+           {data.statu == 'done' && statuView()}
+         </View>
+           <TouchableOpacity
+              onPress={()=>{
+                }}
+              >
+             <View>
+               {type == 'image' && __renderImageView()}
+               <Text
+                 numberOfLines = {1}
+                 style={styles.text}>
+                 {data.content}
+               </Text>
+             </View>
+             <View style={styles.line}/>
+           </TouchableOpacity>
+       </View>
+    )
 }
 
 render() {
@@ -395,6 +404,10 @@ const styles = StyleSheet.create({
     marginTop:15,
     marginBottom:20,
     fontSize:17,
+  },
+  rowHeadView:{
+    flexDirection:'row',
+    justifyContent:'space-between'
   },
 });
 const mapStateToProps = (state) => {
