@@ -14,7 +14,7 @@ import {
   ICOMMIT_COMMIT_IMAGE,
   ICOMMIT_DELETE_IMAGE,
   ICOMMIT_CLEAR_DATA,
-
+  ICOMMMIT_INDEX_CHANGE
 } from '../actions/iCommit'
 import * as immutable from 'immutable';
 
@@ -39,8 +39,9 @@ export default function iCommitState(state:immutable.Map<string,any> = initialSt
       case ICOMMIT_LIST_SUCCEED:
         let data = state.get('data')
         const page = state.get('page')
+
          page == 0?data = action.data:data.push(action.data);
-        return state.mergeDeep({
+        return state.merge({
           loadStatu:action.loadStatu,
           page:action.page,
           data:data,
@@ -73,7 +74,9 @@ export default function iCommitState(state:immutable.Map<string,any> = initialSt
           return state.setIn(['uris'],uris2);
         }
 
-
+        case ICOMMMIT_INDEX_CHANGE:{
+          return state.setIn(['index'],action.index)
+        }
 
 
       case ICOMMIT_CLEAR_DATA:

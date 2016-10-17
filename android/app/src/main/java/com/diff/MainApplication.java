@@ -16,9 +16,6 @@ import com.oblador.vectoricons.VectorIconsPackage;
 import java.util.Arrays;
 import java.util.List;
 
-import cn.reactnative.modules.update.UpdateContext;
-import cn.reactnative.modules.update.UpdatePackage;
-
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
@@ -27,10 +24,10 @@ public class MainApplication extends Application implements ReactApplication {
       return BuildConfig.DEBUG;
     }
 
-    @Override
-    protected String getJSBundleFile() {
-      return UpdateContext.getBundleUrl(MainApplication.this);
-    }
+//    @Override
+//    protected String getJSBundleFile() {
+//      return UpdateContext.getBundleUrl(MainApplication.this);
+//    }
 
     @Override
     protected List<ReactPackage> getPackages() {
@@ -41,7 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
           new OrientationPackage(),
           new VectorIconsPackage(),
           new RNDeviceInfo(),
-          new UpdatePackage(),
+//          new UpdatePackage(),
           new ImagePickerPackage()
       );
     }

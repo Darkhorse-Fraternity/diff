@@ -56,8 +56,8 @@ __renderHeaderView():ReactElement<any>{
 
 __renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
 
-    const url = item.getIn(['images',0,'url'])
-    const type = item.getIn(['idea','Type'])
+    const url = item.getIn(['replyImages',0,'url'])
+    const type = item.getIn(['idea','type'])
     const  content = item.get('replyContent')
     const __renderImageView = ()=>{
      return  (<WBImage style={styles.rowImage} source={{uri:url}}/>)
@@ -185,6 +185,7 @@ const styles = StyleSheet.create({
    backgroundColor:'rgba(0,0,0,0.2)',
  },
  rowImage:{
+   marginTop:15,
    height:200,
  },
  row:{

@@ -12,6 +12,7 @@ import {
   IPURCHASE_RATE_RESET,
   IPURCHASE_PAGE_CHANGE,
   IPURCHASE_RATE_CHANGE,
+  IPURCHASE_INDEX_CHANGE
 } from '../actions/iPurchase'
 import * as immutable from 'immutable';
 
@@ -36,7 +37,7 @@ export default function iPurchaseState(state:immutable.Map<string,any> = initial
         let data = state.get('data')
         const page = state.get('page')
          page == 0?data = action.data:data.push(action.data);
-        return state.mergeDeep({
+        return state.merge({
           loadStatu:action.loadStatu,
           page:action.page,
           data:data,
@@ -49,7 +50,7 @@ export default function iPurchaseState(state:immutable.Map<string,any> = initial
         return state
       case IPURCHASE_CONTENT_CHANGE:
         return state.setIn(['content'], action.content)
-      case IPURCHASE_PAGE_CHANGE:
+      case IPURCHASE_INDEX_CHANGE:
         return state.setIn(['index'],action.index)
       case IPURCHASE_RATE_CHANGE:
         return state.setIn(['rate'], action.rate)

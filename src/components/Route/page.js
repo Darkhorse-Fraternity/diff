@@ -31,8 +31,10 @@ import iServe from '../../pages/Other/iServe'
 import iPurchase from '../../pages/Other/iPurchase'
 import iReply from '../../pages/Other/iReply'
 import iRate from '../../pages/Other/iRate'
+import introDetail from '../../pages/Other/introDetail'
 export  const PageMap =
 {
+  introDetail,
   iRate,
   iReply,
   iPurchase,

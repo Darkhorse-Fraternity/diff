@@ -63,7 +63,7 @@ export default class ExceptionView extends Component {
   render() {
     let prompt = this.getPromptText(this.props.exceptionType);
     return (
-      <View style={[{flex:1},this.props.style]}>
+      <ScrollView style={[{flex:1},this.props.style]}>
          {this.props.renderHeader && this.props.renderHeader()}
         <ScrollView
           style={this.props.style}
@@ -75,7 +75,7 @@ export default class ExceptionView extends Component {
           {this.renderPrompt()}
           {this.renderOtherTips()}
         </ScrollView>
-      </View>
+      </ScrollView>
     );
   }
 

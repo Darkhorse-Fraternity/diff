@@ -42,6 +42,7 @@ export  const pageConfig = {
   'iPurchase'           : { title : ''},
   'iReply'              : { title : '回复'},
   'iRate'               : { title : '评价'},
+  'introDetail'         : { title : '回复'},
 }
 
 export function config(key:string):Object{

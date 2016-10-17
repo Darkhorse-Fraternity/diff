@@ -6,7 +6,7 @@
 'use strict'
 
 import {loadUserData, loadFirstJoin} from '../../util/XGlobal'
-import jsCheckUpdate from '../../util/checkUpdate'
+// import jsCheckUpdate from '../../util/checkUpdate'
 import {lockToPortrait} from 'react-native-orientation'
 // import umeng from '../util/umeng'
 import React, {
@@ -33,7 +33,7 @@ function _preConfig() {
     loadUserData();
 
     //热跟新
-    jsCheckUpdate();
+    // jsCheckUpdate();
 
 
     lockToPortrait();

@@ -26,7 +26,7 @@ export default function ideaState(state:immutable.Map<string,any> = initialIdeaL
         let data = state.get('data')
         const page = state.get('page')
          page == 0?data = action.data:data.push(action.data);
-        return state.mergeDeep({
+        return state.merge({
           loadStatu:action.loadStatu,
           page:action.page,
           data:data,

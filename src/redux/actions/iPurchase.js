@@ -31,6 +31,7 @@ export const IPURCHASE_ADD_SUCCEED = 'IPURCHASE_ADD_SUCCEED'
 export const IPURCHASE_ADD_FAILED = 'IPURCHASE_ADD_FAILED'
 export const IPURCHASE_CONTENT_CHANGE = 'IPURCHASE_CONTENT_CHANGE'
 export const IPURCHASE_PAGE_CHANGE = 'IPURCHASE_PAGE_CHANGE'
+export const IPURCHASE_INDEX_CHANGE = 'IPURCHASE_INDEX_CHANGE'
 export const IPURCHASE_RATE_CHANGE = 'IPURCHASE_RATE_CHANGE'
 export const IPURCHASE_RATE_RESET = 'IPURCHASE_RATE_RESET'
 import {navigatePop,navigateRefresh} from './nav'
@@ -225,7 +226,7 @@ export function iPurchaseDeleteFailed():Object{
 
 export function selectChange(index:number):Object{
   return {
-    type:IPURCHASE_PAGE_CHANGE,
+    type:IPURCHASE_INDEX_CHANGE,
     index,
   }
 }

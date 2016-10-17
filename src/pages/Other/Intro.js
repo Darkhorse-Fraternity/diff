@@ -24,7 +24,7 @@ const MyBlueView = Platform.OS == 'ios' ?BlurView:View;
 
 const style = Platform.OS == 'ios'?{}:{backgroundColor:'rgba(0,0,0,0.9)'}
 import {showModalSwiper,hiddenModelSwiper,tryIdea} from '../../redux/actions/intro'
-import {iCommitListLoad,iCommitListLoadMore} from '../../redux/actions/iCommit'
+import {iCommitListLoad,iCommitListLoadMore,selectChange} from '../../redux/actions/iCommit'
 import {mainColor,containingColor,lightMainColor,lightContainingColor} from '../../configure';
 import * as Animatable from 'react-native-animatable';
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
@@ -155,6 +155,41 @@ shouldComponentUpdate(nextProps:Object) {
         !immutable.is(this.props.loadStatu,nextProps.loadStatu);
 }
 
+
+__renderPropView():ReactElement<any>{
+  const idea = this.props.scene.route.idea.toObject();
+  const commmitType = idea.commitType
+  const relyType = idea.type
+  const sets ={
+    phone:'电话',
+    image:'图片',
+    write:'文字',
+    link:'链接'
+  }
+  return(
+    <View>
+      <View style={{marginHorizontal:20,marginBottom:20}}>
+         <View style={styles.propRow}>
+           <Text>提交类型</Text>
+           <Text>{sets[commmitType]}</Text>
+         </View>
+          <View style={styles.line}/>
+         <View style={styles.propRow}>
+           <Text>回复类型</Text>
+           <Text>{sets[relyType]}</Text>
+         </View>
+          <View style={styles.line}/>
+         <View style={styles.propRow}>
+           <Text>次数</Text>
+           <Text>一次</Text>
+         </View>
+          <View style={styles.line}/>
+      </View>
+      <View style={styles.line}/>
+    </View>
+
+  )
+}
 __renderHeaderView():ReactElement<any>{
   const idea = this.props.scene.route.idea.toObject();
   const user =  idea.user && idea.user.toObject();
@@ -191,6 +226,7 @@ __renderHeaderView():ReactElement<any>{
         {idea.contents}
       </Text>
       <View style={styles.titleView }/>
+      {this.__renderPropView()}
     </View>
   )
 }
@@ -198,42 +234,55 @@ __renderHeaderView():ReactElement<any>{
 __renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
 
     const url = item.getIn(['images',0,'url'])
-    const type = item.getIn(['idea','Type'])
-    const  content = item.get('replyContent')
+    const type = item.get('type')
+    const replyType = this.props.scene.route.idea.get('type');
+    const avtarImage = item.getIn(['user','avatar','url'])
+    const name = item.getIn(['user','username'])
+    const  content = item.get('content')
     const __renderImageView = ()=>{
      return  (<WBImage style={styles.rowImage} source={{uri:url}}/>)
-    }
+   }
     const data = item.toObject()
     const title = data.idea.get('title')
      const    statuView = ()=>{
         return (
+          <View style={{marginRight:5}}>
             <StarRating
-              starSize={20}
+              starSize={15}
               disabled={true}
               maxStars={5}
-              starColor='rgba(0,0,0,0.5)'
+              starColor='rgba(0,0,0,0.3)'
               rating={item.get('rate')}
               selectedStar={() => {}}
              />
+          </View>
         )
       }
      return (
        <View  style={[styles.row]}>
-         <View style={styles.rowHeadView}>
-           {data.statu == 'done' && statuView()}
-         </View>
+
            <TouchableOpacity
               onPress={()=>{
+                this.props.selectChange(rowID)
+                this.props.push({key:'introDetail',type:replyType})
                 }}
               >
-             <View>
                {type == 'image' && __renderImageView()}
-               <Text
-                 numberOfLines = {1}
-                 style={styles.text}>
-                 {data.content}
-               </Text>
-             </View>
+               <View style={styles.rowBottomView}>
+                  <View >
+                    <Text
+                      numberOfLines = {1}
+                      style={styles.text}>
+                      {data.content}
+                    </Text>
+                    <View style={styles.rowSubBottomView}>
+                       {data.statu == 'done' && statuView()}
+                      <Text style={styles.name}>{name}</Text>
+                    </View>
+                  </View>
+                  <WBImage style={styles.subAvatar} source={{uri:avtarImage}}/>
+               </View>
+
              <View style={styles.line}/>
            </TouchableOpacity>
        </View>
@@ -341,6 +390,11 @@ const styles = StyleSheet.create({
     width:60,
     borderRadius:30,
   },
+  subAvatar:{
+    height:40,
+    width:40,
+    borderRadius:20,
+  },
   image:{
     flex:1
   },
@@ -393,22 +447,35 @@ const styles = StyleSheet.create({
     backgroundColor:'rgba(0,0,0,0.2)',
   },
   rowImage:{
+    marginTop:20,
     height:200,
   },
   row:{
-    marginTop:30,
     marginHorizontal:20,
     backgroundColor:'white'
   },
   text:{
-    marginTop:15,
-    marginBottom:20,
+    marginBottom:5,
     fontSize:17,
   },
-  rowHeadView:{
+  rowBottomView:{
+    marginTop:10,
+    marginBottom:10,
     flexDirection:'row',
     justifyContent:'space-between'
   },
+  rowSubBottomView:{
+    flexDirection:'row',
+  },
+  name:{
+    color:'rgba(0,0,0,0.5)'
+  },
+  propRow:{
+    marginTop:15,
+    marginBottom:15,
+    flexDirection:'row',
+    justifyContent:'space-between'
+  }
 });
 const mapStateToProps = (state) => {
 
@@ -449,6 +516,9 @@ const mapDispatchToProps = (dispatch) => {
       loadMore:()=>{
         dispatch(iCommitListLoadMore());
       },
+      selectChange:(index)=>{
+        dispatch(selectChange(index))
+      }
     }
 }
 

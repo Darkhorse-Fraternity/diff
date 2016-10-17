@@ -34,7 +34,7 @@ export const ICOMMIT_BINDING_IDEAID = 'ICOMMIT_BINDING_IDEAID'
 export const ICOMMIT_CHANGE_PHONE = 'ICOMMIT_CHANGE_PHONE'
 export const ICOMMIT_COMMIT_IMAGE = 'ICOMMIT_COMMIT_IMAGE'
 export const ICOMMIT_DELETE_IMAGE = 'ICOMMIT_DELETE_IMAGE'
-
+export const ICOMMMIT_INDEX_CHANGE = 'ICOMMMIT_INDEX_CHANGE'
 
 
 export const ICOMMIT_CLEAR_DATA = 'ICOMMIT_CLEAR_DATA'
@@ -71,7 +71,7 @@ export function iCommitListLoadMore():Function{
         const objectId = idea.get('objectId')
         const user = state.login.data;
         const params = limitSearch('iCommit',page,pageSize,{
-          include:'user',
+          include:'user,images,replyImages',
            where:{
              'idea':{'__type':"Pointer","className":"TodoObject","objectId":objectId}}
            });
@@ -318,5 +318,12 @@ export function deleteImage(uri:string){
   return {
     type: ICOMMIT_DELETE_IMAGE,
     uri,
+  }
+}
+
+export function selectChange(index:number):Object{
+  return {
+    type:ICOMMMIT_INDEX_CHANGE,
+    index,
   }
 }
