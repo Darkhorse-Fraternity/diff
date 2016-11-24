@@ -15,8 +15,7 @@ import { NAV_PUSH, NAV_POP,
 			}from '../actions/nav'
 import {LOGOUT} from '../actions/login'
 //生成原始单页配置数据。
-const originalRoute =  config('LoginView');
-const originalRoute2 =  config('TabView');
+const originalRoute =  config('TabView');
 const initialNavState = {
 	index: 0,
 	routes: [
@@ -28,7 +27,6 @@ const initialNavLoginState = {
 	index:1,
 	routes:[
 		originalRoute,
-		originalRoute2
 	]
 }
 

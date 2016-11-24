@@ -32,7 +32,7 @@ const initialLoginState = {
  * @param  {[type]} action:Object atcions 提交的会在这边显示。
  * @return {[type]}         返回给component 的state 值。
  */
-export default function loginState(state:Object = initialLoginState, action:Object) {
+export default function loginState(state:immutable.Map<string,any> = initialLoginState, action:Object) {
     switch (action.type) {
         case LOAD_ACCOUNT:
         case ACCOUNT_CHANGE:

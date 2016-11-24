@@ -107,7 +107,7 @@ export function register(state:Object):Function {
         request(params, function (response) {
             if (response.statu) {
                 dispatch(_loginSucceed(response));
-                dispatch(navigateReplaceIndex('TabView'));
+                dispatch(navigatePop());
             } else {
                 dispatch(_loginFailed(response));
             }

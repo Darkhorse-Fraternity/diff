@@ -22,6 +22,7 @@ import {backViewColor, blackFontColor, grayFontColor} from '../../configure';
 const EmitterSubscription = require('EmitterSubscription');
 import { createAnimatableComponent } from 'react-native-animatable';
 const AniScrollView= createAnimatableComponent(ScrollView);
+import {my_head} from '../../../source/'
 const styles = StyleSheet.create({
   list: {
     backgroundColor: backViewColor,
@@ -96,8 +97,7 @@ const styles = StyleSheet.create({
 
 });
 
-const gradeName = ['一年级','二年级','三年级','四年级','五年级','六年级','初一',
-                  '初二','初三','高一','高二','高三','大学'];
+
  class PersonInfo extends React.Component {
 
   constructor(props:Object){
@@ -134,7 +134,9 @@ const gradeName = ['一年级','二年级','三年级','四年级','五年级','
 	}
 
     _renderHeadRow(onPress: Function = ()=>{}) {
-      return (
+        const source = this.props.userData.avatar ? {uri: this.props.userData.avatar.url} : my_head
+
+        return (
           <TouchableHighlight onPress={onPress} style={styles.group}>
             <View style={styles.headerStyle}>
 
@@ -142,7 +144,7 @@ const gradeName = ['一年级','二年级','三年级','四年级','五年级','
               <Text style={styles.rowText}>修改头像</Text>
             </View>
             <Image
-              source={{uri:this.props.userData.avatar&& this.props.userData.avatar.url||''}}
+              source={source}
               style={styles.thumbnail}
             />
             <View style={styles.arrowView}/>

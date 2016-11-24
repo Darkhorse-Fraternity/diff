@@ -35,12 +35,12 @@ let SCREEN_HEIGHT = Dimensions.get('window').height;
    timer : number;
    componentWillMount() {
      var self = this;
-     this.timer = setTimeout(()=>{
-       self.props.refreshDirection()
-     }, 1000);
+     // this.timer = setTimeout(()=>{
+     //   self.props.refreshDirection()
+     // }, 1000);
    }
    componentWillUnmount(){
-    this.timer && clearTimeout(this.timer)
+    // this.timer && clearTimeout(this.timer)
    }
   //  index==i?0:-SCREEN_WIDTH
    _sceneMap(state:Object){

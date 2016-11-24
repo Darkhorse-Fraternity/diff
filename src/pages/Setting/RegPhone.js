@@ -2,7 +2,7 @@
 //注册页面
 'use strict';
 import React, {Component, PropTypes} from 'react';
-import ReactNative, {
+import  {
     ScrollView,
     StyleSheet,
     Text,
@@ -13,49 +13,44 @@ import ReactNative, {
     TouchableOpacity,
     NativeModules
 } from 'react-native'
-const AppSourceAndroid = NativeModules.AppSourceAndroid
-import {saveUserData} from '../../util/XGlobal'
-import DialogAndroid from 'react-native-dialogs'
-import {pixel, navbarHeight, Toast, OS, checkPhoneNum} from '../../util/';
-// import {Actions} from "react-native-router-flux";
+import { OS} from '../../util/';
 
 import {BCButton} from '../../components/Base/WBButton'
 import Button from 'react-native-button'
 import {request} from '../../request'
-import {requestSmsCode, requestUsersByMobilePhone} from '../../request/leanCloud'
+import {requestSmsCode} from '../../request/leanCloud'
 import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../configure'
 import {connect} from 'react-redux'
 import {navigateReplaceIndex, navigatePush} from '../../redux/actions/nav'
 import {register} from '../../redux/actions/login'
+import {checkPhoneNum,Toast} from '../../util'
 
 const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
 class RegPhone extends Component {
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             time: 60,
             codeName: '',
             phone: "", //号码
             ymCode: "", //验证码
-            setPwd: "", //设置密码
             isTap: false,
             timeLoad: false,
         };
     }
 
-    state:{
+    state: {
         phone:string,
         time:number,
         codeName:string,
         ymCode:string,
-        setPwd:string,
         isTap:bool, // 用于time 是否在走。
         timeLoad:bool,
     };
 
 
-    requestHandle:Object;
-    id:number = 0;
+    requestHandle: Object;
+    id: number = 0;
 
     _onClickCode() {
         //发送验证码请求
@@ -65,7 +60,9 @@ class RegPhone extends Component {
         requestSmsCode.params.mobilePhoneNumber = this.state.phone;
         this.requestHandle = request(requestSmsCode, function (response) {
             if (response.statu) {
+                console.log('test:',response)
                 Toast.show("发送成功!");
+                console.log('isTap:',self.state.isTap)
                 if (self.state.isTap == false) {
                     self.setState({isTap: true});
                     self.id = setInterval(function () {
@@ -104,45 +101,18 @@ class RegPhone extends Component {
             return;
         }
         //判断验证码的正则
-        var reg = /^\d{6}$/;
-        var flag = reg.test(this.state.ymCode)
+        const reg = /^\d{6}$/;
+        const flag = reg.test(this.state.ymCode)
         if (!flag) {
             Toast.show('不是正确验证码');
             this.refs['2'].focus();
             return;
         }
 
-        //判断设置密码是否正确 6到16位
-        reg = /^.{6,16}$/
-        flag = reg.test(this.state.setPwd)
-        if (!flag) {
-            Toast.show('密码设置不正确');
-            this.refs['3'].focus();
-            return;
-        }
-
-        //判断年级是否进行了选择。
-
-
-        // var self = this;
-        //
-        // const params = requestUsersByMobilePhone(this.state.phone,this.state.ymCode,
-        // this.state.setPwd);
-        //
-        // this.requestHandle = request(params, function(response){
-        //     if(response.statu){
-        //       Toast.show(response.msg);
-        //       saveUserData(response.data,registerRequest.params.user_name);//保存到本地。
-        //       self.setState({
-        //          setPwd:"",
-        //       });
-        //       self.props.push();
-        //     }
-        //     self.setState({loaded:false});
-        // });
         this.props.mRegister(this.state);
 
     }
+
 
 
     componentWillUnmount() {
@@ -151,7 +121,7 @@ class RegPhone extends Component {
     }
 
 
-    focusNextField(nextField:string) {
+    focusNextField(nextField: string) {
 
         if (nextField == '1') {
             this.refs['2'].focus();
@@ -162,21 +132,23 @@ class RegPhone extends Component {
         }
     }
 
-    _renderRowMain(title:string, placeholder:string, onChangeText:Function,
-                   boardType:PropTypes.oneOf = 'default', autoFocus:bool = false, maxLength:number = 16,
-                   ref:string) {
+    _renderRowMain(title: string, placeholder: string, onChangeText: Function,
+                   boardType: PropTypes.oneOf = 'default', autoFocus: bool = false, maxLength: number = 16,
+                   ref: string) {
 
         return (
             <View style={styles.rowMainStyle}>
                 <Text style={styles.textStyle}>{title}</Text>
                 <TextInput
                     ref={ref}
+                    placeholderTextColor="rgba(180,180,180,1)"
                     selectionColor={mainColor}
                     returnKeyType='next'
                     autoFocus={autoFocus}
                     maxLength={maxLength}
                     keyboardType={boardType}
                     style={styles.textInputStyle}
+                    underlineColorAndroid='transparent'
                     placeholder={placeholder}
                     clearButtonMode='while-editing'
                     enablesReturnKeyAutomatically={true}
@@ -187,60 +159,55 @@ class RegPhone extends Component {
     }
 
     render() {
-        console.log('--', this.props.state);
         var codeEnable = checkPhoneNum(this.state.phone) &&
             this.state.time == 60 && !this.state.isTap;
+        const reg = /^\d{6}$/;
+        const flag = reg.test(this.state.ymCode) && checkPhoneNum(this.state.phone)
         return (
-            <View style={styles.container}>
-                <ScrollView
-                    keyboardShouldPersistTaps={true}
-                    keyboardDismissMode='on-drag'>
+            <ScrollView
+                style={styles.container}
+                keyboardShouldPersistTaps={true}
+                keyboardDismissMode='on-drag'>
 
-                    <View style={[styles.rowStyle,{marginTop:29/2}]}>
-                        {this._renderRowMain('手机号码:', '请填入手机号',
-                            (text) => this.setState({phone: text}), 'default', true, 11, "1"
-                        )}
-                        <BCButton containerStyle={styles.buttonContainerStyle}
-                                  disabled={!codeEnable}
-                                  loaded={this.state.timeLoad}
-                            //styleDisabled={{fontWeight:'normal'}}
-                                  onPress={this._onClickCode.bind(this)}
-                                  style={{fontWeight:'100',fontSize:14}}
-                        >
-                            {this.state.time == 60 || this.state.time == 0 ? '获取验证码' :
-                            this.state.time.toString() + '秒'}
-                        </BCButton>
-                    </View>
+                {this._renderRowMain('手机号:', '请填入手机号码',
+                    (text) => this.setState({phone: text}), 'default', true, 11, "1"
+                )}
 
-                    <View style={styles.rowStyle}>
-                        {this._renderRowMain('验证码:', '输入您收到的验证码',
-                            (text) => this.setState({ymCode: text}), 'numbers-and-punctuation'
-                            , false, 6, "2"
-                        )}
-                    </View>
-                    <View style={styles.rowStyle}>
-                        {this._renderRowMain('设置密码:', '6-16个字符,区分大小写',
-                            (text) => this.setState({setPwd: text}), 'numbers-and-punctuation'
-                            , false, 16, "3"
-                        )}
-                    </View>
+                <View style={{flexDirection:'row'}}>
+                    {this._renderRowMain('验证码:', '输入您收到的验证码',
+                        (text) => this.setState({ymCode: text}), 'numbers-and-punctuation'
+                        , false, 6, "2"
+                    )}
 
-                    <BCButton
-                        isLoad={this.props.state.loaded}
-                        onPress={this._goRegist.bind(this)}
-                        containerStyle={styles.buttonContainerStyle2}>
-                        提 交
+                    <BCButton containerStyle={styles.buttonContainerStyle}
+                              disabled={!codeEnable}
+                              loaded={this.state.timeLoad}
+                        //styleDisabled={{fontWeight:'normal'}}
+                              onPress={this._onClickCode.bind(this)}
+                              style={{fontWeight:'400',fontSize:14}}
+                    >
+                        {this.state.time == 60 || this.state.time == 0 ? '获取验证码' :
+                        this.state.time.toString() + '秒'}
                     </BCButton>
-                    <View style={styles.rowMainStyle}>
-                        <Text style={styles.protocolPre}>注册代表您已经阅读</Text>
-                        <Button
-                            onPress={this._gowebView}
-                            style={styles.protocolSuf}>
-                            《微著网络服务协议》
-                        </Button>
-                    </View>
-                </ScrollView>
-            </View>
+                </View>
+
+
+                <BCButton
+                    disabled={!flag}
+                    isLoad={this.props.state.loaded}
+                    onPress={this._goRegist.bind(this)}
+                    containerStyle={styles.buttonContainerStyle2}>
+                    开始
+                </BCButton>
+                <View style={styles.bottom}>
+                    <Text style={styles.protocolPre}>点击开始,即表示已阅读并同意</Text>
+                    <Button
+                        onPress={this._gowebView}
+                        style={styles.protocolSuf}>
+                        《用车服务条款》
+                    </Button>
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -248,35 +215,31 @@ class RegPhone extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: navbarHeight,
-        // flexDirection:'row',
         flex: 1,
-        backgroundColor: backViewColor
-    },
-    rowStyle: {
-        flexDirection: 'row',
-        backgroundColor: '#ffffff',
-        marginTop: 7,
-        marginLeft: 29 / 2,
-        marginRight: 29 / 2,
-        borderRadius: 3,
-        height: 40,
-        alignItems: 'center',
-        // flexDirection:'row'
+        backgroundColor: 'white',
+        paddingTop: 20,
     },
 
+
     rowMainStyle: {
+
         flex: 1,
-        // padding:15,
+        height: 40,
+        marginTop: 10,
+        backgroundColor: 'rgba(200,200,200,0.1)',
         paddingHorizontal: 15,
+        flexDirection: 'row',
         alignItems: 'center',
-        flexDirection: 'row'
+        marginHorizontal: 15,
     },
     buttonContainerStyle: {
-        marginRight: 5,
-        height: 25,
-        paddingHorizontal: 6,
+        marginRight: 15,
+        marginLeft: -5,
+        height: 40,
+        marginTop: 10,
+        paddingHorizontal: 15,
         alignSelf: 'center',
+
         justifyContent: 'center',
     },
     textStyle: {
@@ -286,13 +249,12 @@ const styles = StyleSheet.create({
         color: blackFontColor,
     },
     textInputStyle: {
-        marginLeft: 29 / 2,
-        textAlign: 'left',
-        fontSize: 13,
+        // width:200,
         flex: 1,
-        height: 40,
-        borderColor: 'gray',
-        backgroundColor: '#00000000',
+        marginLeft: 0,
+        textAlign: 'left',
+        fontSize: 14,
+        color: 'black',
     },
     buttonSelectStyle: {
         marginLeft: OS == 'ios' ? 29 / 2 : 27,
@@ -311,27 +273,9 @@ const styles = StyleSheet.create({
     buttonContainerStyle2: {
         marginLeft: 29 / 2,
         marginRight: 29 / 2,
-        marginTop: 7,
+        marginTop: 30,
         height: 40,
         justifyContent: 'center',
-    },
-    arrowView: {
-        borderBottomWidth: pixel * 2,
-        borderRightWidth: pixel * 2,
-        borderColor: '#8c8c85',
-        transform: [{rotate: '315deg'}],
-        marginRight: 20,
-        width: 10,
-        height: 10,
-    },
-    arrowView2: {
-        borderBottomWidth: pixel * 2,
-        borderRightWidth: pixel * 2,
-        borderColor: '#8c8c85',
-        transform: [{rotate: '45deg'}],
-        marginRight: 20,
-        width: 10,
-        height: 10,
     },
 
     protocolPre: {
@@ -343,8 +287,13 @@ const styles = StyleSheet.create({
         marginTop: 8,
         fontSize: 11,
         color: mainColor,
-    }
+    },
 
+    bottom: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent:'center',
+    }
 })
 
 

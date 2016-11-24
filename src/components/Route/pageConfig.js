@@ -10,7 +10,7 @@
 
 export  const pageConfig = {
   'TabView'           :{title:'创意列表',hideBackBtn:true,gestureResponseDistance:0.0001,
-                          direction:'vertical',hideNavBar:true,},
+                          hideNavBar:true,},
   'LoginView'           :{title:'登录',hideNavBar:true,gestureResponseDistance:0.0001,
                           direction:'vertical'},
 

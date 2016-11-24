@@ -45,8 +45,13 @@ class Commit extends Component{
      const rightBtn = renderNavSenderButton(this._tapRight)
      this.props.refresh({renderRightComponent:rightBtn});
 
-     this.props.state.get('phoneNumber').length == 0 &&
-     this.props.changePhoneNumber(this.props.phoneNumber);
+
+      const  phoneNumber =  this.props.state.get('phoneNumber')
+       if(phoneNumber){
+           phoneNumber.length == 0 &&
+           this.props.changePhoneNumber(this.props.phoneNumber);
+       }
+
 
 
    }

@@ -7,7 +7,7 @@
 
 import {loadUserData, loadFirstJoin} from '../../util/XGlobal'
 // import jsCheckUpdate from '../../util/checkUpdate'
-import {lockToPortrait} from 'react-native-orientation'
+// import {lockToPortrait} from 'react-native-orientation'
 // import umeng from '../util/umeng'
 import React, {
     Platform,
@@ -15,6 +15,7 @@ import React, {
     ToastAndroid,
     StatusBar,
 } from 'react-native';
+import {loginSucceed} from './login'
 
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 
@@ -30,13 +31,13 @@ function _preConfig() {
     // loadFirstJoin()
 
     // 加载缓存设置到公共参数
-    loadUserData();
+
 
     //热跟新
     // jsCheckUpdate();
 
 
-    lockToPortrait();
+    // lockToPortrait();
     //配置友盟信息
     // umeng.configure();
 
@@ -45,14 +46,29 @@ function _preConfig() {
         UIManager.setLayoutAnimationEnabledExperimental(true);
     }
 
-    Platform.OS=='ios'&& StatusBar.setBarStyle('default', true);
+    // Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
 
 }
 
 
 
-export function preConfig():Object {
+export function preConfig():Function {
     _preConfig();
+    return (dispatch) =>{
+        loadUserData().then((response)=>{
+            dispatch(loginSucceed(response))
+            // console.log('test:',response)
+            dispatch(__preConfigResult())
+        }).catch((error)=>{
+            console.log('loadUserDataError:',error.message)
+        });
+    }
+
+}
+
+
+function __preConfigResult():Object {
+
     return {
         type: PRE_CONFIG_STATU,
         status:'done',

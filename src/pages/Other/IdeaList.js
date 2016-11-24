@@ -43,7 +43,7 @@ class IdeaList extends Component {
     }
 
     _renderHeader=()=>{
-      const name = this.props.user.username
+      const name = this.props.user.username||'陌生人'
       return (
         <View style={styles.headView}>
           <Text style={styles.headViewText}>

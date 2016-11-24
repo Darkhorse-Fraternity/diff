@@ -20,14 +20,13 @@ import ReactNative, {
     StatusBar,
     StyleSheet,
 } from 'react-native';
-import type EmitterSubscription from 'EmitterSubscription';``
+import type EmitterSubscription from 'EmitterSubscription';
 import RCTDeviceEventEmitter  from 'RCTDeviceEventEmitter'
 import {alertUpdate, saveFirstTime} from '../../util/XGlobal';
 import Route from '../../components/Route'
 import {connect} from 'react-redux'
 import {navigatePush, navigatePop} from '../../redux/actions/nav'
 import {logout,loginSucceed} from '../../redux/actions/login'
-const { BlurView, VibrancyView } = require('react-native-blur');
 import {preConfig} from '../../redux/actions/config'
 import { mainColor, backViewColor, lightMainColor, lightContainingColor} from '../../configure';
 class Main extends Component {
@@ -37,14 +36,9 @@ class Main extends Component {
       //  this.state = {
       //  };
       this.props.preConfig();
-      this.state = {isLogin: false, waiting: true, isFirst: true};
   }
 
-  state:{
-      isLogin:boolean,
-      waiting:boolean,
-      isFirst:boolean,
-      };
+
 
       lastBackPressed:number = 0;
     _backAnroid()
@@ -57,10 +51,10 @@ class Main extends Component {
             const key = routes[index].key;
             //idnex 前两个分别是登录和tabview
 
-            if (key != 'LoginView' && key != 'TabView') {
+            // if (key != 'LoginView' && key != 'Map') {
                 self.props.pop();
-                return true;
-            }
+            //     return true;
+            // }
             let times = Date.now();
             if (times - self.lastBackPressed >= 2500) {
                 //再次点击退出应用
@@ -78,43 +72,30 @@ class Main extends Component {
     logoutTimer:number;
     componentDidMount()
   {
-      var self = this;
-      this.subscriber1 = RCTDeviceEventEmitter.addListener("userIsLogin", (obj)=> {
 
-          self.setState({waiting: false, isLogin: obj.isLogin,});
-
-          // console.log('test11:',obj.data);
-          obj.data && obj.isLogin && self.props.login(obj.data);
-          //发送注册给服务器
-          // PushNotification.putToken();//
-      });
-
-      this.subscriber2 = RCTDeviceEventEmitter.addListener("loadFirstJoin", (obj)=> {
-          self.setState({isFirst: obj});
-      });
 
       const timer = Date.now();
-      let openKey = true;
       RCTDeviceEventEmitter.addListener("logout", (obj)=> {
           //需要等动画结束再回调否则可能有问题。
+          self.props.logOut();
           const timer2 = Date.now();
           // console.log('111111--');
           // console.log(timer2 - timer);
-          if (timer2 - timer >= 5000) {
-              InteractionManager.runAfterInteractions(()=> {
-                  self.props.logOut();
-              });
-          } else {
-              //进入页面瞬间被退会有白屏现在，估计是动画的问题。
-              //这边做了延迟加载。并且只执行一次。
-              if (openKey) {
-                  openKey = false;
-                  this.logoutTimer = setTimeout(()=> {
-                      self.props.logOut();
-                  }, 1000);
-              }
-
-          }
+          // if (timer2 - timer >= 5000) {
+          //     InteractionManager.runAfterInteractions(()=> {
+          //         self.props.logOut();
+          //     });
+          // } else {
+          //     //进入页面瞬间被退会有白屏现在，估计是动画的问题。
+          //     //这边做了延迟加载。并且只执行一次。
+          //     if (openKey) {
+          //         openKey = false;
+          //         this.logoutTimer = setTimeout(()=> {
+          //             self.props.logOut();
+          //         }, 1000);
+          //     }
+          //
+          // }
 
       });
 
@@ -152,23 +133,23 @@ class Main extends Component {
       }
   }
 
-  shouldComponentUpdate(nextProps:Object, nextState:Object)
-  {
-      return (this.state !== nextState);
-  }
+  // shouldComponentUpdate(nextProps:Object, nextState:Object)
+  // {
+  //     return (this.state !== nextState);
+  // }
 
 
   render() {
-    if (!this.state.isLogin && this.state.waiting) {
-      //做伪闪屏
-      // if (Platform.OS === 'ios') {
-      return (<View/>);
-      // }else {
-      // 	StatusBar.setHidden(true);
-      // 	return <GuideView/>
-      // }
-    }
-    //引导页
+    // if (!this.state.isLogin && this.state.waiting) {
+    //   //做伪闪屏
+    //   // if (Platform.OS === 'ios') {
+    //   return (<View/>);
+    //   // }else {
+    //   // 	StatusBar.setHidden(true);
+    //   // 	return <GuideView/>
+    //   // }
+    // }
+    // //引导页
     // if (!this.state.isLogin && this.state.isFirst) {
     //   //     <IntroView onClick={()=>{
 		// 	//  LayoutAnimation.spring();
@@ -178,7 +159,7 @@ class Main extends Component {
 		// 	return (<View/>)
     // };
 
-      this.showStatuBar();//做一个延迟。
+      // this.showStatuBar();//做一个延迟。
       return (
           <Route/>
       );

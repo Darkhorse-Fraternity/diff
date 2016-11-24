@@ -20,12 +20,12 @@ import {navigatePush} from '../../redux/actions/nav'
 
 var needRefresh = true;
 class SettingIOS extends Component {
-    state:{
+    state: {
         refreshing: bool,
     };
-    requesetHandle:Object;
+    requesetHandle: Object;
 
-    constructor(props:Object) {
+    constructor(props: Object) {
         super(props);
         this.state = {
             refreshing: false,
@@ -43,9 +43,9 @@ class SettingIOS extends Component {
         // })
     }
 
-    isLoading:bool;
+    isLoading: bool;
 
-    _handleRefresh = (animation:bool)=> {
+    _handleRefresh = (animation: bool)=> {
         // if (this.isLoading) {
         //   return;
         // }
@@ -72,31 +72,10 @@ class SettingIOS extends Component {
 
     }
 
-    // courseSource = require('../../source/img/xy_start/xy_start.png');
-    // recordSource = require('../../source/img/0531_xy_account/xy_account.png');
-    // orderSource = require('../../source/img/0531_xy_order/xy_order.png');
-    // setSource = require('../../source/img/0531_xy_set/xy_set.png');
-    // balanceSource = require('../../source/img/xy_balance/xy_balance.png');
-    // couponsSource = require('../../source/img/xy_mycoupon/xy_mycoupon.png');
-    // buySource = require('../../source/img/xy_buy/xy_buy.png');
 
-    render() {
-        // let leftCourseTime = this.state.userCenterData.left_course_time || 0;
-        // let courseTimeStr = '剩余课时: '+leftCourseTime+'课时';
+    __renderLoginRow() {
         return (
-            <ScrollView
-                style={styles.list}
-                //refreshControl={
-					// <RefreshControl
-					// 	refreshing={this.state.refreshing}
-					// 	onRefresh={this._handleRefresh}
-					// 	/>
-				//}
-            >
-                {this._renderHeadRow(this.props.userData, () => {
-                    this.props.push({key: 'PersonInfo'});
-                })}
-
+            <View>
                 {this._renderRow('推荐我的创意服务', styles.group, true, () => {
                     this.props.push('Submit');
                 })}
@@ -111,25 +90,49 @@ class SettingIOS extends Component {
                 {this._renderRow('我的收藏', styles.group, true, () => {
 
                 })}
-                {this._renderRow('设置', styles.group,  true, () => {
+                {this._renderRow('设置', styles.group, true, () => {
                     this.props.push('Setting');
                 })}
+            </View>
+        )
+    }
+
+    render() {
+        // let leftCourseTime = this.state.userCenterData.left_course_time || 0;
+        // let courseTimeStr = '剩余课时: '+leftCourseTime+'课时';
+        const loaded = this.props.userData != undefined
+        return (
+            <ScrollView
+                style={styles.list}
+                //refreshControl={
+                // <RefreshControl
+                // 	refreshing={this.state.refreshing}
+                // 	onRefresh={this._handleRefresh}
+                // 	/>
+                //}
+            >
+                {this._renderHeadRow(this.props.userData, () => {
+                    loaded?this.props.push({key: 'PersonInfo'}): this.props.push({key: 'RegPhone'})
+
+                })}
+
+                {loaded && this.__renderLoginRow()}
 
             </ScrollView>
         );
     }
 
-    _renderRow(title:string, style:any,  isArraw:bool = false, onPress:Function = ()=> {
-    }, description:any = null) {
+    _renderRow(title: string, style: any, isArraw: bool = false, onPress: Function = ()=> {
+    }, description: any = null) {
         return (
             <TouchableOpacity onPress={onPress} style={style}>
                 <View style={styles.row}>
                     <View style={{flexDirection:'row',alignItems:'center',}}>
                         {/*<Image
-                            resizeMode='contain'
-                            source={source}
-                            style={styles.imageNail}
-                        />*/}
+                         resizeMode='contain'
+                         source={source}
+                         style={styles.imageNail}
+                         />*/}
                         <Text style={styles.rowText}>
                             {title}
                         </Text>
@@ -144,35 +147,41 @@ class SettingIOS extends Component {
     }
 
 
-    _renderHeadRow(data:Object, onPress:Function = ()=> {
+    _renderHeadRow(data: Object, onPress: Function = ()=> {
     }) {
         // let {grade_str,connect_phone} = data;
         // console.log('test111:',data.avatar.url)
-        const name = data.username
+        const name = data.username || '陌生人'
+        const loaded = this.props.userData != undefined
+        const tip = loaded?'查看或编辑个人资料':'先登录吧~'
+        const arraw = ()=>{
+            return  (<View style={styles.arrowView}/>)
+        }
         return (
-            <TouchableOpacity onPress={onPress} style={styles.group}>
+            <TouchableOpacity onPress={onPress} style={styles.head}>
                 {/*<View style={styles.headerStyle}>
-                    <Image
-                        source={{uri: data.avatar && data.avatar.url||''}}
-                        style={styles.thumbnail}
-                    />
-                    <View style={styles.infoContainer}>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title}>{data.username}</Text>
+                 <Image
+                 source={{uri: data.avatar && data.avatar.url||''}}
+                 style={styles.thumbnail}
+                 />
+                 <View style={styles.infoContainer}>
+                 <View style={styles.titleContainer}>
+                 <Text style={styles.title}>{data.username}</Text>
 
-                        </View>
-                        <Text style={styles.teacherName}>
-                            {data.mobilePhoneNumber}
-                        </Text>
-                    </View>
-                    <View style={styles.arrowView}/>
-                </View>*/}
+                 </View>
+                 <Text style={styles.teacherName}>
+                 {data.mobilePhoneNumber}
+                 </Text>
+                 </View>
+                 <View style={styles.arrowView}/>
+                 </View>*/}
                 <View style={styles.headView}>
-                  <Text style={styles.headViewText}>
-                       -{name}
-                  </Text>
-                  <Text style={styles.headViewSubText}>查看或编辑个人资料</Text>
+                    <Text style={styles.headViewText}>
+                        -{name}
+                    </Text>
+                    <Text style={styles.headViewSubText}>{tip}</Text>
                 </View>
+                {!loaded && arraw()}
             </TouchableOpacity>
         );
     }
@@ -183,12 +192,21 @@ const styles = StyleSheet.create({
     group: {
         marginBottom: 7
     },
+    head:{
+        marginBottom: 7,
+        flexDirection:'row',
+        height: 170,
+        backgroundColor: 'white',
+        alignItems:'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+    },
     emptyPageText: {
         margin: 10,
     },
     list: {
-        flex:1,
-        backgroundColor:backViewColor,
+        flex: 1,
+        backgroundColor: backViewColor,
     },
     bottomLine: {
         borderBottomWidth: pixel,
@@ -197,13 +215,13 @@ const styles = StyleSheet.create({
     row: {
         backgroundColor: 'white',
         paddingHorizontal: 15,
-        paddingVertical: 10 ,
+        paddingVertical: 10,
         flexDirection: 'row',
         justifyContent: 'space-between',
     },
     imageNail: {
-    // marginTop: 13,
-    // marginBottom: 13,
+        // marginTop: 13,
+        // marginBottom: 13,
         marginLeft: 10,
         width: 20,
         height: 20,
@@ -247,20 +265,14 @@ const styles = StyleSheet.create({
         color: blackFontColor
     },
 
-    headView:{
-      height:170,
-      backgroundColor:'white',
+
+    headViewText: {
+        fontSize: 30,
+        fontWeight: 'bold',
     },
-    headViewText:{
-      marginTop:60,
-      marginHorizontal:20,
-      fontSize:30,
-      fontWeight:'bold',
-    },
-    headViewSubText:{
-      marginTop:10,
-      marginHorizontal:20,
-      fontSize:13,
+    headViewSubText: {
+        marginTop: 10,
+        fontSize: 13,
     },
 });
 
