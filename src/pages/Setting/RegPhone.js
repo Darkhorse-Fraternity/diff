@@ -13,7 +13,7 @@ import  {
     TouchableOpacity,
     NativeModules
 } from 'react-native'
-import { OS} from '../../util/';
+import {OS} from '../../util/';
 
 import {BCButton} from '../../components/Base/WBButton'
 import Button from 'react-native-button'
@@ -23,7 +23,7 @@ import {deepFontColor, backViewColor, blackFontColor, mainColor} from '../../con
 import {connect} from 'react-redux'
 import {navigateReplaceIndex, navigatePush} from '../../redux/actions/nav'
 import {register} from '../../redux/actions/login'
-import {checkPhoneNum,Toast} from '../../util'
+import {checkPhoneNum, Toast} from '../../util'
 
 const webUrl = 'https://static.dayi.im/static/fudaojun/rule.html?version=20160603182000';
 class RegPhone extends Component {
@@ -55,14 +55,15 @@ class RegPhone extends Component {
     _onClickCode() {
         //发送验证码请求
 //没注册过手机号 13517238595
+
         this.setState({timeLoad: true});
         var self = this;
         requestSmsCode.params.mobilePhoneNumber = this.state.phone;
         this.requestHandle = request(requestSmsCode, function (response) {
             if (response.statu) {
-                console.log('test:',response)
+                console.log('test:', response)
                 Toast.show("发送成功!");
-                console.log('isTap:',self.state.isTap)
+                self.refs[2] && self.refs[2].focus()
                 if (self.state.isTap == false) {
                     self.setState({isTap: true});
                     self.id = setInterval(function () {
@@ -114,7 +115,6 @@ class RegPhone extends Component {
     }
 
 
-
     componentWillUnmount() {
         this.id && clearInterval(this.id);
         this.requestHandle && this.requestHandle.next();
@@ -126,9 +126,7 @@ class RegPhone extends Component {
         if (nextField == '1') {
             this.refs['2'].focus();
         } else if (nextField == '2') {
-            this.refs['3'].focus();
-        } else {
-
+            this._goRegist()
         }
     }
 
@@ -170,12 +168,15 @@ class RegPhone extends Component {
                 keyboardDismissMode='on-drag'>
 
                 {this._renderRowMain('手机号:', '请填入手机号码',
-                    (text) => this.setState({phone: text}), 'default', true, 11, "1"
+                    (text) => this.setState({phone: text}), 'numeric', true, 11, "1"
                 )}
 
                 <View style={{flexDirection:'row'}}>
                     {this._renderRowMain('验证码:', '输入您收到的验证码',
-                        (text) => this.setState({ymCode: text}), 'numbers-and-punctuation'
+                        (text) => {
+                            this.setState({ymCode: text})
+                        },
+                        'numeric'
                         , false, 6, "2"
                     )}
 
@@ -204,7 +205,7 @@ class RegPhone extends Component {
                     <Button
                         onPress={this._gowebView}
                         style={styles.protocolSuf}>
-                        《用车服务条款》
+                        《diff使用条款》
                     </Button>
                 </View>
             </ScrollView>
@@ -292,7 +293,7 @@ const styles = StyleSheet.create({
     bottom: {
         flexDirection: 'row',
         alignItems: 'center',
-        justifyContent:'center',
+        justifyContent: 'center',
     }
 })
 

@@ -60,7 +60,7 @@ export function tryIdea(idea:Object):Function{
      if(idea.type == 'link' && idea.link.length>0){
        dispatch(navigatePush({'key':'WebView','url':idea.link}))
      }else{
-       const login =  state.login.data != undefined
+       const login =  state.login.isLogin
        if(login){
          dispatch(iBindingIdeaID(idea.objectId,idea.commitType))
          dispatch(navigatePush('iCommit'))

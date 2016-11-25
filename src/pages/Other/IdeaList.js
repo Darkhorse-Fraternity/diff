@@ -134,7 +134,6 @@ const styles = StyleSheet.create({
     },
     list:{
       backgroundColor:'white',
-      marginTop:20,
     },
     wrap: {
         flex: 1,

@@ -19,7 +19,7 @@ import {navigatePush} from '../../redux/actions/nav'
 
 
 var needRefresh = true;
-class SettingIOS extends Component {
+class PersonCenter extends Component {
     state: {
         refreshing: bool,
     };
@@ -100,7 +100,7 @@ class SettingIOS extends Component {
     render() {
         // let leftCourseTime = this.state.userCenterData.left_course_time || 0;
         // let courseTimeStr = '剩余课时: '+leftCourseTime+'课时';
-        const loaded = this.props.userData != undefined
+        const isLogin = this.props.login.isLogin
         return (
             <ScrollView
                 style={styles.list}
@@ -111,12 +111,12 @@ class SettingIOS extends Component {
                 // 	/>
                 //}
             >
-                {this._renderHeadRow(this.props.userData, () => {
-                    loaded?this.props.push({key: 'PersonInfo'}): this.props.push({key: 'RegPhone'})
+                {this._renderHeadRow(this.props.login.data, () => {
+                    isLogin?this.props.push({key: 'PersonInfo'}): this.props.push({key: 'RegPhone'})
 
                 })}
 
-                {loaded && this.__renderLoginRow()}
+                {isLogin && this.__renderLoginRow()}
 
             </ScrollView>
         );
@@ -152,8 +152,8 @@ class SettingIOS extends Component {
         // let {grade_str,connect_phone} = data;
         // console.log('test111:',data.avatar.url)
         const name = data.username || '陌生人'
-        const loaded = this.props.userData != undefined
-        const tip = loaded?'查看或编辑个人资料':'先登录吧~'
+        const isLogin = this.props.login.isLogin
+        const tip = isLogin?'查看或编辑个人资料':'先登录吧~'
         const arraw = ()=>{
             return  (<View style={styles.arrowView}/>)
         }
@@ -181,7 +181,7 @@ class SettingIOS extends Component {
                     </Text>
                     <Text style={styles.headViewSubText}>{tip}</Text>
                 </View>
-                {!loaded && arraw()}
+                {!isLogin && arraw()}
             </TouchableOpacity>
         );
     }
@@ -282,7 +282,7 @@ const mapStateToProps = (state) => {
     //console.log('state:',state);
     return {
         avatar: state.util.get('loadAvatar').toObject(),
-        userData: state.login.data,
+        login: state.login,
     }
 }
 
@@ -297,4 +297,4 @@ const mapDispatchToProps = (dispatch) => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(SettingIOS)
+)(PersonCenter)

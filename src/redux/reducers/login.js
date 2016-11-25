@@ -20,6 +20,7 @@ import {CHANGEAVATAR} from '../actions/util'
 import {saveUserData} from '../../util/XGlobal'
 const initialLoginState = {
     loaded: false,
+    isLogin: false,
     accountText: __DEV__ ? "13588833404" : '',
     passwordText: __DEV__ ? "123456" : '',
     data: {},
@@ -38,24 +39,26 @@ export default function loginState(state:immutable.Map<string,any> = initialLogi
         case ACCOUNT_CHANGE:
         case PASSWORD_CHANGE:
         case LOGIN_REQUEST:
-        case LOGIN_FAILED:
-        case LOGOUT:
-
-        case LOGIN_SUCCEED:
             return Object.assign({}, state, {
-                ...action
-            });
-        case LOGOUT:
-
-            return Object.assign({}, state, {
-                ...action
-            });
-        case LOGIN_SUCCEED:
-
-            const a = Object.assign({}, state, {
                 ...action,
             });
-            return a;
+        case LOGIN_FAILED:
+        case LOGOUT:
+            return Object.assign({}, state, {
+                ...action,
+                isLogin:false,
+            });
+        case LOGIN_SUCCEED:
+            return Object.assign({}, state, {
+                ...action,
+                isLogin:true,
+            });
+        case LOGOUT:
+
+            return Object.assign({}, state, {
+                ...action
+            });
+
         case UPDATE_USERDATA:{
 
               state.data =  Object.assign({},state.data, action.data)
