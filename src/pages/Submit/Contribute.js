@@ -74,6 +74,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
           style={styles.line}
           placeholder={"一句话介绍"}
           maxLength={100}
+          underlineColorAndroid='transparent'
           clearButtonMode = 'while-editing'
           enablesReturnKeyAutomatically= {true}
           returnKeyType='next'
@@ -83,6 +84,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
           multiline={true}
           placeholderTextColor={placeholderTextColor}
           style={styles.content}
+          underlineColorAndroid='transparent'
           placeholder={"有趣，或有收获。"}
           maxLength={500}
           clearButtonMode = 'while-editing'
@@ -98,6 +100,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
           placeholder={"价格"}
           maxLength={50}
           keyboardType='numeric'
+          underlineColorAndroid='transparent'
           clearButtonMode = 'while-editing'
           enablesReturnKeyAutomatically= {true}
           returnKeyType='next'
@@ -109,6 +112,7 @@ import {commitImage,deleteImage} from '../../redux/actions/contribute'
           style={styles.line}
           placeholder={"链接"}
           clearButtonMode = 'while-editing'
+          underlineColorAndroid='transparent'
           enablesReturnKeyAutomatically= {true}
           returnKeyType='next'
           maxLength={1000}

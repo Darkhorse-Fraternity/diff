@@ -10,6 +10,7 @@ import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
 import {
     navigatePush,
+    navigatePop,
     navigateClearMiddleScene,
     navigatePopToIndex,
     navigateReplaceIndex

@@ -132,6 +132,7 @@ __renderPhoneView():ReactElement<any>{
          style={styles.content}
          placeholder={"给客户留言..."}
          maxLength={500}
+         underlineColorAndroid='transparent'
          clearButtonMode = 'while-editing'
          enablesReturnKeyAutomatically= {true}
          returnKeyType='next'

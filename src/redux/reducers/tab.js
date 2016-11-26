@@ -63,14 +63,17 @@ function tabState(state = initialTabState, action) {
                 index: action.index,
             }
         case LOGIN_SUCCEED:
+
             return {
                 ...state,
-                tabs: loginTabs
+                tabs: loginTabs,
+                index:state.index ==0?0:2
             }
         case LOGOUT:
             return {
                 ...state,
-                tabs: unLoginTabs
+                tabs: unLoginTabs,
+                index:0,
             }
 
         default:

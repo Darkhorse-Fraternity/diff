@@ -188,6 +188,7 @@ import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../.
               placeholder="请输入手机号码"
               maxLength={11}
               keyboardType='numeric'
+              underlineColorAndroid='transparent'
               clearButtonMode = 'while-editing'
               enablesReturnKeyAutomatically= {true}
               returnKeyType='next'
@@ -212,6 +213,7 @@ import {login,accountTextChange,passwordTextChange,loadAccountAction} from '../.
               secureTextEntry={true}
               placeholder="请输入登录密码"
               selectTextOnFocus={false}
+              underlineColorAndroid='transparent'
               clearButtonMode = 'while-editing'
               enablesReturnKeyAutomatically= {true}
               returnKeyType='join'

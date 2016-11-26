@@ -266,21 +266,16 @@ const styles = StyleSheet.create({
 
 
 
-          <View style={styles.group}>
-          {/*{this._renderRow('联系手机号', this.props.userData.mobilePhoneNumber, () => {
-            // NavigationManager.goToPage("PhoneContacts");
-            this.props.push("PhoneContacts");
-          })}*/}
-          </View>
 
-          <View style={styles.groupSpace}>
-          </View>
-          <View style={styles.group}>
-          {this._renderRow('*修改密码',"" ,() => {
-              // NavigationManager.goToPage("AlterPwd");
-              this.props.push("AlterPwd");
-          })}
-          </View>
+
+          {/*<View style={styles.groupSpace}>*/}
+          {/*</View>*/}
+          {/*<View style={styles.group}>*/}
+          {/*{this._renderRow('*修改密码',"" ,() => {*/}
+              {/*// NavigationManager.goToPage("AlterPwd");*/}
+              {/*this.props.push("AlterPwd");*/}
+          {/*})}*/}
+          {/*</View>*/}
         </AniScrollView>
       );
   }

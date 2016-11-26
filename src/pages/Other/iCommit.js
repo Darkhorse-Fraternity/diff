@@ -102,6 +102,7 @@ __renderPhoneNumberCommit():ReactElement<any>{
         defaultValue={this.props.state.get('phoneNumber')}
         style={styles.phone}
         maxLength={13}
+        underlineColorAndroid='transparent'
         clearButtonMode = 'while-editing'
         keyboardType= 'number-pad'
         onSubmitEditing={this._tapRight}
@@ -127,6 +128,7 @@ __renderPhoneNumberCommit():ReactElement<any>{
          style={styles.content}
          placeholder={"给卖家留言..."}
          maxLength={500}
+         underlineColorAndroid='transparent'
          clearButtonMode = 'while-editing'
          enablesReturnKeyAutomatically= {true}
          returnKeyType='next'

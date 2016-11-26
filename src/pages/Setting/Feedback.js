@@ -77,6 +77,7 @@ import {navigateRefresh,navigatePop} from '../../redux/actions/nav'
           multiline={true}
           placeholderTextColor={placeholderTextColor}
           style={styles.account}
+          underlineColorAndroid='transparent'
           placeholder={"请填写您的宝贵意见。"}
           maxLength={200}
           onChangeText={(text) => this.setState({content:text})}

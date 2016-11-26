@@ -130,6 +130,7 @@ import {navigatePop,navigateRefresh} from '../../redux/actions/nav'
            secureTextEntry={true}
            style={styles.textInputStyle}
            placeholder={placeholder}
+           underlineColorAndroid='transparent'
            onChangeText={onChangeText}
            selectTextOnFocus ={false}
            returnKeyType= {ref== '3'?'done':'next'}

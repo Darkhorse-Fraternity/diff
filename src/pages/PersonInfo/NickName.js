@@ -99,6 +99,7 @@ class NickName extends React.Component{
             style={styles.textInputStyle}
             onChangeText={onChangeText}
             maxLength={16}
+           underlineColorAndroid='transparent'
             defaultValue={this.props.userData.username}
             clearButtonMode = 'while-editing'
             enablesReturnKeyAutomatically= {true}
