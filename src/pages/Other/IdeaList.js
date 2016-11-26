@@ -13,6 +13,7 @@ import {
     Image,
     TouchableOpacity,
     StyleSheet,
+    Platform,
 } from 'react-native'
 import * as immutable from 'immutable';
 import WBImage from '../../components/Base/WBImage'
@@ -134,6 +135,7 @@ const styles = StyleSheet.create({
     },
     list:{
       backgroundColor:'white',
+        marginBottom:Platform.OS == 'ios'?0:20,
     },
     wrap: {
         flex: 1,

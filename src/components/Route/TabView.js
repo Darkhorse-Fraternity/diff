@@ -54,7 +54,7 @@ let SCREEN_HEIGHT = Dimensions.get('window').height;
       // console.log(pageKey,MyComponent);
       return (
         <View key={tab.key} style={{position:'absolute', width:SCREEN_WIDTH, height:SCREEN_HEIGHT-50, top:0, left:0, zIndex:index==i?1:0}}>
-            <MyComponent  />
+            <MyComponent />
          </View>
        )
 

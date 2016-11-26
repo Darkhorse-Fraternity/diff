@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
  list:{
    backgroundColor:'white',
    // marginBottom:50,
+     marginBottom:Platform.OS == 'ios'?0:20,
  },
  wrapper:{
    // backgroundColor:'transparent'
