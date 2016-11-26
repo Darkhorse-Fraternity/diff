@@ -17,7 +17,6 @@ import{
   LIST_NORMAL,
 } from '../../../src/components/Base/BaseListView'
 
-import {Toast,checkPhoneNum} from '../../util'
 import {uploadFilesByLeanCloud} from '../../util/uploadAVImage'
 
 

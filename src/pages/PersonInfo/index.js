@@ -11,10 +11,8 @@ import {
   Image,
   LayoutAnimation,
 } from 'react-native'
-import {pixel,navbarHeight,OS,Toast} from '../../util/'
+import {pixel,navbarHeight} from '../../util/'
 import imagePicker from '../../util/imagePicker'
-import DialogAndroid from 'react-native-dialogs'
-// import {userManager} from '../../util/XGlobal'
 import {connect} from 'react-redux'
 import {navigatePush } from '../../redux/actions/nav'
 import {uploadAvatar} from '../../redux/actions/util'
