@@ -208,19 +208,9 @@ class intro extends Component {
         const images = idea.images.toArray();
         return (
             <View>
-                <View style={styles.topBtnView}>
-                    {this.__renderTopBtn('comment', ()=> {
-                        this.props.iCommentBindingIdeaID(idea.objectId);
-                        this.props.push('Comment');
-                    })}
-                    {this.__renderTopBtn('heart', ()=> {
-
-                    })}
-                </View>
                 {this._renderSwiper(images)}
-                <View style={styles.label}>
-                    <Text style={styles.price}>￥{price}⚡️</Text>
-                </View>
+
+
                 <View style={styles.titleView}>
                     <Text style={styles.title}>{idea.title}</Text>
                 </View>
@@ -231,8 +221,20 @@ class intro extends Component {
                 <Text style={styles.infoText}>
                     {idea.contents}
                 </Text>
+                <View style={styles.label}>
+                    <Text style={styles.price}>￥{price}⚡️</Text>
+                </View>
                 <View style={styles.titleView }/>
                 {this.__renderPropView()}
+                <View style={styles.topBtnView}>
+                    {this.__renderTopBtn('comment', ()=> {
+                        this.props.iCommentBindingIdeaID(idea.objectId);
+                        this.props.push('Comment');
+                    })}
+                    {this.__renderTopBtn('heart', ()=> {
+
+                    })}
+                </View>
             </View>
         )
     }

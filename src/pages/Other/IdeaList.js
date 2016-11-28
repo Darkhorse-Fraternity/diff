@@ -136,6 +136,7 @@ const styles = StyleSheet.create({
     list:{
       backgroundColor:'white',
         marginBottom:Platform.OS == 'ios'?0:20,
+        marginTop:Platform.OS == 'ios'?20:0,
     },
     wrap: {
         flex: 1,

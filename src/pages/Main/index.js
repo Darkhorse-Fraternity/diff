@@ -40,7 +40,7 @@ class Main extends Component {
 
 
 
-      lastBackPressed:number = 0;
+    lastBackPressed:number = 0;
     _backAnroid()
     {
         var self = this;

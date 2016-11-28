@@ -15,7 +15,7 @@ export  const pageConfig = {
                           direction:'vertical'},
 
   "PersonCenter"        : { title : "个人中心", },
-  "BaseWebView"         : { title : "加载中。。",gestureResponseDistance:30},
+  "BaseWebView"         : { title : "加载中。。",gestureResponseDistance:100},
   "CourseInfoView"      : { title : "课程详情", },
   "LessonEvaluateView"  : { title : "课程评价", },
   "PersonInfo"          : { title : "个人资料", },
@@ -29,7 +29,7 @@ export  const pageConfig = {
   "PhoneContacts"       : { title : "修改手机号", },
   'RegPhone'            : { title : '注册'},
   'Contribute'          : { title : '创意服务'},
-  'Intro'               : { title : '介绍',hideNavBar:true},
+  'Intro'               : { title : '介绍',hideNavBar:true,gestureResponseDistance:100},
   'IdeaList'            : { title : '创意列表'},
   'iShowList'           : { title : '我的发布'},
   'iShowDetail'         : { title : ''},
