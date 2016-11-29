@@ -112,6 +112,7 @@ class intro extends Component {
                 showsPagination={false} autoplayTimeout={20}
                 autoplay={true} removeClippedSubviews={true}>
                 {images.map((image, i)=> {
+                    const url = image.get('url')
                     return (
                         <TouchableOpacity
                             onPress={()=>{
@@ -119,7 +120,7 @@ class intro extends Component {
              this.props.showModalSwiper();
            }}
                             key={'key_'+i} style={styles.slide}>
-                            <WBImage style={styles.image} source={{uri: image.get('url')}}/>
+                            <WBImage style={styles.image} source={{uri: url}}/>
                         </TouchableOpacity>
                     )
                 })}
@@ -403,7 +404,8 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     image: {
-        flex: 1
+        height:SwiperViewHight,
+        width:screenWidth,
     },
     tryButton: {
         backgroundColor: '#f26355',

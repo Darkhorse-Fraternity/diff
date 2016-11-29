@@ -51,10 +51,10 @@ class Main extends Component {
             const key = routes[index].key;
             //idnex 前两个分别是登录和tabview
 
-            // if (key != 'LoginView' && key != 'Map') {
+             if (index>0) {
                 self.props.pop();
-            //     return true;
-            // }
+                 return true;
+            }
             let times = Date.now();
             if (times - self.lastBackPressed >= 2500) {
                 //再次点击退出应用
