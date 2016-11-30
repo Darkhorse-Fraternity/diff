@@ -337,7 +337,8 @@ const styles = StyleSheet.create({
         // marginBottom:50,
     },
     wrapper: {
-        // backgroundColor:'transparent'
+        backgroundColor:'transparent'
+        // width:screenWidth,
     },
     titleView: {
         marginHorizontal: 20,
@@ -404,8 +405,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     image: {
-        height:SwiperViewHight,
-        width:screenWidth,
+        flex:1,
     },
     tryButton: {
         backgroundColor: '#f26355',

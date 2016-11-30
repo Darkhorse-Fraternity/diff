@@ -8,7 +8,6 @@
  import thunk from 'redux-thunk';
 
 import * as immutable from 'immutable';
- // import umeng from '../util/umeng'
  import { Platform } from 'react-native';
  import * as reducers from './reducers'
  const reducer = combineReducers(reducers);
@@ -38,7 +37,6 @@ import * as immutable from 'immutable';
    const installDevTools = require('immutable-devtools');
    installDevTools(immutable);
 
-   const reduxRemoteDevTools = require('remote-redux-devtools');
    enhancer = compose(
      applyMiddleware(...middlewares),
      global.reduxNativeDevTools ?
@@ -65,7 +63,7 @@ import * as immutable from 'immutable';
  export default function configureStore(initialState:Object ={}) {
    const store = createStore(rootReducer, initialState, enhancer);
    if (global.reduxNativeDevTools) {
-     global.reduxNativeDevTools.updateStore(store);
+     global.reduxNativeDevToolsCompose(store);
    }
    return store;
  }
