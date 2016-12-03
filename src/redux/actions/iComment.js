@@ -167,9 +167,10 @@ export function iCommentAdd():Function{
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
 
       if(response.statu){
-        dispatch(navigatePop())
         dispatch(iCommentAddSucceed())
         dispatch(iCommentListLoad())
+          dispatch(iCommentContentChange(''))
+          dispatch(navigatePop())
       }else{
         dispatch(iCommentAddFailed())
       }

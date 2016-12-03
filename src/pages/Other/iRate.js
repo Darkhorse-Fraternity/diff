@@ -164,7 +164,7 @@ const styles = StyleSheet.create({
     fontSize:15,
   },
   rowImage:{
-    height:150,
+    height:200,
     marginTop:20,
     marginHorizontal:15
   },

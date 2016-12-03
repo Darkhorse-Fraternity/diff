@@ -32,6 +32,7 @@ import iPurchase from '../../pages/Other/iPurchase'
 import iReply from '../../pages/Other/iReply'
 import iRate from '../../pages/Other/iRate'
 import introDetail from '../../pages/Other/introDetail'
+import About from '../../pages/Setting/About'
 export  const PageMap =
 {
   introDetail,
@@ -42,6 +43,7 @@ export  const PageMap =
   Normal,
   Submit,
   iCommit,
+  About,
   "WebView"             : BaseWebView,
   'TabView'             : TabView,
 

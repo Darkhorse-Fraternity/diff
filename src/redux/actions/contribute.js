@@ -125,7 +125,7 @@ export function putMyIdea():Function{
 			 request(newParams, (response)=>{
 				 if (response.statu) {
 					 //返回退出并清空数据。
-					 Toast.show('您的创意想法已经提交。')
+					 Toast.show('您的创意想法已经提交,正在审核.')
 					 dispatch(_putMyIdeaSucceed())
 					 dispatch(navigatePop())
 					 dispatch(cleanMyIdea())

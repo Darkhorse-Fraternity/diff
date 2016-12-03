@@ -46,7 +46,7 @@ __renderHeaderView():ReactElement<any>{
   return (
     <View style={styles.headView} >
       <Text style={styles.headViewText}>
-          购买栏
+         我的购买
       </Text>
       <View style={styles.headLine}/>
     </View>
@@ -56,7 +56,7 @@ __renderHeaderView():ReactElement<any>{
 
 __renderRow(item:Object, sectionID:number, rowID:number):ReactElement<any> {
 
-    const url = item.getIn(['replyImages',0,'url'])
+    const url = item.getIn(['images',0,'url'])
     const type = item.getIn(['idea','type'])
     const  content = item.get('replyContent')
     const __renderImageView = ()=>{

@@ -18,7 +18,7 @@ import{
 } from '../../../src/components/Base/BaseListView'
 
 import {uploadFilesByLeanCloud} from '../../util/uploadAVImage'
-
+import {Toast,checkPhoneNum} from '../../util'
 
 export const ICOMMIT_LIST_START = 'ICOMMIT_LIST_START'
 export const ICOMMIT_LIST_FAILED = 'ICOMMIT_LIST_FAILED'
@@ -216,6 +216,7 @@ export  function iCommitAdd():Function{
       dispatch(iCommitListLoad())
       dispatch(iCommitClearData())
     }).catch((res)=>{
+        Toast.show(res.message)
       dispatch(navigateRefresh({rightButtonIsLoad:false}))
       dispatch(iCommitAddFailed())
     })

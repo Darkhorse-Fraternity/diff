@@ -20,6 +20,9 @@ import {loginSucceed} from './login'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 
 
+
+
+
 //前置配置 在一进程序的时候就会
 /**
  * 用于系统前置配置。

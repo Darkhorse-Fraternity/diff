@@ -18,7 +18,7 @@ import WBButton from '../../components/Base/WBButton'
 import {connect} from 'react-redux'
 import {screenWidth, screenHeight} from '../../util'
 import {navigatePush, navigatePop} from '../../redux/actions/nav'
-import {iCommentBindingIdeaID} from '../../redux/actions/iComment'
+import {goCommit} from '../../redux/actions/intro'
 import * as immutable from 'immutable';
 import {BlurView} from 'react-native-blur';
 import BaseListView from '../../components/Base/BaseListView';
@@ -158,7 +158,9 @@ class intro extends Component {
 
 
     shouldComponentUpdate(nextProps: Object) {
-        return !immutable.is(this.props.scene.route.idea, nextProps.scene.route.idea) || !immutable.is(this.props.intro, nextProps.intro) || !immutable.is(this.props.loadStatu, nextProps.loadStatu);
+        return !immutable.is(this.props.scene.route.idea, nextProps.scene.route.idea)
+            || !immutable.is(this.props.intro, nextProps.intro)
+            || !immutable.is(this.props.loadStatu, nextProps.loadStatu);
     }
 
 
@@ -228,13 +230,10 @@ class intro extends Component {
                 <View style={styles.titleView }/>
                 {this.__renderPropView()}
                 <View style={styles.topBtnView}>
-                    {this.__renderTopBtn('comment', ()=> {
-                        this.props.iCommentBindingIdeaID(idea.objectId);
-                        this.props.push('Comment');
-                    })}
-                    {this.__renderTopBtn('heart', ()=> {
+                    {this.__renderTopBtn('comment',()=> this.props.goCommit(idea))}
+                    {/*{this.__renderTopBtn('heart', ()=> {*/}
 
-                    })}
+                    {/*})}*/}
                 </View>
             </View>
         )
@@ -301,6 +300,9 @@ class intro extends Component {
     render() {
         // console.log(this.props);
         const idea = this.props.scene.route.idea.toObject();
+        const user = idea.user && idea.user.toObject();
+        const type = idea.type
+        const disabled = type == 'link' && user.objectId == this.props.user.objectId
         const images = idea.images.toArray();
         return (
             <View style={styles.box}>
@@ -317,8 +319,10 @@ class intro extends Component {
                 {this._renderBackButton()}
                 <WBButton
                     style={{color:'white'}}
+                    disabled={disabled}
                     onPress={()=>{this.props.try(idea)}}
-                    containerStyle={styles.tryButton}>
+                    containerStyle={styles.tryButton}
+                >
                     试一下
                 </WBButton>
             </View>
@@ -434,9 +438,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         position: 'absolute',
         zIndex: 2,
-        left: screenWidth - 90,
+        left: screenWidth - 55,
         top: SwiperViewHight - 17,
-        flexDirection: 'row-reverse',
+        // flexDirection: 'row-reverse',
+        // justifyContent: 'flex-start'
     },
     topButton: {
         marginRight: 10,
@@ -507,15 +512,16 @@ const mapDispatchToProps = (dispatch) => {
         pop: ()=> {
             dispatch(navigatePop());
         },
+        goCommit:(idea)=>{
+            dispatch(goCommit(idea))
+        },
         showModalSwiper: ()=> {
             dispatch(showModalSwiper())
         },
         hiddenModelSwiper: ()=> {
             dispatch(hiddenModelSwiper())
         },
-        iCommentBindingIdeaID: (id: string)=> {
-            dispatch(iCommentBindingIdeaID(id))
-        },
+
         try: (idea: Object)=> {
             dispatch(tryIdea(idea))
         },

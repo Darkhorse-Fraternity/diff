@@ -13,7 +13,7 @@ import {
   ISERVE_COMMIT_IMAGE,
   ISERVE_DELETE_IMAGE,
   ISERVE_CLEAR_DATA,
-  ISERVE_PAGE_CHANGE,
+  ISERVE_INDEX_CHANGE,
   ISERVE_SET_PUBLISH,
 } from '../actions/iServe'
 import * as immutable from 'immutable';
@@ -64,9 +64,9 @@ export default function iServeState(state:immutable.Map<string,any> = initialSta
           list.pop(action.uri);
         })
         return state.setIn(['uris'],uris2);
-      case ISERVE_PAGE_CHANGE:
+      case ISERVE_INDEX_CHANGE:
         return state.mergeDeep({
-          index:action.page,
+          index:action.index,
           type:action.replytype,
           iCommitID:action.iCommitID,
         })
@@ -79,7 +79,7 @@ export default function iServeState(state:immutable.Map<string,any> = initialSta
       }
 
       case ISERVE_CLEAR_DATA:
-         return state.mergeDeep({
+         return state.merge({
           conten:'',
           uris:[],
         })

@@ -66,8 +66,8 @@ class IComment extends Component {
       const user = data.user;
       const date = Date.parse(data.createdAt);
       const avatar = user.get('avatar')
-      console.log(user);
-      console.log(date);
+      // console.log(user);
+      // console.log(date);
       return (
         <View style={[styles.row]} >
 
@@ -155,6 +155,7 @@ const styles = StyleSheet.create({
     },
     subBottom:{
       flexDirection:'row',
+        marginBottom:10,
     },
     date:{
       marginTop:5,

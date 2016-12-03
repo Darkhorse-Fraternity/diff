@@ -11,6 +11,7 @@ import {request} from '../../request';
 import {classBatch,classNormalSearch} from '../../request/leanCloud';
 import {navigatePush} from './nav'
 import {iBindingIdeaID} from './iCommit'
+import {iCommentBindingIdeaID} from './iComment'
 export const SHOW_MODAL_SWIPER = 'SHOW_MODAL_SWIPER'
 export const HIDDEN_MODEL_SWIPER = 'HIDDEN_MODEL_SWIPER'
 
@@ -49,6 +50,20 @@ export function getIntroData():Function{
       }
     })
 
+  }
+}
+
+
+export function goCommit(idea:Object):Function {
+  return (dispatch,getState)=>{
+    const state = getState();
+    const login =  state.login.isLogin
+    if(login){
+      dispatch(iCommentBindingIdeaID(idea.objectId))
+      dispatch(navigatePush('Comment'))
+    }else{
+      dispatch(navigatePush('RegPhone'))
+    }
   }
 }
 

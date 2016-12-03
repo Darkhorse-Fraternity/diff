@@ -154,7 +154,7 @@ class BaseWebView extends Component {
                     onError={this._onError}
                     onLoadStart={this._onLoadStart}
                     onLoad={this._onLoad} //
-                    onMessage={()=>{}}
+                    //onMessage={()=>{}}
                     //onShouldStartLoadWithRequest={this._onShouldStartLoadWithRequest.bind(this)}//iOS,Android 咱么处理
                     //onLoadEnd
                     //injectedJavaScript=jsCode  //Sets the JS to be injected when the webpage loads.

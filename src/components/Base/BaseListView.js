@@ -93,7 +93,6 @@ export default class BaseListView extends Component {
       }
       return (
         <Text style={styles.otherTips}>
-          哟，有意思~
         </Text>
       );
     }

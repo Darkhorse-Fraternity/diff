@@ -70,7 +70,6 @@ export default class ExceptionView extends Component {
           contentContainerStyle={styles.container}
           refreshControl={this.props.refreshControl}
           >
-
           {this._renderPromptIndicator(this.props.exceptionType)}
           {this.renderPrompt()}
           {this.renderOtherTips()}

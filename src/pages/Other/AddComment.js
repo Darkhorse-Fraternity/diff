@@ -33,7 +33,7 @@ class AddComment extends Component{
   }
 
   componentWillUnmount(){
-    this.props.changeText('')
+    // this.props.changeText('')
   }
 
  shouldComponentUpdate(nextProps:Object) {
