@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:background="#ffffff"
+              android:id="@+id/ll"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:weightSum="1">
+
+    <ImageView
+        android:layout_width="186dp"
+        android:layout_height="190dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/loading_xhdpi"
+        tools:src="@mipmap/loading_xhdpi"
+        android:id="@+id/imageView"/>
+
+    <TextView
+        android:text="分享有趣的创意与服务"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView"
+        android:layout_marginBottom="10dp"
+        android:textSize="18sp"
+        android:textAlignment="center"
+        android:textColor="#F16354"/>
+
+</LinearLayout>
