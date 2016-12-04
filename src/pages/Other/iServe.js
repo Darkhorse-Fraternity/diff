@@ -112,6 +112,7 @@ class iPurchase extends Component {
 
                 <BaseListView
                     style={styles.list}
+                    noDataPrompt="看来还没有人购买您的服务."
                     loadStatu={this.props.loadStatu}
                     loadData={this.props.load}
                     dataSource={this.props.dataSource}

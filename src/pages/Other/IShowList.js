@@ -86,6 +86,7 @@ class ishowList extends Component {
             //renderHeader={this._renderHeader}
             style= {styles.list}
             loadStatu={this.props.loadStatu}
+            noDataPrompt="嘿，你好."
     				loadData={this.props.load}
             dataSource={this.props.dataSource}
             loadMore={this.props.loadMore}

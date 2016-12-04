@@ -302,7 +302,7 @@ class intro extends Component {
         const idea = this.props.scene.route.idea.toObject();
         const user = idea.user && idea.user.toObject();
         const type = idea.type
-        const disabled = type == 'link' && user.objectId == this.props.user.objectId
+        const disabled = type != 'link' && user.objectId == this.props.user.objectId
         const images = idea.images.toArray();
         return (
             <View style={styles.box}>
@@ -311,6 +311,7 @@ class intro extends Component {
                     style={styles.list}
                     loadStatu={this.props.loadStatu}
                     loadData={this.props.load}
+                    noDataPrompt="还没有人购买."
                     dataSource={this.props.dataSource}
                     loadMore={this.props.loadMore}
                     renderRow={this.__renderRow.bind(this)}
@@ -322,6 +323,7 @@ class intro extends Component {
                     disabled={disabled}
                     onPress={()=>{this.props.try(idea)}}
                     containerStyle={styles.tryButton}
+                    containerStyleDisabled={[styles.tryButton,{backgroundColor:'rgba(52,52,52,0.3)'}]}
                 >
                     试一下
                 </WBButton>

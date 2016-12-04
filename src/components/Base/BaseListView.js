@@ -137,13 +137,8 @@ export default class BaseListView extends Component {
             image={this.props.noDataImg}
             prompt={this.props.noDataPrompt}
             otherTips={this.renderNoDataTips()}
-            refreshControl={
-              refreshable ?
-    					<RefreshControl
-    						refreshing={this.props.loadStatu === LIST_LOAD_DATA}
-    						onRefresh={this._handleRefresh}
-    						/> : null
-    				}/>
+            onRefresh={this._handleRefresh}
+           />
         );
       }else if(this.props.loadStatu === LIST_LOAD_ERROR &&
          this.props.dataSource.count == 0){

@@ -54,9 +54,6 @@ export default class WBButton extends Component {
       if (this.props.containerStyleDisabled != null) {
          containerStyle =   disabled ? this.props.containerStyleDisabled
          : this.props.containerStyle;
-      }else{
-          containerStyle =   disabled ? [this.props.containerStyle,styles.WBContainerDisabledStyle]
-              : this.props.containerStyle;
       }
       // console.log('child',this.props.children);
       // console.log("disabled",disabled,"isLoad",this.props.isLoad);

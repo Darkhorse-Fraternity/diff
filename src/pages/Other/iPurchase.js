@@ -139,6 +139,7 @@ render() {
        <BaseListView
          renderHeader={this.__renderHeaderView.bind(this)}
          style= {styles.list}
+         noDataPrompt="您还没有购买呢."
          loadStatu={this.props.loadStatu}
          loadData={this.props.load}
          dataSource={this.props.dataSource}

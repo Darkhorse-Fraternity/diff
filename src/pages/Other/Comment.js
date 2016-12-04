@@ -92,6 +92,7 @@ class IComment extends Component {
         return (
           <BaseListView
             style= {styles.list}
+            noDataPrompt="第一个评论吧！"
             loadStatu={this.props.loadStatu}
     				loadData={this.props.load}
             dataSource={this.props.dataSource}

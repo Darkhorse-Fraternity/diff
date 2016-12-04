@@ -97,6 +97,7 @@ class IdeaList extends Component {
           <BaseListView
             renderHeader={this._renderHeader}
             style= {styles.list}
+            noDataPrompt="服务数据居然为空？"
             loadStatu={this.props.loadStatu}
     				loadData={this.props.load}
             dataSource={this.props.dataSource}
