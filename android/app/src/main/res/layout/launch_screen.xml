@@ -6,24 +6,36 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical"
+              android:gravity="center_horizontal"
               android:weightSum="1">
 
     <ImageView
-        android:layout_width="186dp"
-        android:layout_height="190dp"
+        android:layout_width="247dp"
+        android:layout_height="247dp"
         android:scaleType="centerCrop"
+        android:layout_marginTop="100dp"
+        android:layout_marginBottom="20dp"
         android:src="@mipmap/loading_xhdpi"
         tools:src="@mipmap/loading_xhdpi"
         android:id="@+id/imageView"/>
-
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                  xmlns:tools="http://schemas.android.com/tools"
+                  android:background="#ffffff"
+                  android:id="@+id/ll2"
+                  android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical"
+                  android:gravity="center_horizontal"
+                  android:weightSum="1">
     <TextView
         android:text="分享有趣的创意与服务"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textView"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:textSize="18sp"
         android:textAlignment="center"
         android:textColor="#F16354"/>
-
+    </LinearLayout>
 </LinearLayout>

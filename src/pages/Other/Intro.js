@@ -116,10 +116,11 @@ class intro extends Component {
                     return (
                         <TouchableOpacity
                             onPress={()=>{
-             this.tapNum = i;
-             this.props.showModalSwiper();
-           }}
-                            key={'key_'+i} style={styles.slide}>
+                            this.tapNum = i
+                            this.props.showModalSwiper()
+                                 }}
+                            key={'key_'+i}
+                            style={styles.slide}>
                             <WBImage style={styles.image} source={{uri: url}}/>
                         </TouchableOpacity>
                     )
@@ -230,7 +231,7 @@ class intro extends Component {
                 <View style={styles.titleView }/>
                 {this.__renderPropView()}
                 <View style={styles.topBtnView}>
-                    {this.__renderTopBtn('comment',()=> this.props.goCommit(idea))}
+                    {this.__renderTopBtn('comment', ()=> this.props.goCommit(idea))}
                     {/*{this.__renderTopBtn('heart', ()=> {*/}
 
                     {/*})}*/}
@@ -309,6 +310,7 @@ class intro extends Component {
                 <BaseListView
                     renderHeader={this.__renderHeaderView.bind(this)}
                     style={styles.list}
+                    removeClippedSubviews={Platform.OS == 'ios'} //安卓这边如果是为true会导致头的swiper子视图出不来。
                     loadStatu={this.props.loadStatu}
                     loadData={this.props.load}
                     noDataPrompt="还没有人购买."
@@ -343,7 +345,7 @@ const styles = StyleSheet.create({
         // marginBottom:50,
     },
     wrapper: {
-        backgroundColor:'transparent'
+        backgroundColor: 'transparent'
         // width:screenWidth,
     },
     titleView: {
@@ -411,7 +413,7 @@ const styles = StyleSheet.create({
         borderRadius: 20,
     },
     image: {
-        flex:1,
+        flex: 1,
     },
     tryButton: {
         backgroundColor: '#f26355',
@@ -514,7 +516,7 @@ const mapDispatchToProps = (dispatch) => {
         pop: ()=> {
             dispatch(navigatePop());
         },
-        goCommit:(idea)=>{
+        goCommit: (idea)=> {
             dispatch(goCommit(idea))
         },
         showModalSwiper: ()=> {
