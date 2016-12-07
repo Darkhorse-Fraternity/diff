@@ -80,7 +80,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = false
+def enableProguardInReleaseBuilds = true
 
 repositories {
     maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }

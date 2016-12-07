@@ -1661,8 +1661,8 @@ ee-first@1.1.1:
   resolved "http://registry.npm.taobao.org/ee-first/download/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
 ejs@^2.3.1:
-  version "2.5.3"
-  resolved "http://registry.npm.taobao.org/ejs/download/ejs-2.5.3.tgz#bfeae1e2f7fa51c4527769fcaa14c5ca73eb5e47"
+  version "2.5.5"
+  resolved "http://registry.npm.taobao.org/ejs/download/ejs-2.5.5.tgz#6ef4e954ea7dcf54f66aad2fe7aa421932d9ed77"
 
 encoding@^0.1.11:
   version "0.1.12"
@@ -2119,23 +2119,13 @@ glob-stream@^5.3.2:
     to-absolute-glob "^0.1.1"
     unique-stream "^2.0.2"
 
-glob@5.0.10:
+glob@5.0.10, glob@5.x:
   version "5.0.10"
   resolved "http://registry.npm.taobao.org/glob/download/glob-5.0.10.tgz#3ee350319f31f352cef6899a48f6b6b7834c6899"
   dependencies:
     inflight "^1.0.4"
     inherits "2"
     minimatch "^2.0.1"
-    once "^1.3.0"
-    path-is-absolute "^1.0.0"
-
-glob@5.x, glob@^5.0.15, glob@^5.0.3:
-  version "5.0.15"
-  resolved "http://registry.npm.taobao.org/glob/download/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
-  dependencies:
-    inflight "^1.0.4"
-    inherits "2"
-    minimatch "2 || 3"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
 
@@ -2147,6 +2137,16 @@ glob@^4.4.2:
     inherits "2"
     minimatch "^2.0.1"
     once "^1.3.0"
+
+glob@^5.0.15, glob@^5.0.3:
+  version "5.0.15"
+  resolved "http://registry.npm.taobao.org/glob/download/glob-5.0.15.tgz#1bc936b9e02f4a603fcc222ecf7633d30b8b93b1"
+  dependencies:
+    inflight "^1.0.4"
+    inherits "2"
+    minimatch "2 || 3"
+    once "^1.3.0"
+    path-is-absolute "^1.0.0"
 
 glob@^6.0.1:
   version "6.0.4"
@@ -3124,8 +3124,8 @@ jstz@^1.0.7:
   resolved "http://registry.npm.taobao.org/jstz/download/jstz-1.0.7.tgz#ed3cbd2ac3c68532db08635c114586ce934d9eca"
 
 kind-of@^3.0.2:
-  version "3.0.4"
-  resolved "http://registry.npm.taobao.org/kind-of/download/kind-of-3.0.4.tgz#7b8ecf18a4e17f8269d73b501c9f232c96887a74"
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/kind-of/download/kind-of-3.1.0.tgz#475d698a5e49ff5e53d14e3e732429dc8bf4cf47"
   dependencies:
     is-buffer "^1.0.2"
 
@@ -4098,19 +4098,18 @@ react-native-dialogs@0.0.19:
   version "0.0.19"
   resolved "http://registry.npm.taobao.org/react-native-dialogs/download/react-native-dialogs-0.0.19.tgz#5fce60fa4f14779377598a10ab76ba274623f1f5"
 
-react-native-image-picker@^0.23.0:
-  version "0.23.0"
-  resolved "http://registry.npm.taobao.org/react-native-image-picker/download/react-native-image-picker-0.23.0.tgz#683dab19edd9175377587a43ae740e004a30e060"
+react-native-image-picker@^0.24.1:
+  version "0.24.1"
+  resolved "http://registry.npm.taobao.org/react-native-image-picker/download/react-native-image-picker-0.24.1.tgz#0a73fc66ec9e0d28bf3a75df996ad29f695d016c"
 
 "react-native-orientation@git+ssh://git@github.com/youennPennarun/react-native-orientation.git":
   version "1.17.0"
   resolved "git+ssh://git@github.com/youennPennarun/react-native-orientation.git#05d0f60256d9ea750c3dc820a664193d464bdc6e"
 
-react-native-scrollable-tab-view@^0.6.0:
-  version "0.6.0"
-  resolved "http://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-0.6.0.tgz#36050cf72dae0dc00b6b8d7f9a570955d99a213b"
+react-native-scrollable-tab-view@^0.7.0:
+  version "0.7.0"
+  resolved "http://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-0.7.0.tgz#c8fe713530766f8fe9364155a5445a5964a99f77"
   dependencies:
-    react-static-container "^1.0.1"
     react-timer-mixin "^0.13.3"
 
 react-native-star-rating@^1.0.6:
@@ -4132,9 +4131,9 @@ react-native-timeago@^0.3.0:
   version "0.3.0"
   resolved "http://registry.npm.taobao.org/react-native-timeago/download/react-native-timeago-0.3.0.tgz#dc076c1a2fc3935f62cb3e2f327f95aeec233d24"
 
-react-native-update@^3.0.2:
-  version "3.0.3"
-  resolved "http://registry.npm.taobao.org/react-native-update/download/react-native-update-3.0.3.tgz#9e3b7a0e6b57c8d45ff37676f5d2077fbc51bdcd"
+react-native-update@^4.0.0:
+  version "4.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-update/download/react-native-update-4.0.0.tgz#17b05cfc8c379fceeddd59850f8a170ab6504c27"
   dependencies:
     cli-arguments "^0.2.1"
     fs-promise "^0.4.1"
@@ -4149,14 +4148,21 @@ react-native-update@^3.0.2:
     yauzl "2.4.1"
     yazl "2.3.0"
 
-react-native-vector-icons@^2.0.3, react-native-vector-icons@^2.1.0:
+react-native-vector-icons@^2.0.3:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-2.1.0.tgz#37ff40e2fc753a56624846e7471282b818b92edc"
   dependencies:
     lodash "^4.0.0"
     yargs "^4.7.0"
 
-react-native@^0.39.0:
+react-native-vector-icons@^3.0.0:
+  version "3.0.0"
+  resolved "http://registry.npm.taobao.org/react-native-vector-icons/download/react-native-vector-icons-3.0.0.tgz#a2f63757dee4fb89f67eef660e25e86926ae6827"
+  dependencies:
+    lodash "^4.0.0"
+    yargs "^6.3.0"
+
+react-native@0.39:
   version "0.39.0"
   resolved "http://registry.npm.taobao.org/react-native/download/react-native-0.39.0.tgz#fbe31a96dd84effc3a33e07853da5a30b20a7e6d"
   dependencies:
@@ -4252,10 +4258,6 @@ react-redux@^4.4.5:
     invariant "^2.0.0"
     lodash "^4.2.0"
     loose-envify "^1.1.0"
-
-react-static-container@^1.0.1:
-  version "1.0.1"
-  resolved "http://registry.npm.taobao.org/react-static-container/download/react-static-container-1.0.1.tgz#694c0dd68a896b879519afb548399cc1989c9ab0"
 
 react-test-renderer@~15.4.0-rc.4:
   version "15.4.1"
