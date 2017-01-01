@@ -12,6 +12,7 @@
 #import "RCTBundleURLProvider.h"
 #import "RCTRootView.h"
 #import "RCTHotUpdate.h"
+#import <KSCrash/KSCrashInstallationStandard.h>
 //#import "RCTLinkingManager.h"
 @implementation AppDelegate
 
@@ -40,6 +41,14 @@
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
+  
+  
+  //crash
+  KSCrashInstallationStandard* installation = [KSCrashInstallationStandard sharedInstance];
+  installation.url = [NSURL URLWithString:@"https://collector.bughd.com/kscrash?key=172342e117bb9342b289336f0ffe6819"];
+  [installation install];
+  [installation sendAllReportsWithCompletion:nil];
+  
   return YES;
 }
 
