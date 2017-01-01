@@ -4,7 +4,7 @@
  * https://github.com/facebook/react-native
  */
 'use strict'
-
+import {ideaListLoad} from './ideaList'
 import {request} from '../../request';
 import {requestLogin, requestUsersByMobilePhone,getUserByID} from '../../request/leanCloud';
 import {saveAccount,saveUserData, loadAccount, clearUserData} from '../../util/XGlobal'
@@ -74,7 +74,7 @@ export function login(state:Object):Function {
     // loginRequest.params.user_name = state.accountText;
     // loginRequest.params.password = state.passwordText;
 
-    const parame = requestLogin(state.accountText, state.passwordText);
+    const parame = requestLogin(state.phone, state.ymCode);
 
     return dispatch => {
         dispatch(_loginRequest());
@@ -84,7 +84,7 @@ export function login(state:Object):Function {
             if (response.statu) {
                 //加入sessionToken
                 dispatch(_loginSucceed(response));
-                dispatch(navigatePush('TabView'));
+                dispatch(navigatePop());
             } else {
                 dispatch(_loginFailed(response));
             }
@@ -100,10 +100,20 @@ export function login(state:Object):Function {
  */
 export function register(state:Object):Function {
 
-    const params = requestUsersByMobilePhone(state.phone, state.ymCode,
+    let params = requestUsersByMobilePhone(state.phone, state.ymCode,
         state.setPwd);
 
+
+
     return dispatch => {
+
+        if(state.phone == '13588833404'){
+            //这边是给苹果检查时候使用。
+            dispatch(login(state));
+            return
+        }
+
+
         dispatch(_loginRequest());
         request(params, function (response) {
             if (response.statu) {
@@ -159,6 +169,8 @@ export function logout():Function {
         return loadAccount(ret => {
             //加载本地数据。
             dispatch(_loadAccount(ret));
+            //重新加载首页
+            dispatch(ideaListLoad());
         });
     }
 
