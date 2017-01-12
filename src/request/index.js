@@ -94,7 +94,6 @@ function failCallback(err:Error,url:string,params:Object):Object{
   } else{
     callBackData.msg = err.message;
   }
-
   handlerError(url,params, callBackData);
   return callBackData;
 }
@@ -113,9 +112,14 @@ function handlerError(urlpath:string,iParam:Object,oParam:Object) {
       var cl =  '接口请求错误:\n'+'URL:\n'+ urlpath + '\n参数:' + JSON.stringify(iParam) +' \n回值:\n'
       + JSON.stringify(oParam);
       console.warn(cl);
+      const arr=oParam.msg.split('error:');
+      Toast.show(arr[1]);
+    }else {
+      Toast.show(oParam.msg);
+      // console.log('test:',oParam)
     }
-    const arr=oParam.msg.split('error:');
-    Toast.show(arr[1]);
+
+
   }
 
 }
