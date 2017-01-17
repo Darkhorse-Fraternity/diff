@@ -44,3 +44,7 @@ android/keystores/debug.keystore
 
 .update
 *.apk
+
+
+
+configure/leancloud.js
