@@ -12,6 +12,11 @@ import {classBatch,classNormalSearch} from '../../request/leanCloud';
 import {navigatePush} from './nav'
 import {iBindingIdeaID} from './iCommit'
 import {iCommentBindingIdeaID} from './iComment'
+
+import {
+    NativeModules
+}from 'react-native'
+const TB = NativeModules.React_Native_Taobao_Baichuan_Api;
 export const SHOW_MODAL_SWIPER = 'SHOW_MODAL_SWIPER'
 export const HIDDEN_MODEL_SWIPER = 'HIDDEN_MODEL_SWIPER'
 
@@ -73,7 +78,8 @@ export function tryIdea(idea:Object):Function{
      const state = getState();
 
      if(idea.type == 'link' && idea.link.length>0){
-       dispatch(navigatePush({'key':'WebView','url':idea.link}))
+       TB.present(idea.link);
+       // dispatch(navigatePush({'key':'WebView','url':idea.link}))
      }else{
        const login =  state.login.isLogin
        if(login){

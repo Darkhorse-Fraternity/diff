@@ -74,10 +74,20 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "AlibcTradeSDK/AlibcTradeSDK.framework/Resources/NBResource.bundle"
+  install_resource "AlipaySDK/alipay/AlipaySDK.bundle"
   install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopExt-Info.plist"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopSDK.podspec"
+  install_resource "mtop/OpenMtopSDK.framework/Resources/OpenMtopSDK.podspec"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "AlibcTradeSDK/AlibcTradeSDK.framework/Resources/NBResource.bundle"
+  install_resource "AlipaySDK/alipay/AlipaySDK.bundle"
   install_resource "IQKeyboardManager/IQKeyboardManager/Resources/IQKeyboardManager.bundle"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopExt-Info.plist"
+  install_resource "mtop/OpenMtopExt.framework/Resources/OpenMtopSDK.podspec"
+  install_resource "mtop/OpenMtopSDK.framework/Resources/OpenMtopSDK.podspec"
 fi
 
 mkdir -p "${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

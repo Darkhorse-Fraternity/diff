@@ -14,6 +14,47 @@
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Alibaba-Inc copyright</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>AlibabaAuthSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>AlibcTradeSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>AlipaySDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>BCUserTrack</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>The MIT License (MIT)
 Copyright (c) 2012 Marius Landwehr marius.landwehr@gmail.com
 
@@ -253,6 +294,50 @@ Do you agree to be bound by the terms of this agreement?
 		</dict>
 		<dict>
 			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>SGMain</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>SGNoCaptcha</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>SGSecurityBody</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-INC copyright
+</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>SecurityGuardSDK</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
 			<string>Copyright (c) 2011-2015 Charles Scalesse.
 
 Permission is hereby granted, free of charge, to any person obtaining a
@@ -277,6 +362,26 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</string>
 			<string>MIT</string>
 			<key>Title</key>
 			<string>Toast</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>阿里悟空 © 2014. See http://m.laiwang.com/market/laiwang/wukong-serviceagreement.php</string>
+			<key>License</key>
+			<string>MIT</string>
+			<key>Title</key>
+			<string>UTDID</string>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+		</dict>
+		<dict>
+			<key>FooterText</key>
+			<string>Alibaba-Inc copyright</string>
+			<key>License</key>
+			<string>Copyright</string>
+			<key>Title</key>
+			<string>mtop</string>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 		</dict>

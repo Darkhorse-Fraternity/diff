@@ -1,4 +1,20 @@
 PODS:
+  - AlibabaAuthSDK (1.1.0.25):
+    - BCUserTrack
+    - mtop
+    - SecurityGuardSDK
+    - SGMain
+    - SGSecurityBody
+  - AlibcTradeSDK (3.1.1.14):
+    - AlibabaAuthSDK
+    - AlipaySDK (= 2.0.0-bc)
+    - BCUserTrack
+    - mtop
+    - SecurityGuardSDK
+    - SGMain
+  - AlipaySDK (2.0.0-bc)
+  - BCUserTrack (5.1.0.9):
+    - UTDID
   - HexColors (4.0.0)
   - IQKeyboardManager (4.0.7)
   - KSCrash (1.11.2):
@@ -62,10 +78,27 @@ PODS:
     - KSCrash/Reporting/Tools
   - KSCrash/Reporting/Tools (1.11.2):
     - KSCrash/Recording
+  - mtop (2.0.2):
+    - SecurityGuardSDK
+    - SGMain
+    - SGNoCaptcha
+    - SGSecurityBody
   - Reveal-iOS-SDK (1.6.2)
+  - SecurityGuardSDK (5.1.94)
+  - SGMain (5.1.94):
+    - SecurityGuardSDK (= 5.1.94)
+  - SGNoCaptcha (5.1.23):
+    - SecurityGuardSDK (>= 5.1.83)
+    - SGMain (>= 5.1.83)
+    - SGSecurityBody (>= 5.1.27)
+  - SGSecurityBody (5.1.29):
+    - SecurityGuardSDK (>= 5.1.94)
+    - SGMain (>= 5.1.94)
   - Toast (3.1.0)
+  - UTDID (1.0.0)
 
 DEPENDENCIES:
+  - AlibcTradeSDK
   - HexColors
   - IQKeyboardManager
   - KSCrash (~> 1.8)
@@ -73,12 +106,22 @@ DEPENDENCIES:
   - Toast (~> 3.0)
 
 SPEC CHECKSUMS:
+  AlibabaAuthSDK: 8b0fbd3f7204763407c7a3ee48b7bcc11e591a0e
+  AlibcTradeSDK: b41456e5e5cb9742b723fdcd63688c5a68af219a
+  AlipaySDK: a40a4099b24328d90d7ba4fb67f6ce753d7fa2c7
+  BCUserTrack: 684f468b8143be7a2ed10a8c449fd959b2a3a099
   HexColors: 5f95843ef89aff6a72e1fd3a8ebabf205cc43379
   IQKeyboardManager: 69002bb4fea60596b710e57d426abc00e5063630
   KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
+  mtop: 80e94a1db90f23c5c5e8f1892a7b3c8ff9c6cbae
   Reveal-iOS-SDK: e2250b3c155bcfac53ae223ddc1f76d08f206c33
+  SecurityGuardSDK: 05f6d782189160f2b23b731eed5cb314ce584855
+  SGMain: 8a3008d8a709259d4868f78ae3265659e58e4416
+  SGNoCaptcha: faaa0d84ec26329680a8a1486417c91caab06a85
+  SGSecurityBody: 098c981416d0f04faa605642e2da3bb556419f73
   Toast: 14a93686d6c8bfe2727afd342414e35660a8a1f3
+  UTDID: 05c4737c8cf5c210e86d0235570816ed00e023e8
 
-PODFILE CHECKSUM: 1a5ece54113da33a2efa036f56e5329635a1415e
+PODFILE CHECKSUM: 21bef166facf0eb8156cfce38e2935edb7ec95b2
 
 COCOAPODS: 1.1.1

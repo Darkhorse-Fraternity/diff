@@ -19,6 +19,7 @@
     "react-native-dialogs": "0.0.19",
     "react-native-image-picker": "^0.24.1",
     "react-native-orientation": "git+ssh://git@github.com/youennPennarun/react-native-orientation.git",
+    "react-native-taobao-baichuan-api": "git+https://github.com/Darkhorse-Fraternity/react-natireave-taobao-baichuan-api.git",
     "react-native-scrollable-tab-view": "^0.7.0",
     "react-native-star-rating": "^1.0.6",
     "react-native-storage": "^0.1.4",

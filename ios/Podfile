@@ -2,6 +2,8 @@
 platform :ios, '8.0'
 # Uncomment this line if you're using Swift
 #use_frameworks!
+source 'https://github.com/CocoaPods/Specs.git'
+source 'http://repo.baichuan-ios.taobao.com/baichuanSDK/AliBCSpecs.git'
 
 target 'diff' do
 
@@ -27,6 +29,7 @@ pod 'KSCrash', '~> 1.8'
 # pod 'GetuiSDK', '~> 1.4.2'
 #pod 'QiniuUpload'
 #pod 'GrowingIO'
+pod 'AlibcTradeSDK'
 end
 
 target 'diffTests' do

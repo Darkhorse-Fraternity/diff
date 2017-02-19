@@ -46,6 +46,8 @@
 		CC4BC9E91D92E0D20098E31E /* NSString+EasyExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BC9E21D92E0D20098E31E /* NSString+EasyExtend.m */; };
 		CC4BC9EA1D92E0D20098E31E /* NSURL+EasyExtend.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BC9E41D92E0D20098E31E /* NSURL+EasyExtend.m */; };
 		CC4BC9EB1D92E0D20098E31E /* UIWindow+LK.m in Sources */ = {isa = PBXBuildFile; fileRef = CC4BC9E61D92E0D20098E31E /* UIWindow+LK.m */; };
+		CC551C071E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.m in Sources */ = {isa = PBXBuildFile; fileRef = CC551C061E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.m */; };
+		CC551C331E5A00F900BCDB00 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = CC551C321E5A00F900BCDB00 /* yw_1222.jpg */; };
 		CCA304761D92EDFF00C41198 /* libRCTHotUpdate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4BC97D1D92A5090098E31E /* libRCTHotUpdate.a */; };
 		CCA304781D92EEA900C41198 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA304771D92EEA900C41198 /* libz.tbd */; };
 		CCA3047A1D92EEBF00C41198 /* libbz2.1.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CCA304791D92EEBF00C41198 /* libbz2.1.0.tbd */; };
@@ -303,6 +305,9 @@
 		CC4BC9E41D92E0D20098E31E /* NSURL+EasyExtend.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+EasyExtend.m"; sourceTree = "<group>"; };
 		CC4BC9E51D92E0D20098E31E /* UIWindow+LK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+LK.h"; sourceTree = "<group>"; };
 		CC4BC9E61D92E0D20098E31E /* UIWindow+LK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+LK.m"; sourceTree = "<group>"; };
+		CC551C051E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = React_Native_Taobao_Baichuan_Api.h; sourceTree = "<group>"; };
+		CC551C061E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = React_Native_Taobao_Baichuan_Api.m; sourceTree = "<group>"; };
+		CC551C321E5A00F900BCDB00 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
 		CCA304771D92EEA900C41198 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CCA304791D92EEBF00C41198 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		D619942FF8464E2B9C8715C4 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
@@ -468,6 +473,8 @@
 		13B07FAE1A68108700A75B9A /* diff */ = {
 			isa = PBXGroup;
 			children = (
+				CC551C321E5A00F900BCDB00 /* yw_1222.jpg */,
+				CC551C041E59F8E300BCDB00 /* Taobao */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -671,6 +678,15 @@
 				CC4BC9E61D92E0D20098E31E /* UIWindow+LK.m */,
 			);
 			path = Other;
+			sourceTree = "<group>";
+		};
+		CC551C041E59F8E300BCDB00 /* Taobao */ = {
+			isa = PBXGroup;
+			children = (
+				CC551C051E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.h */,
+				CC551C061E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.m */,
+			);
+			name = Taobao;
 			sourceTree = "<group>";
 		};
 		CC736F0D1D91B0820085A703 /* Products */ = {
@@ -1031,6 +1047,7 @@
 				4026FA263D3A441987F103D7 /* EvilIcons.ttf in Resources */,
 				625AAFFBE0814CD5825AAF80 /* FontAwesome.ttf in Resources */,
 				16FC1BB6C3534A5CB0E2E22C /* Foundation.ttf in Resources */,
+				CC551C331E5A00F900BCDB00 /* yw_1222.jpg in Resources */,
 				29213C389B5D4F22B6A9FE8F /* Ionicons.ttf in Resources */,
 				98BC4136CBCD48EF89FA25AF /* MaterialIcons.ttf in Resources */,
 				C698020FE134400F834EC21E /* Octicons.ttf in Resources */,
@@ -1168,6 +1185,7 @@
 				CC4BC9E91D92E0D20098E31E /* NSString+EasyExtend.m in Sources */,
 				CC4BC9D61D92E0060098E31E /* RCTToastIOS.m in Sources */,
 				CC4BC9D91D92E0060098E31E /* URLManager.m in Sources */,
+				CC551C071E59F90900BCDB00 /* React_Native_Taobao_Baichuan_Api.m in Sources */,
 				CC4BC9EB1D92E0D20098E31E /* UIWindow+LK.m in Sources */,
 				CC4BC9D81D92E0060098E31E /* UIViewController+URLManage.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
