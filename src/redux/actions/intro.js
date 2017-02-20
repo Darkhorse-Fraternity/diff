@@ -12,7 +12,7 @@ import {classBatch,classNormalSearch} from '../../request/leanCloud';
 import {navigatePush} from './nav'
 import {iBindingIdeaID} from './iCommit'
 import {iCommentBindingIdeaID} from './iComment'
-
+import Parse from 'url-parse'
 import {
     NativeModules
 }from 'react-native'
@@ -78,8 +78,13 @@ export function tryIdea(idea:Object):Function{
      const state = getState();
 
      if(idea.type == 'link' && idea.link.length>0){
-       TB.present(idea.link);
-       // dispatch(navigatePush({'key':'WebView','url':idea.link}))
+       const url = Parse(idea.link, true);
+       console.log('test:', url.hostname.endsWith('taobao.com')||url.hostname.endsWith('tmall.com'));
+      if(url.hostname.endsWith('taobao.com') || url.hostname.endsWith('tmall.com')){
+        TB.present(idea.link);
+      }else {
+        dispatch(navigatePush({'key':'WebView','url':idea.link}))
+      }
      }else{
        const login =  state.login.isLogin
        if(login){
