@@ -16,7 +16,7 @@ import React, {
     StatusBar,
 } from 'react-native';
 import {loginSucceed} from './login'
-
+import pushConfig from '../../configure/push'
 export const PRE_CONFIG_STATU = 'PRE_CONFIG_STATU'
 
 
@@ -51,6 +51,7 @@ function _preConfig() {
 
     // Platform.OS=='ios'&& StatusBar.setBarStyle('light-content', true);
 
+    pushConfig()
 }
 
 

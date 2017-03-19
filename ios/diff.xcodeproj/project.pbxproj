@@ -369,7 +369,7 @@
 		CC7D6A8B1E7D8800002DCE31 /* AppearanceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceConfig.h; sourceTree = "<group>"; };
 		CC7D6A8C1E7D8800002DCE31 /* AppearanceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceConfig.m; sourceTree = "<group>"; };
 		CC7D6B131E7E400B002DCE31 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		CC7D6B1D1E7E4104002DCE31 /* diff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = diff.entitlements; path = diff/diff.entitlements; sourceTree = "<group>"; };
+		CC7D6B651E7E690A002DCE31 /* diff.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = diff.entitlements; path = diff/diff.entitlements; sourceTree = "<group>"; };
 		CCA304771D92EEA900C41198 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		CCA304791D92EEBF00C41198 /* libbz2.1.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.tbd; path = usr/lib/libbz2.1.0.tbd; sourceTree = SDKROOT; };
 		D619942FF8464E2B9C8715C4 /* libRNDeviceInfo.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNDeviceInfo.a; sourceTree = "<group>"; };
@@ -536,7 +536,7 @@
 		13B07FAE1A68108700A75B9A /* diff */ = {
 			isa = PBXGroup;
 			children = (
-				CC7D6B1D1E7E4104002DCE31 /* diff.entitlements */,
+				CC7D6B651E7E690A002DCE31 /* diff.entitlements */,
 				CC551C321E5A00F900BCDB00 /* yw_1222.jpg */,
 				CC551C041E59F8E300BCDB00 /* Taobao */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
@@ -844,7 +844,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
-						DevelopmentTeam = HERV795NJQ;
+						DevelopmentTeam = G54H3R6236;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
@@ -1381,7 +1381,7 @@
 			baseConfigurationReference = 1814131318345CE42D58715E /* Pods-diffTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = HERV795NJQ;
+				DEVELOPMENT_TEAM = G54H3R6236;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1415,7 +1415,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = HERV795NJQ;
+				DEVELOPMENT_TEAM = G54H3R6236;
 				INFOPLIST_FILE = diffTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1445,7 +1445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = diff/diff.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G54H3R6236;
@@ -1481,7 +1481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = diff/diff.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G54H3R6236;
 				ENABLE_BITCODE = NO;

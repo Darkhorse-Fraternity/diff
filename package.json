@@ -20,6 +20,7 @@
     "react-native-image-picker": "^0.26.2",
     "react-native-leancloud-push": "git+https://github.com/liaoyuan-io/react-native-leancloud-push.git",
     "react-native-orientation": "git+https://git@github.com/youennPennarun/react-native-orientation.git",
+    "react-native-push-notification": "^2.2.1",
     "react-native-scrollable-tab-view": "^0.7.2",
     "react-native-star-rating": "^1.0.7",
     "react-native-storage": "^0.1.5",

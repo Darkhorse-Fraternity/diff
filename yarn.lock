@@ -3449,6 +3449,10 @@ react-native-image-picker@^0.26.2:
   version "1.17.0"
   resolved "git+https://git@github.com/youennPennarun/react-native-orientation.git#05d0f60256d9ea750c3dc820a664193d464bdc6e"
 
+react-native-push-notification@^2.2.1:
+  version "2.2.1"
+  resolved "http://registry.npm.taobao.org/react-native-push-notification/download/react-native-push-notification-2.2.1.tgz#9b392cee8f5223a1e1772c9a88c95742549fcfc3"
+
 react-native-scrollable-tab-view@^0.7.2:
   version "0.7.3"
   resolved "http://registry.npm.taobao.org/react-native-scrollable-tab-view/download/react-native-scrollable-tab-view-0.7.3.tgz#1900615390b1735b01d18b36ff10f113c3625a79"
