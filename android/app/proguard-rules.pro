@@ -80,3 +80,6 @@
 -dontwarn com.ta.**
 -keep class org.json.** {*;}
 -keep class com.ali.auth.** {*;}
+
+#-keep class com.avos.** {*;}
+#-dontwarn com.avos.**
