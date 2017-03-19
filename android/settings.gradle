@@ -1,4 +1,6 @@
 rootProject.name = 'diff'
+include ':react-native-leancloud-push'
+project(':react-native-leancloud-push').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-leancloud-push/android')
 
 include ':app'
 include ':react-native-taobao-baichuan-api'

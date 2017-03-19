@@ -9,6 +9,7 @@ import com.alibaba.baichuan.android.trade.callback.AlibcTradeInitCallback;
 import com.alibaba.baichuan.android.trade.model.AlibcTaokeParams;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactApplication;
+import io.liaoyuan.reactnative.leancloudpush.LeanCloudPushPackage;
 import com.facebook.soloader.SoLoader;
 import com.react.taobaobaichuanapi.BaiChuanPackage;
 import com.facebook.react.ReactNativeHost;
@@ -41,6 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new LeanCloudPushPackage(),
                     new BaiChuanPackage(),
                     new ReactNativeDialogsPackage(),
                     new BlurViewPackage(),
