@@ -47,4 +47,4 @@ android/keystores/debug.keystore
 
 
 
-leancloud.js
+/src/configure/leancloud.js
