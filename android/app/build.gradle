@@ -152,6 +152,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-wechat')
     compile project(':react-native-leancloud-push')
     compile project(':react-native-taobao-baichuan-api')
     compile project(':react-native-update')

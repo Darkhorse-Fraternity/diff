@@ -164,8 +164,8 @@ class RegPhone extends Component {
         return (
             <ScrollView
                 style={styles.container}
-                keyboardShouldPersistTaps={true}
-                keyboardDismissMode='on-drag'>
+                keyboardShouldPersistTaps="always"
+                keyboardDismissMode='interactive'>
 
                 {this._renderRowMain('手机号:', '请填入手机号码',
                     (text) => this.setState({phone: text}), 'numeric', true, 11, "1"

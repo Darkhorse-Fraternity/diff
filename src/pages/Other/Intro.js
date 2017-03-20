@@ -232,9 +232,8 @@ class intro extends Component {
                 {this.__renderPropView()}
                 <View style={styles.topBtnView}>
                     {this.__renderTopBtn('comment', ()=> this.props.goCommit(idea))}
-                    {/*{this.__renderTopBtn('heart', ()=> {*/}
-
-                    {/*})}*/}
+                    {this.__renderTopBtn('share-google', ()=> this.props.goCommit(idea))}
+                    {/*{this.__renderTopBtn('heart', ()=> {})}*/}
                 </View>
             </View>
         )
@@ -442,13 +441,13 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         position: 'absolute',
         zIndex: 2,
-        left: screenWidth - 55,
+        right: 10,
         top: SwiperViewHight - 17,
-        // flexDirection: 'row-reverse',
-        // justifyContent: 'flex-start'
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-start'
     },
     topButton: {
-        marginRight: 10,
+        marginRight: 5,
         backgroundColor: 'white',
         height: 35,
         width: 35,

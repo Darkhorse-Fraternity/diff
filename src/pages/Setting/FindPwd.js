@@ -202,8 +202,8 @@ class FindPwd extends Component {
         return (
             <View style={styles.container}>
                 <ScrollView
-                    keyboardShouldPersistTaps={true}
-                    keyboardDismissMode='on-drag'>
+                    keyboardShouldPersistTaps="always"
+                    keyboardDismissMode='interactive'>
 
                     <View style={[styles.rowStyle,{marginTop:29/2}]}>
                         {this._renderRowMain('手机号码:', '请填入手机号',

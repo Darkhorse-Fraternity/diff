@@ -74,7 +74,7 @@ export default class ExceptionView extends Component {
                 <TouchableOpacity
                     activeOpacity={0.5}
                     onPress={()=>{
-                        this.props.onRefresh()
+                        this.props.onRefresh && this.props.onRefresh()
                     }}>
                     {this._renderPromptIndicator(this.props.exceptionType)}
                     {this.renderPrompt()}
