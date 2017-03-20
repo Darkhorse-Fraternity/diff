@@ -275,3 +275,26 @@ export function classBatch(requests:[Object]):Object{
     }
 }
 
+export function pushInstallation(OS:String,token:string,LeanCloud_APP_ID:string,LeanCloud_APP_KEY:string,userObjectId:string = '') {
+    let installationId = OS == 'ios' ? { "deviceToken": token}:{ "installationId": token}
+
+    return {
+        scheme:'https',
+        host:'leancloud.cn/1.1',
+        path:'/installations',
+        method:methodType.post,
+        head:{
+            "Content-Type": "application/json",
+            "X-LC-Key": LeanCloud_APP_KEY,
+            "X-LC-Id": LeanCloud_APP_ID,
+        },
+        params:{
+            "deviceType": OS,
+            ...installationId,
+            "channels": [
+                "public", "protected", "private"
+            ],
+            userObjectId,
+        },
+    }
+}
