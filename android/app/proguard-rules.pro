@@ -110,8 +110,6 @@
 
 -dontwarn android.support.**
 
--dontwarn org.apache.**
--keep class org.apache.** { *;}
 
 -dontwarn org.jivesoftware.smack.**
 -keep class org.jivesoftware.smack.** { *;}
@@ -123,9 +121,10 @@
 -keep class com.squareup.okhttp.** { *;}
 -keep interface com.squareup.okhttp.** { *; }
 
--dontwarn okio.**
 
 -dontwarn org.xbill.**
 -keep class org.xbill.** { *;}
 
 -keepattributes *Annotation*
+
+-ignorewarnings
