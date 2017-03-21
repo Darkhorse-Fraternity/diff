@@ -19,7 +19,7 @@ export const LOAD_AVATAR = 'LOAD_AVATAR'
 export const VOICE_TEST = 'VOICE_TEST'
 export const NET_TEST = 'NET_TEST'
 export const CHANGEAVATAR = 'CHANGEAVATAR'
-
+export const DATA_STORAGE = 'DATA_STORAGE'
 // export function reuqestQiuNiuToken(uri:string, callback:Function = ()=> {
 // }):Function {
 //
@@ -161,4 +161,12 @@ export function netTestResult(result:string):Object {
         type: NET_TEST,
         netTest: result,
     };
+}
+
+export function dataStorage(key:string,data:any):Object {
+    return {
+        type:DATA_STORAGE,
+        key,
+        data,
+    }
 }

@@ -23,7 +23,7 @@ import * as immutable from 'immutable';
 import {BlurView} from 'react-native-blur';
 import BaseListView from '../../components/Base/BaseListView';
 const MyBlueView = Platform.OS == 'ios' ? BlurView : View;
-
+import ShareModal, {shareModalKey} from '../../components/ShareModal'
 const style = Platform.OS == 'ios' ? {} : {backgroundColor: 'rgba(0,0,0,0.9)'}
 import {showModalSwiper, hiddenModelSwiper, tryIdea} from '../../redux/actions/intro'
 import {iCommitListLoad, iCommitListLoadMore, selectChange} from '../../redux/actions/iCommit'
@@ -38,6 +38,7 @@ import EvilIcons from 'react-native-vector-icons/EvilIcons'
 //   </Icon.Button>
 // );
 import StarRating from 'react-native-star-rating';
+import {dataStorage} from '../../redux/actions/util'
 const SwiperViewHight = screenWidth / 400 * 280
 class intro extends Component {
 
@@ -232,7 +233,7 @@ class intro extends Component {
                 {this.__renderPropView()}
                 <View style={styles.topBtnView}>
                     {this.__renderTopBtn('comment', ()=> this.props.goCommit(idea))}
-                    {this.__renderTopBtn('share-google', ()=> this.props.goCommit(idea))}
+                    {this.__renderTopBtn('share-google', ()=> this.props.share())}
                     {/*{this.__renderTopBtn('heart', ()=> {})}*/}
                 </View>
             </View>
@@ -306,6 +307,7 @@ class intro extends Component {
         const images = idea.images.toArray();
         return (
             <View style={styles.box}>
+                <ShareModal/>
                 <BaseListView
                     renderHeader={this.__renderHeaderView.bind(this)}
                     style={styles.list}
@@ -441,18 +443,23 @@ const styles = StyleSheet.create({
         backgroundColor: 'transparent',
         position: 'absolute',
         zIndex: 2,
-        right: 10,
+        right: 5,
         top: SwiperViewHight - 17,
         flexDirection: 'row-reverse',
         justifyContent: 'flex-start'
     },
     topButton: {
-        marginRight: 5,
+        marginRight: 10,
         backgroundColor: 'white',
         height: 35,
         width: 35,
         borderRadius: 35,
-        justifyContent: 'center'
+        justifyContent: 'center',
+        shadowColor:'rgb(200,200,200)',
+        shadowOffset: {width: 0, height: 1},
+        shadowOpacity:0.5,
+        shadowRadius:1,
+        elevation:1,
     },
     icon: {
         // backgroundColor:'transparent',
@@ -536,6 +543,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         selectChange: (index)=> {
             dispatch(selectChange(index))
+        },
+        share:()=>{
+            dispatch(dataStorage(shareModalKey, true))
         }
     }
 }

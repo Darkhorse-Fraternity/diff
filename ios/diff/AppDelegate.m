@@ -55,7 +55,7 @@
   [installation sendAllReportsWithCompletion:nil];
   
   
-  [AppearanceConfig appearanceConfig];
+  //[AppearanceConfig appearanceConfig];
    [self aliBaichuanStart];
   return YES;
 }

@@ -127,4 +127,8 @@
 
 -keepattributes *Annotation*
 
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
+
 -ignorewarnings

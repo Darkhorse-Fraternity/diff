@@ -53,6 +53,9 @@
 		CC684C5D1E7FB748004683B4 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684C5C1E7FB748004683B4 /* CoreTelephony.framework */; };
 		CC684C5F1E7FB755004683B4 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684C5E1E7FB755004683B4 /* libsqlite3.0.tbd */; };
 		CC684C611E7FB763004683B4 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684C601E7FB763004683B4 /* libc++.tbd */; };
+		CC684CB01E8027CB004683B4 /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684CAF1E8027CB004683B4 /* libiconv.tbd */; };
+		CC684CB21E8027DC004683B4 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684CB11E8027DC004683B4 /* libsqlite3.tbd */; };
+		CC684CB41E80298B004683B4 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CC684CB31E80298B004683B4 /* TencentOpenAPI.framework */; };
 		CC7D6A8D1E7D8800002DCE31 /* AppearanceConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = CC7D6A8C1E7D8800002DCE31 /* AppearanceConfig.m */; };
 		CC7D6B1C1E7E4019002DCE31 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC7D6B191E7E400B002DCE31 /* libRCTPushNotification.a */; };
 		CCA304761D92EDFF00C41198 /* libRCTHotUpdate.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CC4BC97D1D92A5090098E31E /* libRCTHotUpdate.a */; };
@@ -61,6 +64,7 @@
 		DE1FA90D118DA9DBD984ECD0 /* libPods-diff.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C824D9289E4B773726327F7 /* libPods-diff.a */; };
 		E8F8FE04B9BA45C993929ABB /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 331605D2858B4742A87AD259 /* Entypo.ttf */; };
 		E99A29DE9C005C5B22F4534E /* libPods-diffTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 67EBF999931174D272F29A07 /* libPods-diffTests.a */; };
+		FC638CC454E2430FA058D8E1 /* libRCTQQAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4687A6727582447BA71830A4 /* libRCTQQAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -246,6 +250,13 @@
 			remoteGlobalIDString = 86D238421BD0BB9E00C75D01;
 			remoteInfo = RCTWeChat;
 		};
+		CC684C991E802245004683B4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A5B3415A80D440F283B6D4F4 /* RCTQQAPI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9139321C1C232D310085E3BA;
+			remoteInfo = RCTQQAPI;
+		};
 		CC736F1A1D91B0830085A703 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B611F0B600BB4BBF83ED812F /* RNBlur.xcodeproj */;
@@ -337,6 +348,7 @@
 		1814131318345CE42D58715E /* Pods-diffTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diffTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diffTests/Pods-diffTests.debug.xcconfig"; sourceTree = "<group>"; };
 		331605D2858B4742A87AD259 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		431AAA4E547848518800811C /* libRNBlur.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNBlur.a; sourceTree = "<group>"; };
+		4687A6727582447BA71830A4 /* libRCTQQAPI.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTQQAPI.a; sourceTree = "<group>"; };
 		60EBEAEC24B8F054A89262EA /* Pods-diff.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-diff.debug.xcconfig"; path = "Pods/Target Support Files/Pods-diff/Pods-diff.debug.xcconfig"; sourceTree = "<group>"; };
 		67EBF999931174D272F29A07 /* libPods-diffTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-diffTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DE3DE706FBF4916BF5EE697 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -351,6 +363,7 @@
 		9056E7D7F2DD42CE9ED2A103 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		9A372BECCAE249A09CFCFCBF /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		A4672898F6D74C48B31F3B4B /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
+		A5B3415A80D440F283B6D4F4 /* RCTQQAPI.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTQQAPI.xcodeproj; path = "../node_modules/react-native-qq/ios/RCTQQAPI.xcodeproj"; sourceTree = "<group>"; };
 		B20B0053D403474D909E3BB1 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		B611F0B600BB4BBF83ED812F /* RNBlur.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNBlur.xcodeproj; path = "../node_modules/react-native-blur/ios/RNBlur.xcodeproj"; sourceTree = "<group>"; };
 		BDBAFA0D5A6946D38336C0E5 /* RCTHotUpdate.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTHotUpdate.xcodeproj; path = "../node_modules/react-native-update/ios/RCTHotUpdate.xcodeproj"; sourceTree = "<group>"; };
@@ -384,6 +397,9 @@
 		CC684C5C1E7FB748004683B4 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		CC684C5E1E7FB755004683B4 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		CC684C601E7FB763004683B4 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		CC684CAF1E8027CB004683B4 /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		CC684CB11E8027DC004683B4 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		CC684CB31E80298B004683B4 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TencentOpenAPI.framework; path = "../node_modules/react-native-qq/ios/RCTQQAPI/TencentOpenAPI.framework"; sourceTree = "<group>"; };
 		CC7D6A8B1E7D8800002DCE31 /* AppearanceConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppearanceConfig.h; sourceTree = "<group>"; };
 		CC7D6A8C1E7D8800002DCE31 /* AppearanceConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppearanceConfig.m; sourceTree = "<group>"; };
 		CC7D6B131E7E400B002DCE31 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
@@ -410,13 +426,16 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC684CB41E80298B004683B4 /* TencentOpenAPI.framework in Frameworks */,
+				CCA304781D92EEA900C41198 /* libz.tbd in Frameworks */,
+				CC684CB21E8027DC004683B4 /* libsqlite3.tbd in Frameworks */,
+				CC684CB01E8027CB004683B4 /* libiconv.tbd in Frameworks */,
 				CC684C611E7FB763004683B4 /* libc++.tbd in Frameworks */,
 				CC684C5F1E7FB755004683B4 /* libsqlite3.0.tbd in Frameworks */,
 				CC684C5D1E7FB748004683B4 /* CoreTelephony.framework in Frameworks */,
 				CC684C5B1E7FB73D004683B4 /* SystemConfiguration.framework in Frameworks */,
 				CC00B92A1DEA95E90028950E /* libRCTAnimation.a in Frameworks */,
 				CCA3047A1D92EEBF00C41198 /* libbz2.1.0.tbd in Frameworks */,
-				CCA304781D92EEA900C41198 /* libz.tbd in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -436,6 +455,7 @@
 				CCA304761D92EDFF00C41198 /* libRCTHotUpdate.a in Frameworks */,
 				DE1FA90D118DA9DBD984ECD0 /* libPods-diff.a in Frameworks */,
 				B3C507A4C2DD4AFF87798974 /* libRCTWeChat.a in Frameworks */,
+				FC638CC454E2430FA058D8E1 /* libRCTQQAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -530,6 +550,9 @@
 		1059E9D8B6F81AB922C5E3E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CC684CB31E80298B004683B4 /* TencentOpenAPI.framework */,
+				CC684CB11E8027DC004683B4 /* libsqlite3.tbd */,
+				CC684CAF1E8027CB004683B4 /* libiconv.tbd */,
 				CC684C601E7FB763004683B4 /* libc++.tbd */,
 				CC684C5E1E7FB755004683B4 /* libsqlite3.0.tbd */,
 				CC684C5C1E7FB748004683B4 /* CoreTelephony.framework */,
@@ -626,6 +649,7 @@
 				C6D08FE043AB471190D439F0 /* RNVectorIcons.xcodeproj */,
 				BDBAFA0D5A6946D38336C0E5 /* RCTHotUpdate.xcodeproj */,
 				A4672898F6D74C48B31F3B4B /* RCTWeChat.xcodeproj */,
+				A5B3415A80D440F283B6D4F4 /* RCTQQAPI.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -797,6 +821,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		CC684C881E802245004683B4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CC684C9A1E802245004683B4 /* libRCTQQAPI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		CC736F0D1D91B0820085A703 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -944,6 +976,10 @@
 				{
 					ProductGroup = CC7D6B141E7E400B002DCE31 /* Products */;
 					ProjectRef = CC7D6B131E7E400B002DCE31 /* RCTPushNotification.xcodeproj */;
+				},
+				{
+					ProductGroup = CC684C881E802245004683B4 /* Products */;
+					ProjectRef = A5B3415A80D440F283B6D4F4 /* RCTQQAPI.xcodeproj */;
 				},
 				{
 					ProductGroup = 139105B71AF99BAD00B5F7CC /* Products */;
@@ -1168,6 +1204,13 @@
 			fileType = archive.ar;
 			path = libRCTWeChat.a;
 			remoteRef = CC684C4C1E7FB6A8004683B4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		CC684C9A1E802245004683B4 /* libRCTQQAPI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTQQAPI.a;
+			remoteRef = CC684C991E802245004683B4 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		CC736F1B1D91B0830085A703 /* libRNBlur.a */ = {
@@ -1436,12 +1479,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = diffTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1471,12 +1516,14 @@
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = diffTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -1507,6 +1554,22 @@
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = G54H3R6236;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PODS_ROOT)/UTDID",
+					"\"${PODS_ROOT}/AlibabaAuthSDK\"",
+					"\"${PODS_ROOT}/AlibcTradeSDK\"",
+					"\"${PODS_ROOT}/AlipaySDK/alipay\"",
+					"\"${PODS_ROOT}/BCUserTrack\"",
+					"\"${PODS_ROOT}/Reveal-iOS-SDK/Reveal-Framework-iOS-1.6.2\"",
+					"\"${PODS_ROOT}/SGMain\"",
+					"\"${PODS_ROOT}/SGNoCaptcha\"",
+					"\"${PODS_ROOT}/SGSecurityBody\"",
+					"\"${PODS_ROOT}/SecurityGuardSDK\"",
+					"\"${PODS_ROOT}/UTDID\"",
+					"\"${PODS_ROOT}/mtop\"",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1519,6 +1582,7 @@
 					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = diff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1526,6 +1590,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"\"TencentOpenAPI\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sword.diff;
 				PRODUCT_NAME = diff;
@@ -1543,6 +1609,21 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = G54H3R6236;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PODS_ROOT)/UTDID",
+					"\"${PODS_ROOT}/AlibabaAuthSDK\"",
+					"\"${PODS_ROOT}/AlibcTradeSDK\"",
+					"\"${PODS_ROOT}/AlipaySDK/alipay\"",
+					"\"${PODS_ROOT}/BCUserTrack\"",
+					"\"${PODS_ROOT}/SGMain\"",
+					"\"${PODS_ROOT}/SGNoCaptcha\"",
+					"\"${PODS_ROOT}/SGSecurityBody\"",
+					"\"${PODS_ROOT}/SecurityGuardSDK\"",
+					"\"${PODS_ROOT}/UTDID\"",
+					"\"${PODS_ROOT}/mtop\"",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
@@ -1555,6 +1636,7 @@
 					"$(SRCROOT)/../node_modules/react-native-update/ios/RCTHotUpdate/**",
 					"$(SRCROOT)/../node_modules/react-native/Libraries/PushNotificationIOS/**",
 					"$(SRCROOT)/../node_modules/react-native-wechat/ios",
+					"$(SRCROOT)/../node_modules/react-native-qq/ios/RCTQQAPI/**",
 				);
 				INFOPLIST_FILE = diff/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1562,6 +1644,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"\"TencentOpenAPI\"",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.sword.diff;
 				PRODUCT_NAME = diff;

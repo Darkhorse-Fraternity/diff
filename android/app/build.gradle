@@ -111,6 +111,9 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [
+                QQ_APPID: "1105872996",
+        ]
         multiDexEnabled true
     }
     splits {
@@ -152,6 +155,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-qq')
     compile project(':react-native-wechat')
     compile project(':react-native-leancloud-push')
     compile project(':react-native-taobao-baichuan-api')

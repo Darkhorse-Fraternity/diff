@@ -12,6 +12,7 @@ import com.alibaba.baichuan.android.trade.model.AlibcTaokeParams;
 import com.avos.avoscloud.AVOSCloud;
 import com.cmcewen.blurview.BlurViewPackage;
 import com.facebook.react.ReactApplication;
+import cn.reactnative.modules.qq.QQPackage;
 import com.theweflex.react.WeChatPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -46,6 +47,7 @@ public class MainApplication extends Application implements ReactApplication {
         protected List<ReactPackage> getPackages() {
             return Arrays.<ReactPackage>asList(
                     new MainReactPackage(),
+            new QQPackage(),
             new WeChatPackage(),
                     new LeanCloudPushPackage(),
                     new BaiChuanPackage(),
