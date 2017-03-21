@@ -1,71 +1,67 @@
 /**
- * Created by lintong on 9/21/16.
+ * Sample React Native App
+ * https://github.com/facebook/react-native
  * @flow
  */
-'use strict';
-
-require('./src/app');
+// require('./src/app');
 
 
-// import React, {Component, PropTypes} from 'react';
-// import  {
-//     AppRegistry,
-//     TouchableOpacity,
-//     View,
-//     Text,
-//     Image,
-//     ListView,
-//     ViewPagerAndroid,
-//     ScrollView,
-// } from 'react-native';
-//
-//
-// export default class App extends Component {
-//
-//     constructor(props: Object) {
-//         super(props);
-//         this.state = {};
-//         this._dataSource = new ListView.DataSource({
-//             rowHasChanged: (r1, r2) => r1 !== r2,
-//         });
-//     }
-//
-//     __renderRow(item: Object, sectionID: number, rowID: number): ReactElement<any> {
-//         return (
-//             <View>
-//                 <Text>{item}</Text>
-//             </View>
-//         )
-//     }
-//
-//     __renderHeaderView(): ReactElement<any> {
-//         return (
-//                 <ViewPagerAndroid
-//                     initialPage={0}
-//                     style={{backgroundColor:'orange',height:100,}}>
-//
-//                     <View style={{backgroundColor:'green',}}/>
-//                     <View style={{backgroundColor:'grey',}}/>
-//                 </ViewPagerAndroid>
-//
-//         )
-//     }
-//
-//     render() {
-//         return (
-//             <View style={{flex:1}}>
-//                 <ListView
-//                     style={{flex:1}}
-//                     removeClippedSubviews={false}
-//                     renderHeader={this.__renderHeaderView.bind(this)}
-//                     renderRow={this.__renderRow.bind(this)}
-//                     dataSource={this._dataSource.cloneWithRows(['aaa','bbb'])}
-//                 />
-//                 {this.__renderHeaderView() }
-//             </View>
-//         );
-//     }
-// }
-//
-// // var WhiteBoardRN = require('../example_advanced');
-// AppRegistry.registerComponent('diff', () => App);
+
+var React = require('react');
+var ReactNative = require('react-native');
+var {
+    StyleSheet,
+    View,
+    Text,
+    TouchableHighlight,
+    Share,
+    AppRegistry
+} = ReactNative;
+import AMapView from 'air-amap'
+
+const amapkey = Platform.OS == 'ios' ? '0220c0014e571c40a99752d6865bcedb'
+    : '2351b3779d2bde3aa611e228917bda0c'
+
+class ShareMessageExample extends React.Component {
+
+
+    constructor(props) {
+        super(props);
+
+
+
+        this.state = {
+            result: ''
+        };
+    }
+
+    render() {
+        return (<View style={{flex: 1, backgroundColor: '#f00'}}>
+            <AMapView
+                amapkey={amapkey}
+                initialRegion={{latitude: 30.315888, longitude: 120.165817}} showsUserLocation>
+                <AMapView.Marker pinColor="green" draggable title='xxx' description="这是一个好地方" coordinate={{latitude: 30.315888, longitude: 120.165817}} />
+            </AMapView>
+        </View>);
+    }
+
+
+
+}
+
+
+var styles = StyleSheet.create({
+    wrapper: {
+        borderRadius: 5,
+        marginBottom: 5,
+    },
+    button: {
+        backgroundColor: '#eeeeee',
+        padding: 10,
+    },
+});
+
+
+
+// var WhiteBoardRN = require('../example_advanced');
+AppRegistry.registerComponent('diff', () => ShareMessageExample);

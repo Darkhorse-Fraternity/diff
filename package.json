@@ -20,7 +20,7 @@
     "react-native-device-info": "^0.10.1",
     "react-native-dialogs": "0.0.19",
     "react-native-image-picker": "^0.26.2",
-    "react-native-amap-view": "https://github.com/Darkhorse-Fraternity/air-amap.git",
+    "air-amap": "https://github.com/Darkhorse-Fraternity/air-amap.git",
     "react-native-leancloud-push": "git+https://github.com/liaoyuan-io/react-native-leancloud-push.git",
     "react-native-orientation": "git+https://git@github.com/youennPennarun/react-native-orientation.git",
     "react-native-push-notification": "^2.2.1",

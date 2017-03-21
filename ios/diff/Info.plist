@@ -120,7 +120,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>diff需要您的同意,才能访问相机</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>diff需要您的同意,才能使用您的位置</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>diff需要您的同意,才能访问相册</string>
 	<key>UIAppFonts</key>

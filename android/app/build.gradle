@@ -139,6 +139,11 @@ android {
             signingConfig signingConfigs.release
         }
     }
+
+    dexOptions {
+        incremental true
+        javaMaxHeapSize "2048M"
+    }
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -155,6 +160,7 @@ android {
 }
 
 dependencies {
+    compile project(':air-amap')
     compile project(':react-native-qq')
     compile project(':react-native-wechat')
     compile project(':react-native-leancloud-push')
