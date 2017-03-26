@@ -76,10 +76,10 @@ class PersonCenter extends Component {
     __renderLoginRow() {
         return (
             <View>
-                {this._renderRow('推荐我的创意服务', styles.group, true, () => {
+                {this._renderRow('申请开热铺', styles.group, true, () => {
                     this.props.push('Submit');
                 })}
-                {this._renderRow('我的发布', styles.group, true, () => {
+                {this._renderRow('我的热铺', styles.group, true, () => {
                     this.props.push('iShowList');
                 })}
 

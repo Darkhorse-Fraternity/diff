@@ -38,7 +38,7 @@ export const pageConfig = {
     'iShowDetail': {title: ''},
     'Comment': {title: '评论'},
     'AddComment': {title: '写评论'},
-    'Submit': {title: '选择类型'},
+    'Submit': {title: '店铺类型'},
     'Normal': {title: '创意服务'},
     'iCommit': {title: '购买'},
     'iServe': {title: '我的服务'},

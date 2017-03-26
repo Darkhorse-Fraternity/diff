@@ -30,10 +30,11 @@ const mainColor = 'rgba(0,0,0,0.5)'
 
       __renderProBtn(name:string,title:string,type:string = 'EvilIcons'):ReactElement<any>{
         let Icon = EvilIcons;
+
         let size = 100;
         if(type == 'FontAwesome'){
           Icon = FontAwesome;
-          size = 85.5;
+          size = 60;
         }
 
         return(
@@ -60,6 +61,7 @@ const mainColor = 'rgba(0,0,0,0.5)'
           <View style={styles.main}>
             <ScrollView style={styles.list}>
               <View style={styles.content}>
+                {/*{this.__renderProBtn('map-o','地图模式',"FontAwesome")}*/}
                 {this.__renderProBtn('image','图片模式')}
                 {this.__renderProBtn('pencil','文字模式')}
                 {this.__renderProBtn('phone','电话模式','FontAwesome')}
@@ -150,6 +152,12 @@ const mapDispatchToProps = (dispatch) => {
         case 'share-google':{
           dispatch(changeReplyType('link'));
           dispatch(navigatePush('Contribute'))
+        }
+          break;
+        case 'map-o':{
+          dispatch(changeReplyType('image'));
+          dispatch(changeCommitType('image'));
+          dispatch(navigatePush({key:'Normal',type:'map'}))
         }
           break;
         default:

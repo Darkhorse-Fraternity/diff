@@ -275,6 +275,93 @@ export function classBatch(requests:[Object]):Object{
     }
 }
 
+//多对多关系查询
+export function relationAdd(className:string,objectId:string,relationClass:string,relationId:string):Object{
+
+    return {
+        path:'/classes/'+ className + '/' + objectId,
+        method:methodType.put,
+        params:{
+            "likes":{
+                "__op":"AddRelation",
+                "objects":[{
+                    "__type":"Pointer",
+                    "className":relationClass,
+                    "objectId":relationId
+                }]
+            }
+        },
+    }
+}
+
+export function relatotionRemove(className:string,objectId:string,relationClass:string,relationId:string):Object{
+    return {
+        path:'/classes/'+ className + '/' + objectId,
+        method:methodType.put,
+        params:{
+            "likes":{
+                "__op":"RemoveRelation",
+                "objects":[{
+                    "__type":"Pointer",
+                    "className":relationClass,
+                    "objectId":relationId
+                }]
+            }
+        },
+    }
+}
+
+/*
+ * className 关系的绑定对象
+ * objectId  关系绑定对象的id
+ * relationClass被绑定对象，一般为User
+ * relationClassID 被绑定对象的id
+ * 绑定对象的具体属性
+ */
+export function relationExist(className:string,objectId:string,relationClass:string,relationId:string,key:string):Object{
+    return {
+        path:'/classes/'+ relationClass,
+        method:methodType.put,
+        params:{
+            where:{
+                "$relatedTo":{
+                    "object":{
+                        "__type":"Pointer",
+                        "className":className,
+                        "objectId":objectId
+                    },
+                    "key":key
+                },
+                "objectId":relationId
+            }
+        },
+    }
+}
+
+export function relationList(className:string,objectId:string,relationClass:string,key:string):Object{
+    return {
+        path:'/classes/'+ relationClass,
+        method:methodType.put,
+        params:{
+            where:{
+                "$relatedTo":{
+                    "object":{
+                        "__type":"Pointer",
+                        "className":className,
+                        "objectId":objectId
+                    },
+                    "key":key
+                },
+            }
+        },
+    }
+}
+
+
+
+
+
+
 export function pushInstallation(OS:String,token:string,LeanCloud_APP_ID:string,LeanCloud_APP_KEY:string,userObjectId:string = '') {
     let installationId = OS == 'ios' ? { "deviceToken": token}:{ "installationId": token}
 
@@ -298,3 +385,6 @@ export function pushInstallation(OS:String,token:string,LeanCloud_APP_ID:string,
         },
     }
 }
+
+
+

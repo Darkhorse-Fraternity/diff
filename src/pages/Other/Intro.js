@@ -28,8 +28,10 @@ const style = Platform.OS == 'ios' ? {} : {backgroundColor: 'rgba(0,0,0,0.9)'}
 import {showModalSwiper, hiddenModelSwiper, tryIdea} from '../../redux/actions/intro'
 import {iCommitListLoad, iCommitListLoadMore, selectChange} from '../../redux/actions/iCommit'
 import {mainColor, containingColor, lightMainColor, lightContainingColor} from '../../configure';
-import * as Animatable from 'react-native-animatable';
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
+import * as Animatable from 'react-native-animatable';
+const AniView = Animatable.createAnimatableComponent(FontAwesome);
 // const AniView = Animatable.View;
 // const myIcon = (<Icon name="rocket" size={30} color="#900" />)
 // const customTextButton = (
@@ -305,6 +307,27 @@ class intro extends Component {
         const type = idea.type
         const disabled = type != 'link' && user.objectId == this.props.user.objectId
         const images = idea.images.toArray();
+        const btn = (name, selectName, size, bottom, onPress )=> {
+            return (
+                <View>
+                    <View style={[{width:60},styles.line]}/>
+                    <TouchableOpacity
+                        onPress={()=>{
+                     this.refs[name].bounceIn(1000);
+                     onPress && onPress()
+                      }}
+                        style={{alignItems:'center',justifyContent:'center',width:60,height:50}}>
+                        <AniView
+                            ref={name}
+                            name={name}
+                            size={size}
+                            style={{marginBottom:bottom}}
+                            color={mainColor}
+                        />
+                    </TouchableOpacity>
+                </View>
+            )
+        }
         return (
             <View style={styles.box}>
                 <ShareModal/>
@@ -321,15 +344,22 @@ class intro extends Component {
                 />
                 {this._renderModalSwiper(images)}
                 {this._renderBackButton()}
-                <WBButton
-                    style={{color:'white'}}
-                    disabled={disabled}
-                    onPress={()=>{this.props.try(idea)}}
-                    containerStyle={styles.tryButton}
-                    containerStyleDisabled={[styles.tryButton,{backgroundColor:'rgba(52,52,52,0.3)'}]}
-                >
-                    试一下
-                </WBButton>
+                <View style={styles.bottomBtn}>
+                    {btn('comments-o', "comments", 30, 5,()=>{})}
+                    <View style={{width:StyleSheet.hairlineWidth,height:50, backgroundColor: 'rgba(0,0,0,0.2)'}}/>
+                    {btn('star-o', 'star', 28, 0,()=>{
+
+                    })}
+                    <WBButton
+                        style={{color:'white'}}
+                        disabled={disabled}
+                        onPress={()=>{this.props.try(idea)}}
+                        containerStyle={[styles.tryButton,{flex:1}]}
+                        containerStyleDisabled={[styles.tryButton,{backgroundColor:'rgba(52,52,52,0.3)'}]}
+                    >
+                        立即预约
+                    </WBButton>
+                </View>
             </View>
         )
     }
@@ -455,11 +485,11 @@ const styles = StyleSheet.create({
         width: 35,
         borderRadius: 35,
         justifyContent: 'center',
-        shadowColor:'rgb(200,200,200)',
+        shadowColor: 'rgb(200,200,200)',
         shadowOffset: {width: 0, height: 1},
-        shadowOpacity:0.5,
-        shadowRadius:1,
-        elevation:1,
+        shadowOpacity: 0.5,
+        shadowRadius: 1,
+        elevation: 1,
     },
     icon: {
         // backgroundColor:'transparent',
@@ -499,7 +529,11 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         flexDirection: 'row',
         justifyContent: 'space-between'
-    }
+    },
+    bottomBtn: {
+        flexDirection: 'row',
+    },
+
 });
 const mapStateToProps = (state) => {
 
@@ -537,6 +571,7 @@ const mapDispatchToProps = (dispatch) => {
         },
         load: ()=> {
             dispatch(iCommitListLoad());
+            //查询是否已经被收藏
         },
         loadMore: ()=> {
             dispatch(iCommitListLoadMore());
@@ -544,8 +579,11 @@ const mapDispatchToProps = (dispatch) => {
         selectChange: (index)=> {
             dispatch(selectChange(index))
         },
-        share:()=>{
+        share: ()=> {
             dispatch(dataStorage(shareModalKey, true))
+        },
+        collect:(c)=>{
+
         }
     }
 }

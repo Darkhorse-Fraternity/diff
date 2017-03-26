@@ -14,17 +14,19 @@ import iComment from './iComment'
 import iCommit from './iCommit'
 import iServe from './iServe'
 import iPurchase from './iPurchase'
+import req from  './req'
 export {
-  intro,
-  ideaList,
-  route,
-  login,
-  tab,
-  util,
-  contribute,
-  iShow,
-  iComment,
-  iCommit,
-  iServe,
-  iPurchase,
+    req,
+    intro,
+    ideaList,
+    route,
+    login,
+    tab,
+    util,
+    contribute,
+    iShow,
+    iComment,
+    iCommit,
+    iServe,
+    iPurchase,
 };
