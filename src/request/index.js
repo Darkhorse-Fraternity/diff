@@ -166,7 +166,7 @@ function  send( {scheme  = schemeType.https,
     })
   ]);
   let status = 200;
-  requestPromise.then((response)=>{
+  return requestPromise.then((response)=>{
       status = response.status;
      return   response.json()
   }).then((responseData)=>{
@@ -187,8 +187,6 @@ function  send( {scheme  = schemeType.https,
   // .catch(function(err:Error){
   //      failCallback(err,urlpath,params);
   // });
-
-   return requestPromise;
 }
 
 module.exports = {

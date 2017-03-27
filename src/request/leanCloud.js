@@ -276,13 +276,13 @@ export function classBatch(requests:[Object]):Object{
 }
 
 //多对多关系查询
-export function relationAdd(className:string,objectId:string,relationClass:string,relationId:string):Object{
+export function relationAdd(className:string,objectId:string,relationClass:string,relationId:string,key):Object{
 
     return {
         path:'/classes/'+ className + '/' + objectId,
         method:methodType.put,
         params:{
-            "likes":{
+            [key]:{
                 "__op":"AddRelation",
                 "objects":[{
                     "__type":"Pointer",
@@ -294,12 +294,12 @@ export function relationAdd(className:string,objectId:string,relationClass:strin
     }
 }
 
-export function relatotionRemove(className:string,objectId:string,relationClass:string,relationId:string):Object{
+export function relationRemove(className:string,objectId:string,relationClass:string,relationId:string,key):Object{
     return {
         path:'/classes/'+ className + '/' + objectId,
         method:methodType.put,
         params:{
-            "likes":{
+            [key]:{
                 "__op":"RemoveRelation",
                 "objects":[{
                     "__type":"Pointer",
@@ -320,8 +320,8 @@ export function relatotionRemove(className:string,objectId:string,relationClass:
  */
 export function relationExist(className:string,objectId:string,relationClass:string,relationId:string,key:string):Object{
     return {
-        path:'/classes/'+ relationClass,
-        method:methodType.put,
+        path:relationClass != 'users' ? '/classes/'+ relationClass : '/'+relationClass,
+        method:methodType.get,
         params:{
             where:{
                 "$relatedTo":{
@@ -332,32 +332,65 @@ export function relationExist(className:string,objectId:string,relationClass:str
                     },
                     "key":key
                 },
-                "objectId":relationId
+                "objectId":relationId,
             }
         },
     }
 }
 
-export function relationList(className:string,objectId:string,relationClass:string,key:string):Object{
+export function relationList(className:string,relationClass:string,relationId:string,key:string,skip:number,limit:number = 40):Object{
     return {
-        path:'/classes/'+ relationClass,
-        method:methodType.put,
+        path:'/classes/'+ className,
+        method:methodType.get,
         params:{
             where:{
                 "$relatedTo":{
                     "object":{
                         "__type":"Pointer",
-                        "className":className,
-                        "objectId":objectId
+                        "className":relationClass,
+                        "objectId":relationId
                     },
                     "key":key
                 },
-            }
+            },
+            // skip:skip +'',
+            // limit:limit + '',
+            // order:'-createdAt',//降序
         },
     }
 }
 
 
+
+//关注
+export function friendshipAdd(userId:string,friendshipId:string):Object{
+    return {
+        path:'/users/' + userId + "friendship" +  friendshipId,
+        method:methodType.post,
+        params:{
+        },
+    }
+}
+
+//取消关注
+export function friendshipDelete(userId:string,friendshipId:string):Object{
+    return {
+        path:'/users/' + userId + "friendship" +  friendshipId,
+        method:methodType.delete,
+        params:{
+        },
+    }
+}
+
+export function friendshipList(userId:string):Object{
+    return {
+        path:'/users/' + userId + "/followersAndFollowees",
+        method:methodType.get,
+        params:{
+            include:"followee"
+        },
+    }
+}
 
 
 

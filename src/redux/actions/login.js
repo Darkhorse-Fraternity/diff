@@ -107,11 +107,11 @@ export function register(state:Object):Function {
 
     return dispatch => {
 
-        if(state.phone == '13588833404'){
-            //这边是给苹果检查时候使用。
-            dispatch(login(state));
-            return
-        }
+        // if(state.phone == '13588833404'){
+        //     //这边是给苹果检查时候使用。
+        //     dispatch(login(state));
+        //     return
+        // }
 
 
         dispatch(_loginRequest());

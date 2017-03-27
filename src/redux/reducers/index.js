@@ -15,7 +15,9 @@ import iCommit from './iCommit'
 import iServe from './iServe'
 import iPurchase from './iPurchase'
 import req from  './req'
+import list from './list'
 export {
+    list,
     req,
     intro,
     ideaList,

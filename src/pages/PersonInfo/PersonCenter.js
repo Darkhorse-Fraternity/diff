@@ -87,6 +87,11 @@ class PersonCenter extends Component {
                     this.props.push('iServe');
                 })}
 
+                {this._renderRow('我的收藏', styles.group, true, () => {
+                    this.props.push('iCollect');
+                })}
+
+
                 {/*{this._renderRow('我的收藏', styles.group, true, () => {*/}
 
                 {/*})}*/}

@@ -31,6 +31,8 @@ import {mainColor, containingColor, lightMainColor, lightContainingColor} from '
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import * as Animatable from 'react-native-animatable';
+import {send} from '../../request'
+import {collectExist,userAddRelation,userRemoveRelation} from '../../redux/leanCloud'
 const AniView = Animatable.createAnimatableComponent(FontAwesome);
 // const AniView = Animatable.View;
 // const myIcon = (<Icon name="rocket" size={30} color="#900" />)
@@ -162,9 +164,8 @@ class intro extends Component {
 
 
     shouldComponentUpdate(nextProps: Object) {
-        return !immutable.is(this.props.scene.route.idea, nextProps.scene.route.idea)
-            || !immutable.is(this.props.intro, nextProps.intro)
-            || !immutable.is(this.props.loadStatu, nextProps.loadStatu);
+        return !immutable.is(this.props, nextProps)
+
     }
 
 
@@ -307,7 +308,7 @@ class intro extends Component {
         const type = idea.type
         const disabled = type != 'link' && user.objectId == this.props.user.objectId
         const images = idea.images.toArray();
-        const btn = (name, selectName, size, bottom, onPress )=> {
+        const btn = (name, size, bottom, onPress )=> {
             return (
                 <View>
                     <View style={[{width:60},styles.line]}/>
@@ -345,17 +346,17 @@ class intro extends Component {
                 {this._renderModalSwiper(images)}
                 {this._renderBackButton()}
                 <View style={styles.bottomBtn}>
-                    {btn('comments-o', "comments", 30, 5,()=>{})}
+                    {btn('comments-o', 30, 5,()=>{})}
                     <View style={{width:StyleSheet.hairlineWidth,height:50, backgroundColor: 'rgba(0,0,0,0.2)'}}/>
-                    {btn('star-o', 'star', 28, 0,()=>{
-
+                    {btn(!this.props.isCollect?'star-o':"star", 28, 0,()=>{
+                        this.props.collect(this.props.isCollect)
                     })}
                     <WBButton
                         style={{color:'white'}}
                         disabled={disabled}
                         onPress={()=>{this.props.try(idea)}}
                         containerStyle={[styles.tryButton,{flex:1}]}
-                        containerStyleDisabled={[styles.tryButton,{backgroundColor:'rgba(52,52,52,0.3)'}]}
+                        containerStyleDisabled={[styles.tryButton,{flex:1,backgroundColor:'rgba(52,52,52,0.3)'}]}
                     >
                         立即预约
                     </WBButton>
@@ -545,10 +546,11 @@ const mapStateToProps = (state) => {
         loadStatu: state.iCommit.get('loadStatu'),
         dataSource: state.iCommit.get('data').toArray(),
         user: state.login.data,
+        isCollect:state.util.get('idea_collect')||false
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch,props) => {
     return {
         push: (key)=> {
             dispatch(navigatePush(key));
@@ -572,6 +574,8 @@ const mapDispatchToProps = (dispatch) => {
         load: ()=> {
             dispatch(iCommitListLoad());
             //查询是否已经被收藏
+            const id = props.scene.route.idea.toJS().objectId
+            dispatch(collectExist(id))
         },
         loadMore: ()=> {
             dispatch(iCommitListLoadMore());
@@ -584,6 +588,13 @@ const mapDispatchToProps = (dispatch) => {
         },
         collect:(c)=>{
 
+            const id = props.scene.route.idea.toJS().objectId
+            if(c){
+                dispatch(userRemoveRelation(id))
+            }else {
+                dispatch(userAddRelation(id))
+
+            }
         }
     }
 }

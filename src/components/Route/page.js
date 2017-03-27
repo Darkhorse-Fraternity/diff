@@ -33,8 +33,10 @@ import iReply from '../../pages/Other/iReply'
 import iRate from '../../pages/Other/iRate'
 import introDetail from '../../pages/Other/introDetail'
 import About from '../../pages/Setting/About'
+import iCollect from '../../pages/Other/iCollect'
 export  const PageMap =
 {
+  iCollect,
   introDetail,
   iRate,
   iReply,
