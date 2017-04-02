@@ -34,8 +34,10 @@ import iRate from '../../pages/Other/iRate'
 import introDetail from '../../pages/Other/introDetail'
 import About from '../../pages/Setting/About'
 import iCollect from '../../pages/Other/iCollect'
+import Follow from '../../pages/Other/Follow'
 export  const PageMap =
 {
+  Follow,
   iCollect,
   introDetail,
   iRate,

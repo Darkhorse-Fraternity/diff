@@ -32,7 +32,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import EvilIcons from 'react-native-vector-icons/EvilIcons'
 import * as Animatable from 'react-native-animatable';
 import {send} from '../../request'
-import {collectExist,userAddRelation,userRemoveRelation} from '../../redux/leanCloud'
+import {collectExist, userAddRelation, userRemoveRelation} from '../../redux/leanCloud'
 const AniView = Animatable.createAnimatableComponent(FontAwesome);
 // const AniView = Animatable.View;
 // const myIcon = (<Icon name="rocket" size={30} color="#900" />)
@@ -224,7 +224,9 @@ class intro extends Component {
                 </View>
                 <View style={styles.intro}>
                     <Text style={styles.introText}>{user.username}</Text>
-                    <WBImage style={styles.avatar} source={{uri:avatar.url}}/>
+                    <TouchableOpacity onPress={()=>{this.props.push({key:'Follow',user:user})}}>
+                        <WBImage style={styles.avatar} source={{uri:avatar.url}}/>
+                    </TouchableOpacity>
                 </View>
                 <Text style={styles.infoText}>
                     {idea.contents}
@@ -308,7 +310,7 @@ class intro extends Component {
         const type = idea.type
         const disabled = type != 'link' && user.objectId == this.props.user.objectId
         const images = idea.images.toArray();
-        const btn = (name, size, bottom, onPress )=> {
+        const btn = (name, size, bottom, onPress)=> {
             return (
                 <View>
                     <View style={[{width:60},styles.line]}/>
@@ -346,9 +348,10 @@ class intro extends Component {
                 {this._renderModalSwiper(images)}
                 {this._renderBackButton()}
                 <View style={styles.bottomBtn}>
-                    {btn('comments-o', 30, 5,()=>{})}
+                    {btn('comments-o', 30, 5, ()=> {
+                    })}
                     <View style={{width:StyleSheet.hairlineWidth,height:50, backgroundColor: 'rgba(0,0,0,0.2)'}}/>
-                    {btn(!this.props.isCollect?'star-o':"star", 28, 0,()=>{
+                    {btn(!this.props.isCollect ? 'star-o' : "star", 28, 0, ()=> {
                         this.props.collect(this.props.isCollect)
                     })}
                     <WBButton
@@ -546,11 +549,11 @@ const mapStateToProps = (state) => {
         loadStatu: state.iCommit.get('loadStatu'),
         dataSource: state.iCommit.get('data').toArray(),
         user: state.login.data,
-        isCollect:state.util.get('idea_collect')||false
+        isCollect: state.util.get('idea_collect') || false
     }
 }
 
-const mapDispatchToProps = (dispatch,props) => {
+const mapDispatchToProps = (dispatch, props) => {
     return {
         push: (key)=> {
             dispatch(navigatePush(key));
@@ -586,12 +589,12 @@ const mapDispatchToProps = (dispatch,props) => {
         share: ()=> {
             dispatch(dataStorage(shareModalKey, true))
         },
-        collect:(c)=>{
+        collect: (c)=> {
 
             const id = props.scene.route.idea.toJS().objectId
-            if(c){
+            if (c) {
                 dispatch(userRemoveRelation(id))
-            }else {
+            } else {
                 dispatch(userAddRelation(id))
 
             }

@@ -47,7 +47,9 @@ export const pageConfig = {
     'iRate': {title: '评价'},
     'introDetail': {title: '回复'},
     'About': {title: ''},
-    'iCollect':{title:"我的收藏"}
+    'iCollect':{title:"我的收藏"},
+    'Follow':{title:''},
+
 }
 
 export function config(key: string): Object {
