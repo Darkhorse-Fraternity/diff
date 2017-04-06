@@ -3,13 +3,17 @@ import {relationExist,relationAdd,relationRemove,relationList} from '../request/
 import {send} from '../request'
 import {dataStorage} from './actions/util'
 import {Toast} from '../util'
+import {push} from '../redux/nav'
 import {listLoad,listLoadMore} from './actions/list'
 
 export function userAddRelation(classId):Function {
     return async (dispatch,getState) => {
         try {
             const state = getState()
-            if(!state.login.data){return}
+            if(!state.login.isLogin){
+                push('RegPhone')
+                return
+            }
             const uid = state.login.data.id
             const params = relationAdd('TodoObject',classId,"_User",uid,'collects')
             const res = await send(params)
@@ -28,7 +32,10 @@ export function userRemoveRelation(classId):Function {
 
         try {
             const state = getState()
-            if(!state.login.data){return}
+            if(!state.login.isLogin){
+                push('RegPhone')
+                return
+            }
             const uid = state.login.data.id
             const params = relationRemove('TodoObject',classId,"_User",uid,'collects')
             const res = await send(params)
@@ -47,7 +54,7 @@ export function collectExist(classId) {
         try {
             const state = getState()
             dispatch(dataStorage('idea_collect',false))
-            if(!state.login.data){return}
+            if(!state.login.isLogin){return}
             const uid = state.login.data.id
             const params = relationExist('TodoObject',classId,"users",uid,'collects')
             const res = await send(params)

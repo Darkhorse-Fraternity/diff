@@ -30,7 +30,7 @@ export const pageConfig = {
     "AlterPwd": {title: "修改密码",},
     "NickName": {title: "修改昵称",},
     "PhoneContacts": {title: "修改手机号",},
-    'RegPhone': {title: '注册'},
+    'RegPhone': {title: '登录'},
     'Contribute': {title: '创意服务'},
     'Intro': {title: '介绍', hideNavBar: true, gestureResponseDistance: 100},
     'IdeaList': {title: '创意列表'},

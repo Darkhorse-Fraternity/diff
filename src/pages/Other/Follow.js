@@ -18,11 +18,12 @@ import {mainColor} from '../../configure';
 import {send} from '../../request'
 import {friendshipAdd,friendshipDelete} from '../../request/leanCloud'
 import {bindActionCreators} from 'redux';
-
+import {push} from '../../redux/nav'
 //static displayName = Follow
 @connect(
     state =>({
         //state:state.util.get()
+        isLogin:state.login.isLogin,
         user:state.login.data
     }),
     dispatch =>({
@@ -65,8 +66,14 @@ export  default  class Follow extends Component {
                 <View style={styles.head}>
                     <Image style={styles.avatar} source={{uri:avatar.url}}/>
                     <Text style={styles.userName}>{user.username}</Text>
-                    <TouchableOpacity style={styles.followBtn} onPress={()=>{
+                    <TouchableOpacity disabled={selfFlag} style={styles.followBtn} onPress={()=>{
                         //关注
+                        //如果没有登录则先去登录
+                        if(!this.props.isLogin){
+                            push('RegPhone')
+                        }else {
+
+                        }
 
                     }}>
                         <Text style={styles.follow1}>{"+ "}</Text>

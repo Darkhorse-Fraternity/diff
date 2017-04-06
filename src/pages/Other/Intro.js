@@ -549,6 +549,7 @@ const mapStateToProps = (state) => {
         loadStatu: state.iCommit.get('loadStatu'),
         dataSource: state.iCommit.get('data').toArray(),
         user: state.login.data,
+        isLogin:state.login.isLogin,
         isCollect: state.util.get('idea_collect') || false
     }
 }
